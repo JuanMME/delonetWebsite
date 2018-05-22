@@ -1,0 +1,22 @@
+.navbar {
+    height: 3.5rem;
+
+    .navbar-brand {
+        padding: .2rem 0 .4rem 2rem;
+        height: 100%;
+        margin: 0 auto;
+
+        .logo {
+            max-height: 100%;
+        }
+    }
+
+    .nav-item {
+        margin-left: 20px;
+    }
+
+    .nav-item-last {
+        margin-right: 20px;
+    }
+}
+
