@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-nav',
   templateUrl: 'nav.component.html',
   styleUrls: [

@@ -1,5 +1,6 @@
 .navbar {
     height: 3.5rem;
+    background-color: #262626;
 
     .navbar-brand {
         padding: .2rem 0 .4rem 2rem;
@@ -13,10 +14,14 @@
 
     .nav-item {
         margin-left: 20px;
+
+        .nav-link {
+            color: white;
+        }
     }
 
     .nav-item-last {
         margin-right: 20px;
     }
-}
 
+}

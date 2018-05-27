@@ -1,0 +1,57 @@
+footer .list-inline {
+  margin: 0 auto;
+}
+
+footer .col {
+  text-align: center;
+}
+
+footer .col p {
+  font-size: .7em;
+  margin-bottom: 0;
+}
+
+footer .social a {
+  font-size: 1.2em;
+  padding: 0 .4em;
+}
+
+footer {
+  background-color: #262626;
+}
+
+footer a,
+footer p,
+footer i {
+  color: white;
+}
+
+footer a:hover {
+  color: #2AA3F0;
+}
+
+/* Colores hover */
+
+footer .fi-social-twitter:hover {
+  color: #2AA3F0;
+}
+
+footer .fi-social-facebook:hover {
+  color: #4969A8;
+}
+
+footer .fi-social-google-plus:hover {
+  color: #DA4B3E;
+}
+
+footer .fi-social-youtube:hover {
+  color: #F80D1B;
+}
+
+footer .fi-social-vimeo:hover {
+  color: #1DAEEC;
+}
+
+a {
+  text-decoration: none;
+}
