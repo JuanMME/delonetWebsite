@@ -10,6 +10,7 @@ import { NavbarComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { MembersComponent } from './admin/members/members.component';
+import { ContactComponent } from './contact/contact.component';
 
 import { MembersService } from './admin/members/members.service';
 
@@ -20,7 +21,8 @@ import { MembersService } from './admin/members/members.service';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    MembersComponent
+    MembersComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

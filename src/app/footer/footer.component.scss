@@ -19,6 +19,8 @@ footer .social a {
 footer {
   background-color: #262626;
   margin-top: 40px;
+  position: absolute;
+  bottom: 0;
 }
 
 footer a,
@@ -29,28 +31,6 @@ footer i {
 
 footer a:hover {
   color: #2AA3F0;
-}
-
-/* Colores hover */
-
-footer .fi-social-twitter:hover {
-  color: #2AA3F0;
-}
-
-footer .fi-social-facebook:hover {
-  color: #4969A8;
-}
-
-footer .fi-social-google-plus:hover {
-  color: #DA4B3E;
-}
-
-footer .fi-social-youtube:hover {
-  color: #F80D1B;
-}
-
-footer .fi-social-vimeo:hover {
-  color: #1DAEEC;
 }
 
 a {
