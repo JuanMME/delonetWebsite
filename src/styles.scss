@@ -42,3 +42,9 @@ body {
     min-width: 20px !important;
     max-width: 100% !important;
 }
+
+.cal-day-view {
+    & .cal-hour-rows {
+        overflow: hidden;
+    }
+}
