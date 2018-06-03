@@ -1,0 +1,32 @@
+.calendar {
+    max-width: 450px;
+
+    .cal-hour-segment {
+        height: 30px;
+    }
+
+    .calendar-column {
+        text-align: center;
+        width: 15%;
+        float: left;
+        font-size: .75rem;
+    }
+
+    .calendar-hours-column {
+        text-align: left;
+        width: 10%;
+        float: left;
+        font-size: .75rem;
+
+        .cal-time {
+            width: 100%;
+            font-weight: 200;
+            font-size: .8rem;
+        }
+    }
+}
+
+.datepicker {
+    display: flex;
+    align-items: center;
+}

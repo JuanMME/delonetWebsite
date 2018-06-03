@@ -19,3 +19,15 @@ body {
     margin-left: 0 !important;
     max-width: 100%;
 }
+
+.cal-event {
+    white-space: initial !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cal-event-title {
+        font-size: .7rem !important;
+        color: white !important;
+    }
+}

@@ -14,6 +14,12 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
+import { ReservationsService } from './reservations.service';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 
 @Component({
   selector: 'app-mycalendar',
@@ -30,147 +36,119 @@ import { DatePipe } from '@angular/common';
 })
 
 export class ReservationsComponent implements OnInit {
-  eventForm: FormGroup;
+  reservationForm: FormGroup;
   viewDate: Date = new Date();
   submitted = false;
+  classes;
 
   locale = 'es';
-  modalRef: BsModalRef;
-  events = [{
-    start: new Date('2018-05-28T16:00:00.000Z'),
-    end: addHours('2018-05-28T16:00:00.000Z', 1),
-    title: 'Aquagym',
-    color: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3'
-    },
-  }];
+  laneEvents = new Array();
+  minTime: Date = new Date();
+  maxTime: Date = new Date();
+  mstep = 60;
+  valid = true;
+  isAdmin = true;
 
-  events2 = [{
-    start: new Date('2018-05-28T18:00:00.000Z'),
-    end: addHours('2018-05-28T18:00:00.000Z', 1),
-    title: 'Principiantes',
-    color: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3'
-    },
-  }];
-
-  newEventModal = false;
-  selectedEvent: CalendarEvent;
-  eventGroups = new Array();
-  eventDates = new Array();
 
   constructor(
     private modalService: BsModalService,
     private fb: FormBuilder,
-    // service
+    private _reservationsService: ReservationsService,
+    private localeService: BsLocaleService,
     private datePipe: DatePipe
-  ) { }
-
-  ngOnInit() {
-    this.getCalendarEvents();
+  ) {
+    this.createForm();
+    this.setMinMaxTime();
+    this.localeService.use(this.locale);
   }
 
-  getCalendarEvents() {
-    /* this._adminService.getCalendarEvents().subscribe(events => {
-      events.forEach((event) => {
-        event.start = new Date(event.start);
-        event.end = new Date(event.end);
+  ngOnInit() {
+    this.getReservations();
+    this.getClasses();
+  }
+
+  setMinMaxTime() {
+    this.minTime.setHours(15);
+    this.minTime.setMinutes(59);
+    this.maxTime.setHours(21);
+    this.maxTime.setMinutes(0);
+  }
+
+  getReservations() {
+    this._reservationsService.getReservations().subscribe(laneEvents => {
+      laneEvents.forEach(lane => {
+        lane.events.forEach(event => {
+          event.title = event.nombre;
+          event.start = new Date(event.fecha);
+          event.end = addHours(new Date(event.fecha), 1);
+          event.color = {
+            primary: '#2F606E',
+            secondary: '#5FC0DD'
+          };
+        });
       });
-      this.events = events;
-      this.groupCalendarEvents();
-    }); */
+      this.laneEvents = laneEvents;
+      console.log(laneEvents);
+    });
+  }
+
+  setTime(event: any) {
+    this._reservationsService.getClass(event).subscribe(clase => {
+      const classTime = new Date();
+      const hour = clase.hora.substring(0, 2);
+      classTime.setHours(hour, 0, 0, 0);
+      this.reservationForm.controls.time.setValue(classTime);
+    });
+  }
+
+  getClasses() {
+    this._reservationsService.getClasses().subscribe(classes => {
+      this.classes = classes;
+      console.log(classes);
+    });
   }
 
   createForm() {
-    this.eventForm = this.fb.group({
-      title: [, [<any>Validators.required]],
-      color: [{
-        primary: '#ad2121',
-        secondary: '#FAE3E3'
-      }],
-      start: [new Date(), [<any>Validators.required]],
-      end: [addHours(new Date(), 1), [<any>Validators.required]]
+    const now = new Date();
+    now.setHours(16, 0, 0, 0);
+    this.reservationForm = this.fb.group({
+      id_socio: [null],
+      id_calle: [null, [<any>Validators.required]],
+      id_clase: [, [<any>Validators.required]],
+      date: [now, [<any>Validators.required]],
+      time: [{value: now, disabled: this.isAdmin}],
+      fecha: []
     });
   }
 
-  openNewEventModal(template: TemplateRef<any>): void {
-    this.submitted = false;
-    this.newEventModal = true;
-    this.createForm();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-  }
-
-  createEvent() {
-    /* if (this.eventForm.valid) {
-      this.submitted = true;
-      this._adminService.createEvent(this.eventForm.value).subscribe( response => {
-          const createResponse = response;
-          if (createResponse.success === true) {
-            this.toastr.success('Evento creado');
-          } else {
-            this.toastr.error('No se ha podido crear el evento, se ha producido un error');
-          }
-          this.getCalendarEvents(); // move inside the if when the db is implemented
-        },
-        error => this._adminService = <any>error
-        );
-    } else {
-      this.toastr.error('Debe rellenar todos los campos');
-    } */
-  }
-
-  openModifyEventModal(template: TemplateRef<any>, event): void {
-    this.submitted = false;
-    this.newEventModal = false;
-    this.selectedEvent = event;
-    this.createFilledForm();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
-  }
-
-  updateEvent() {
-    /* if (this.eventForm.valid) {
-      this.submitted = true;
-      this._adminService.updateEvent(this.selectedEvent.id, this.eventForm.value).subscribe( response => {
-          const createResponse = response;
-          if (createResponse.success === true) {
-            this.toastr.success('Evento actualizado');
-          } else {
-            this.toastr.error('No se ha podido actualizar el evento, se ha producido un error');
-          }
-          this.getCalendarEvents(); // move inside the if when the db is implemented
-        },
-        error => this._adminService = <any>error
-        );
-    } else {
-      this.toastr.error('Debe rellenar todos los campos');
+  isValid(event: boolean): void {
+    this.valid = event;
+    if (new Date(this.reservationForm.controls.time.value).getMinutes() !== 0) {
+      this.valid = false;
     }
-    this.selectedEvent = <CalendarEvent>{}; */
   }
 
-  createFilledForm () {
-    this.eventForm = this.fb.group({
-      title: [this.selectedEvent.title, [<any>Validators.required]],
-      color: [this.selectedEvent.color],
-      start: [this.selectedEvent.start, [<any>Validators.required]],
-      end: [this.selectedEvent.end, [<any>Validators.required]]
-    });
+  createReservation() {
+    this.combineDates();
+    if (this.reservationForm.valid) {
+      this.submitted = true;
+      this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
+        if (response.affectedRows === 1) {
+          console.log('Done');
+          this.getReservations();
+        } else {
+          console.log('Error');
+        }
+      });
+    }
   }
 
-  deleteEvent() {
-    /* this._adminService.deleteEvent(this.selectedEvent.id).subscribe( response => {
-      const createResponse = response;
-          if (createResponse.success === true) {
-            this.toastr.success('Evento actualizado');
-          } else {
-            this.toastr.error('No se ha podido actualizar el evento, se ha producido un error');
-          }
-          this.getCalendarEvents(); // move inside the if when the db is implemented
-        },
-        error => this._adminService = <any>error
-    );
-    this.selectedEvent = <CalendarEvent>{}; */
+  combineDates() {
+    const date = new Date(this.reservationForm.controls.date.value);
+    const time = new Date(this.reservationForm.controls.time.value);
+    // reajusta la hora a la hora de guardarla
+    date.setHours(time.getHours() - (time.getTimezoneOffset() / 60), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
+    this.reservationForm.controls.fecha.setValue(date);
   }
 
 }

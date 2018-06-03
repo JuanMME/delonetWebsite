@@ -62,6 +62,7 @@ export class MembersComponent implements OnInit {
       fecha_baja: [new Date(), [<any>Validators.required]], // cambiar
       telefono: [, [<any>Validators.required]],
       email: [, [<any>Validators.required]],
+      id_clase: [2]
     });
   }
 }

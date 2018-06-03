@@ -1,61 +1,114 @@
-<ng-template #test
-      let-segment="segment"
-      let-locale="locale">
-      <div
-        class="cal-hour-segment"
-        [class.cal-hour-start]="segment.isStart"
-        [class.cal-after-hour-start]="!segment.isStart"
-        [ngClass]="segment.cssClass">
-      </div>
-    </ng-template>
+
 
 <div class="container">
-  <div class="row no-gutters">
-    <div class="col-1">
-      <br>
-      <mwl-calendar-day-view
-        [viewDate]="viewDate"
-        [locale]="locale"
-        [dayStartHour]="16"
-        [dayEndHour]="21"
-        (eventClicked)="openModifyEventModal(eventModal, $event.event)">
-      </mwl-calendar-day-view>
+  <div class="row">
+    <div class="col-md-7">
+      <form [formGroup]="reservationForm" (ngSubmit)="createReservation()" novalidate>
+        <div class="row">
+          <div class="col-6 form-group">
+            <label>Calle</label>
+            <select class="form-control" formControlName="id_calle">
+                <option [value]="1">Calle 1</option>
+                <option [value]="2">Calle 2</option>
+                <option [value]="3">Calle 3</option>
+                <option [value]="4">Calle 4</option>
+                <option [value]="5">Calle 5</option>
+                <option [value]="6">Calle 6</option>
+            </select>
+          </div>
+          <div class="col-6 form-group">
+            <label>Clase</label>
+            <select class="form-control" formControlName="id_clase" (change)="setTime($event.target.value)">
+                <option *ngFor="let class of classes" [value]="class.id_clase">{{ class.nombre }} - {{ class.hora }}</option>
+            </select>
+          </div>
+          <div class="col-12">
+            Selecciona la fecha y hora de tu reserva
+          </div>
+          <div class="col-12">
+            <div class="row datepicker">
+              <div class="col-6 form-group">
+                  <input type="text" class="form-control" placeholder="Selecciona una fecha" 
+                    bsDatepicker formControlName="date" 
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-blue' }"/>
+              </div>
+              <div class="col-6 form-group">
+                  <timepicker 
+                    formControlName="time" 
+                    [showMeridian]="ismeridian"
+                    (isValid)="isValid($event)"
+                    [min]="minTime"
+                    [max]="maxTime"
+                    [minuteStep]="mstep">
+                  </timepicker>
+              </div>
+              <div class="col-12">
+                  <p *ngIf="!valid" class="text-danger">La hora estar comprendida entre las 16 y las 21. Los minutos deben ser 0.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid">Generar Reserva</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="col-1">
-      Calle 1
-      <mwl-calendar-day-view
-        [viewDate]="viewDate"
-        [events]="events"
-        [locale]="locale"
-        [dayStartHour]="16"
-        [dayEndHour]="21"
-        [hourSegmentTemplate]="test"
-        (eventClicked)="openModifyEventModal(eventModal, $event.event)">
-      </mwl-calendar-day-view>
-    </div>
-    <div class="col-1">
-      Calle 2
-      <mwl-calendar-day-view
-        [viewDate]="viewDate"
-        [events]="events2"
-        [locale]="locale"
-        [dayStartHour]="16"
-        [dayEndHour]="21"
-        [hourSegmentTemplate]="test"
-        (eventClicked)="openModifyEventModal(eventModal, $event.event)">
-      </mwl-calendar-day-view>
-    </div>
-    <div class="col-1">
-      Calle 3
-      <mwl-calendar-day-view
-        [viewDate]="viewDate"
-        [events]="events"
-        [locale]="locale"
-        [dayStartHour]="16"
-        [dayEndHour]="21"
-        [hourSegmentTemplate]="test"
-        (eventClicked)="openModifyEventModal(eventModal, $event.event)">
-      </mwl-calendar-day-view>
+    <div class="col-md-5">
+      <div class="row calendar">
+        <div class="col-12 text-center mb-3">
+          {{ viewDate | date:'longDate':'':'es'}}
+        </div>
+        <div class="col-12">
+          <div class="calendar-hours-column">
+            <br>
+            <mwl-calendar-day-view
+              [viewDate]="viewDate"
+              [locale]="locale"
+              [dayStartHour]="16"
+              [dayEndHour]="21"
+              [hourSegmentTemplate]="hoursTemplate">
+            </mwl-calendar-day-view>
+          </div>
+          <div class="calendar-column" *ngFor="let lane of laneEvents, let i = index">
+            Calle {{ lane.lane }}
+            <mwl-calendar-day-view
+              [viewDate]="viewDate"
+              [events]="lane.events"
+              [locale]="locale"
+              [dayStartHour]="16"
+              [dayEndHour]="21"
+              [hourSegmentTemplate]="customTemplate">
+            </mwl-calendar-day-view>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<ng-template
+  #hoursTemplate
+  let-segment="segment"
+  let-locale="locale">
+  <div
+    class="cal-hour-segment"
+    [class.cal-hour-start]="segment.isStart"
+    [class.cal-after-hour-start]="!segment.isStart"
+    [ngClass]="segment.cssClass">
+    <div class="cal-time">
+      {{ segment.date | date:'H:mm' }}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #customTemplate
+  let-segment="segment"
+  let-locale="locale">
+  <div
+    class="cal-hour-segment"
+    [class.cal-hour-start]="segment.isStart"
+    [class.cal-after-hour-start]="!segment.isStart"
+    [ngClass]="segment.cssClass">
+  </div>
+</ng-template>

@@ -15,7 +15,6 @@ import { ContactComponent } from './contact/contact.component';
 
 import { MembersService } from './admin/members/members.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
