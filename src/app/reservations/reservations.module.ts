@@ -3,7 +3,7 @@ import { CommonModule, registerLocaleData, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'angular-calendar';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { TimepickerModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { TimepickerModule, BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 
 import { ReservationsComponent } from './reservations.component';
 
@@ -21,7 +21,8 @@ registerLocaleData(localeEs);
     CalendarModule.forRoot(),
     ReactiveFormsModule,
     TimepickerModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [
     DatePipe,

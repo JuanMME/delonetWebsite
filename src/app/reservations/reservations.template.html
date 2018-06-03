@@ -1,8 +1,10 @@
-
-
 <div class="container">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
+      <h2>Nueva reserva</h2>
+      <p>Completa el siguiente formulario para generar una nueva reserva. Puedes utilizar nuestro calendario
+        para comprobar las fechas y horas disponibles.
+      </p>
       <form [formGroup]="reservationForm" (ngSubmit)="createReservation()" novalidate>
         <div class="row">
           <div class="col-6 form-group">
@@ -30,7 +32,7 @@
               <div class="col-6 form-group">
                   <input type="text" class="form-control" placeholder="Selecciona una fecha" 
                     bsDatepicker formControlName="date" 
-                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-blue' }"/>
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"/>
               </div>
               <div class="col-6 form-group">
                   <timepicker 
@@ -42,21 +44,61 @@
                     [minuteStep]="mstep">
                   </timepicker>
               </div>
-              <div class="col-12">
-                  <p *ngIf="!valid" class="text-danger">La hora estar comprendida entre las 16 y las 21. Los minutos deben ser 0.</p>
-              </div>
             </div>
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid">Generar Reserva</button>
           </div>
+          <div class="col-12 mt-3">
+            <alert *ngIf="!valid" type="danger">
+              La hora estar comprendida entre las 16 y las 21. Los minutos deben ser 0.
+            </alert>
+            <alert *ngIf="newReservation" type="success">
+              Reserva generada con éxito.
+            </alert>
+            <alert *ngIf="alreadyBooked" type="danger">
+              <strong>Error.</strong> Ya hay una reserva realizada ese día para la calle y hora seleccionadas.
+            </alert>
+          </div>
         </div>
       </form>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 offset-md-1">
       <div class="row calendar">
-        <div class="col-12 text-center mb-3">
-          {{ viewDate | date:'longDate':'':'es'}}
+        <div class="col-12">
+            
+        </div>
+        <div class="col-8 offset-2 calendar-controls mb-3">
+          <div class="btn-group btn-group-sm">
+            <div
+              class="btn btn-primary"
+              (click)="viewPreviousDay()">
+              <i class="fa fa-angle-left"></i>
+            </div>
+            <div
+              class="btn btn-outline-primary"
+              (click)="viewToday()">
+              Hoy
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="viewNextDay()">
+              <i class="fa fa-angle-right"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-8 offset-2 text-center pt-1">
+          <span (click)="dp.toggle()">{{ viewDate | date:'longDate':'':'es'}}</span>
+          <input
+            class="calendar-dp"
+            #dp="bsDatepicker"
+            bsDatepicker 
+            [(ngModel)]="viewDate"
+            readonly
+            [bsConfig]="{ containerClass: 'theme-dark-blue' }">
+        </div>
+        <div class="col-2">
+            <button class="btn btn-sm btn-primary" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"><i class="fa fa-calendar"></i></button>
         </div>
         <div class="col-12">
           <div class="calendar-hours-column">

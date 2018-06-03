@@ -1,5 +1,5 @@
 import { Component, TemplateRef, OnInit } from '@angular/core';
-import { addHours, addDays } from 'date-fns';
+import { addHours, addDays, subDays, isSameHour } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import {
   CalendarEvent,
@@ -19,6 +19,7 @@ import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
+import { isSameDay } from 'ngx-bootstrap/chronos/utils/date-getters';
 defineLocale('es', esLocale);
 
 @Component({
@@ -48,7 +49,8 @@ export class ReservationsComponent implements OnInit {
   mstep = 60;
   valid = true;
   isAdmin = true;
-
+  newReservation = false;
+  alreadyBooked = false;
 
   constructor(
     private modalService: BsModalService,
@@ -83,7 +85,7 @@ export class ReservationsComponent implements OnInit {
           event.end = addHours(new Date(event.fecha), 1);
           event.color = {
             primary: '#2F606E',
-            secondary: '#5FC0DD'
+            secondary: '#377BB5'
           };
         });
       });
@@ -130,17 +132,29 @@ export class ReservationsComponent implements OnInit {
 
   createReservation() {
     this.combineDates();
-    if (this.reservationForm.valid) {
+    if (this.reservationForm.valid && this.checkAvailability()) {
       this.submitted = true;
       this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
         if (response.affectedRows === 1) {
-          console.log('Done');
+          this.newReservation = true;
           this.getReservations();
         } else {
-          console.log('Error');
+          this.newReservation = false;
         }
       });
     }
+  }
+
+  checkAvailability() {
+    const calle = parseInt(this.reservationForm.controls.id_calle.value, 10) - 1;
+    this.alreadyBooked = false;
+    this.laneEvents[calle].events.forEach(event => {
+      if (isSameDay(new Date(event.fecha), new Date(this.reservationForm.controls.date.value)) &&
+          isSameHour(new Date(event.fecha), new Date(this.reservationForm.controls.time.value))) {
+        this.alreadyBooked = true;
+      }
+    });
+    console.log(this.alreadyBooked);
   }
 
   combineDates() {
@@ -149,6 +163,18 @@ export class ReservationsComponent implements OnInit {
     // reajusta la hora a la hora de guardarla
     date.setHours(time.getHours() - (time.getTimezoneOffset() / 60), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
     this.reservationForm.controls.fecha.setValue(date);
+  }
+
+  viewPreviousDay() {
+    this.viewDate = subDays(this.viewDate, 1);
+  }
+
+  viewToday() {
+    this.viewDate = new Date();
+  }
+
+  viewNextDay() {
+    this.viewDate = addDays(this.viewDate, 1);
   }
 
 }
