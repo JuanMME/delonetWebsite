@@ -26,6 +26,11 @@ export class MembersService {
       .catch(this.handleError);
   }
 
+  deleteMember(memberId: Number) {
+    return this._http.delete(this.serverUrl + '/' + memberId)
+      .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     const msg = 'Error status code' + error.status + 'status' + error.statusText + ' at ' + error.url;
     return Observable.throw(msg);

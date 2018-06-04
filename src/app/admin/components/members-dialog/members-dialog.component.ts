@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { MembersService } from '../../containers/members/members.service';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Member } from '../../models/member';
@@ -18,7 +19,8 @@ export class MembersDialogComponent implements OnInit {
   constructor(
     private _membersService: MembersService,
     private fb: FormBuilder,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -27,17 +29,22 @@ export class MembersDialogComponent implements OnInit {
 
   createMember() {
     this.submitted = true;
-    this._membersService.createMember(this.memberForm.value).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => console.log(error)
-    );
+    this._membersService.createMember(this.memberForm.value).subscribe( data => {
+      if (data && data['affectedRows'] > 0) {
+        this.toastr.success('Operación realizada con éxito', 'El socio ha sido añadido');
+      } else {
+        this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+      }
+    });
   }
 
   modifyMember() {
     this._membersService.modifyMember(this.member.id_socio, this.memberForm.value).subscribe(data => {
-      console.log(data);
+      if (data && data['affectedRows'] > 0) {
+        this.toastr.success('Operación realizada con éxito', 'El socio ha sido modificado');
+      } else {
+        this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+      }
     });
   }
   
