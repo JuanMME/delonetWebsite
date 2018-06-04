@@ -3,27 +3,24 @@ import { MembersService } from './members.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { MembersDialogComponent } from '../../components/members-dialog/members-dialog.component';
+import { Member } from '../../models/member';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'members.template.html',
+  templateUrl: 'members.component.html',
   styleUrls: ['members.component.scss']
 })
 
 export class MembersComponent implements OnInit {
 
-  members;
-  newMemberModal = true;
-  submitted = false;
-  modalRef;
-  memberForm;
+  private members: Member[];
+  private bsModalRef: BsModalRef;
 
   constructor(
     private _membersService: MembersService,
-    private modalService: BsModalService,
-    private fb: FormBuilder) {
-      this.createForm();
-    }
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit() {
     this.getMembers();
@@ -37,33 +34,27 @@ export class MembersComponent implements OnInit {
     );
   }
 
-  createMember() {
-    console.log('hola');
-    this._membersService.createMember(this.memberForm.value).subscribe(
-      response => {
-        console.log(response);
-      },
-      error => console.log(error)
-    );
+  addMember(): void {
+    const initialState = {
+      member: null,
+      class: 'modal-lg'
+    };
+    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 
-  openNewMemberModal(template: TemplateRef<any>): void {
-    this.submitted = false;
-    this.newMemberModal = true;
-    this.createForm();
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+  editMember(member: Member) {
+    const initialState = {
+      member: member,
+      class: 'modal-lg'
+    };
+    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+    this.bsModalRef.content.member = member;
   }
 
-  createForm() {
-    this.memberForm = this.fb.group({
-      nombre: [, [<any>Validators.required]],
-      apellidos: [, [<any>Validators.required]],
-      direccion: [, [<any>Validators.required]],
-      fecha_alta: [new Date(), [<any>Validators.required]],
-      fecha_baja: [new Date(), [<any>Validators.required]], // cambiar
-      telefono: [, [<any>Validators.required]],
-      email: [, [<any>Validators.required]],
-      id_clase: [2]
-    });
+  deleteMember(member: Member) {
+    console.log(member);
   }
+
 }

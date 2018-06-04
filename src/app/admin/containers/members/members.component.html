@@ -1,0 +1,35 @@
+<div class="row container-members">
+  <div class="col-10 offset-1">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="text-secondary">Socios</h3>
+        <button class="btn btn-primary-outline text-primary" (click)="addMember()">
+          <i class="fa fa-user-plus"></i>
+        </button>
+      </div>
+      <div class="card-body">
+        <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="50"
+          [rows]="members" [scrollbarV]="true" style="height: 85vh;">
+          <ngx-datatable-column name="Nombre" prop="nombre" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column name="Apellidos" prop="apellidos" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column name="Email" prop="email" [flexGrow]="2"></ngx-datatable-column>
+          <ngx-datatable-column name="Teléfono" prop="telefono" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column name="Dirección" prop="direccion" [flexGrow]="2"></ngx-datatable-column>
+          <ngx-datatable-column name="Clase" prop="id_clase" [flexGrow]="1"></ngx-datatable-column>
+          <ngx-datatable-column name="Acciones" prop="" [flexGrow]="1">
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              <div style="display: flex;">
+                <button class="btn btn-primary-outline actions-buttons" (click)="editMember(row)">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-primary-outline actions-buttons" (click)="deleteMember(row)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>

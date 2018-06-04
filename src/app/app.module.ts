@@ -15,6 +15,7 @@ import { MembersComponent } from './admin/containers/members/members.component';
 import { ContactComponent } from './contact/contact.component';
 
 import { MembersService } from './admin/containers/members/members.service';
+import { MembersDialogComponent } from './admin/components/members-dialog/members-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MembersService } from './admin/containers/members/members.service';
     FooterComponent,
     HomeComponent,
     MembersComponent,
-    ContactComponent
+    ContactComponent,
+    MembersDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { MembersService } from './admin/containers/members/members.service';
   providers: [
     MembersService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MembersDialogComponent]
 })
 export class AppModule { }

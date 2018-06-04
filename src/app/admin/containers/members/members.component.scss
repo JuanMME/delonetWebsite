@@ -20,6 +20,14 @@
         & .card-body {
             padding: 0;
         }
+        & .actions-buttons {
+            background-color: transparent;
+            padding: 0;
+            padding-right: 15px;
+            i {
+                font-size: 1.4rem;
+            }
+        }
     }
 
 }

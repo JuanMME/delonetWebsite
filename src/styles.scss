@@ -16,6 +16,10 @@ $theme-colors: (
 .bg-secondary {
     background-color: #EEEEEE;
 }
+.btn:focus, .btn.focus {
+    box-shadow: none;
+}
+
 html {
     position: relative;
     min-height: 100%;
