@@ -1,0 +1,55 @@
+<form [formGroup]="memberForm" (ngSubmit)="member ? modifyMember() : createMember(); bsModalRef.hide(memberForm.value)" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title">Nuevo Socio</h5>
+    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 form-group text-right" style="display: flex;">
+        <div class="m-auto" *ngIf="!profilePhoto">
+          <div>
+            <label for="input-file" class="button-file btn btn-primary" >Escoja la imagen de perfil</label>
+            <input type="file" id="input-file" name="input-file" (change)="fileChangeListener($event)" style="display: none">
+          </div>
+          <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          <div *ngIf="data && data.image && data.image.length">
+              <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
+          </div>
+        </div>
+        <div class="m-auto" *ngIf="data.image && profilePhoto">
+          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
+          <div>
+              <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" autofocus />
+      </div>
+      <div class="col-6 form-group">
+        <label>Apellidos</label>
+        <input type="text" class="form-control" formControlName="apellidos" />
+      </div>
+      <div class="col-6 form-group">
+        <label>Dirección</label>
+        <input type="text" class="form-control" formControlName="direccion" />
+      </div>
+      <div class="col-6 form-group">
+        <label>Teléfono</label>
+        <input type="number" class="form-control" formControlName="telefono" />
+      </div>
+      <div class="col-6 form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" formControlName="email" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="!member" [disabled]="submitted || !memberForm.valid" type="submit" class="btn btn-primary">Crear</button>
+    <button *ngIf="member" [disabled]="submitted || !memberForm.valid || memberForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+  </div>
+</form>

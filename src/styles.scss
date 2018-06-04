@@ -1,10 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 $theme-colors: (
   "primary": #377BB5
 );
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+// regular style toast 
+@import "~ngx-toastr/toastr.css";
+ 
+// bootstrap style toast 
+// or import a bootstrap 4 alert styled design (SASS ONLY) 
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions 
+@import "~ngx-toastr/toastr-bs4-alert";
+ 
+// if you'd like to use it without importing all of bootstrap it requires 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~ngx-toastr/toastr-bs4-alert";
+
+// Sobreescritura de clases principales de bootstrap
+.text-secondary {
+    color: #5c5e61;
+}
+.bg-secondary {
+    background-color: #EEEEEE;
+}
+
+.btn:focus, .btn.focus {
+    box-shadow: none;
+}
 
 html {
     position: relative;
@@ -47,4 +76,78 @@ body {
     & .cal-hour-rows {
         overflow: hidden;
     }
+}
+
+// Grid de bootstrap
+.row {
+    margin: 0;
+}
+.col-12 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+// Módulo de las tablas (ngx datatable)
+.ngx-datatable{
+    & .datatable-body .datatable-scroll {
+        width: 100% !important;
+        & .datatable-row-wrapper, .datatable-body-row, .datatable-row-even {
+            width: inherit !important;
+        }
+    }
+    & .material:not(.cell-selection) .datatable-body-row:hover {
+        background-color: none;
+        cursor: pointer;
+    }
+    & .datatable-body-row {
+      border-bottom: 1px solid #efefef;
+      & .datatable-body-cell:first-child {
+        border-left: 4px solid transparent;
+        }
+    }
+    &:not(.cell-selection) {
+        & .datatable-body-row:hover {
+            & .datatable-body-cell:first-child {
+                border-left: 4px solid #377BB5;
+            }
+        }
+        .datatable-row-group, .datatable-body-cell {
+            cursor: pointer;
+        }
+    }
+}
+
+// Styling cards to display data of Monitors, members, etc
+.container-members{
+    h3 {
+        display: inline;
+        font-family: roboto;
+        font-size: 1.9rem;
+        font-weight: bold;
+    }
+    button {
+        float: right;
+        background-color: #f7f7f7;
+        i {
+            font-size: 1.4rem;
+        }
+    }
+    .card{
+        margin-top: 30px;
+        & .card-header{
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        & .card-body {
+            padding: 0;
+        }
+        & .actions-buttons {
+            background-color: transparent;
+            padding: 0;
+            padding-right: 15px;
+            i {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
 }
