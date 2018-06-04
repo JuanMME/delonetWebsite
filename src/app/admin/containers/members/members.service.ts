@@ -21,6 +21,11 @@ export class MembersService {
       .catch(this.handleError);
   }
 
+  modifyMember(memberId: Number, member: any) {
+    return this._http.put(this.serverUrl + '/' + memberId, member)
+      .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     const msg = 'Error status code' + error.status + 'status' + error.statusText + ' at ' + error.url;
     return Observable.throw(msg);

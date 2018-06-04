@@ -18,7 +18,14 @@ $theme-colors: (
 .bg-secondary {
     background-color: #EEEEEE;
 }
+<<<<<<< b1c1d1d1de23bb21477c2f9c7590a6cce48d8875
 >>>>>>> update: view members updated
+=======
+.btn:focus, .btn.focus {
+    box-shadow: none;
+}
+
+>>>>>>> feat: modify member implemented
 html {
     position: relative;
     min-height: 100%;
