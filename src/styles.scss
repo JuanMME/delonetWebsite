@@ -2,6 +2,40 @@
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
+<<<<<<< HEAD
+=======
+
+$theme-colors: (
+  "primary": #377BB5
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// regular style toast 
+@import "~ngx-toastr/toastr.css";
+ 
+// bootstrap style toast 
+// or import a bootstrap 4 alert styled design (SASS ONLY) 
+// should be after your bootstrap imports, it uses bs4 variables, mixins, functions 
+@import "~ngx-toastr/toastr-bs4-alert";
+ 
+// if you'd like to use it without importing all of bootstrap it requires 
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~ngx-toastr/toastr-bs4-alert";
+
+// Sobreescritura de clases principales de bootstrap
+.text-secondary {
+    color: #5c5e61;
+}
+.bg-secondary {
+    background-color: #EEEEEE;
+}
+.btn:focus, .btn.focus {
+    box-shadow: none;
+}
+>>>>>>> 84618643a4ff6e53c7ae42aced3148b8e06d7b87
 
 $theme-colors: (
   "primary": #377BB5
@@ -75,6 +109,7 @@ body {
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< b44360140782ba407fc98b44d607a3140cc559c2
 .cal-hour {
     min-width: 20px !important;
@@ -87,6 +122,8 @@ body {
     }
 }
 =======
+=======
+>>>>>>> 84618643a4ff6e53c7ae42aced3148b8e06d7b87
 // Grid de bootstrap
 .row {
     margin: 0;
@@ -159,4 +196,8 @@ body {
         }
     }
 
+<<<<<<< HEAD
 }>>>>>>> update: view members updated
+=======
+}
+>>>>>>> 84618643a4ff6e53c7ae42aced3148b8e06d7b87
