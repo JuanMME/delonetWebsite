@@ -7,6 +7,24 @@
   </div>
   <div class="modal-body">
     <div class="row">
+      <div class="col-12 form-group text-right" style="display: flex;">
+        <div class="m-auto" *ngIf="!profilePhoto">
+          <div>
+            <label for="input-file" class="button-file btn btn-primary" >Escoja la imagen de perfil</label>
+            <input type="file" id="input-file" name="input-file" (change)="fileChangeListener($event)" style="display: none">
+          </div>
+          <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          <div *ngIf="data && data.image && data.image.length">
+              <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
+          </div>
+        </div>
+        <div class="m-auto" *ngIf="data.image && profilePhoto">
+          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
+          <div>
+              <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
+          </div>
+        </div>
+      </div>
       <div class="col-6 form-group">
         <label>Nombre</label>
         <input type="text" class="form-control" formControlName="nombre" autofocus />
