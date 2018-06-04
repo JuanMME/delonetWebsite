@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -35,7 +37,9 @@ import { MembersDialogComponent } from './admin/components/members-dialog/member
     ReactiveFormsModule,
     ModalModule.forRoot(),
     ReservationsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
     MembersService

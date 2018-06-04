@@ -5,6 +5,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MembersDialogComponent } from '../../components/members-dialog/members-dialog.component';
 import { Member } from '../../models/member';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +20,8 @@ export class MembersComponent implements OnInit {
 
   constructor(
     private _membersService: MembersService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,9 @@ export class MembersComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
+    this.modalService.onHide.subscribe(data => {
+      this.getMembers();
+    });
   }
 
   editMember(member: Member) {
@@ -51,10 +56,20 @@ export class MembersComponent implements OnInit {
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.bsModalRef.content.member = member;
+    this.modalService.onHide.subscribe(data => {
+      this.getMembers();
+    });
   }
 
   deleteMember(member: Member) {
-    console.log(member);
+    this._membersService.deleteMember(member.id_socio).subscribe(data => {
+      if (data && data['affectedRows'] > 0) {
+        this.toastr.success('Operación realizada con éxito', 'El socio ha sido eliminado');
+        this.getMembers();
+      } else {
+        this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+      }
+    });
   }
 
 }
