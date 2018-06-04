@@ -125,4 +125,38 @@ body {
         }
     }
 }
->>>>>>> update: view members updated
+
+// Styling cards to display data of Monitors, members, etc
+.container-members{
+    h3 {
+        display: inline;
+        font-family: roboto;
+        font-size: 1.9rem;
+        font-weight: bold;
+    }
+    button {
+        float: right;
+        background-color: #f7f7f7;
+        i {
+            font-size: 1.4rem;
+        }
+    }
+    .card{
+        margin-top: 30px;
+        & .card-header{
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        & .card-body {
+            padding: 0;
+        }
+        & .actions-buttons {
+            background-color: transparent;
+            padding: 0;
+            padding-right: 15px;
+            i {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+}>>>>>>> update: view members updated

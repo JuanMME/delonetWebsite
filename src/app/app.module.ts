@@ -16,9 +16,13 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { MembersComponent } from './admin/containers/members/members.component';
 import { ContactComponent } from './contact/contact.component';
+import { MembersDialogComponent } from './admin/components/members-dialog/members-dialog.component';
+import { MonitorsComponent } from './admin/containers/monitors/monitors.component';
 
 import { MembersService } from './admin/containers/members/members.service';
-import { MembersDialogComponent } from './admin/components/members-dialog/members-dialog.component';
+import { MonitorService } from './admin/monitor.service';
+import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
+import { ClassComponent } from './admin/containers/class/class.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { MembersDialogComponent } from './admin/components/members-dialog/member
     MembersComponent,
     ContactComponent,
     MembersDialogComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    MonitorsComponent,
+    MonitorsDialogComponent,
+    ClassComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +51,10 @@ import { MembersDialogComponent } from './admin/components/members-dialog/member
     ToastrModule.forRoot(),
   ],
   providers: [
-    MembersService
+    MembersService,
+    MonitorService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MembersDialogComponent]
+  entryComponents: [MembersDialogComponent, MonitorsDialogComponent]
 })
 export class AppModule { }
