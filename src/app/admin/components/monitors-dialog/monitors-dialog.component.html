@@ -48,8 +48,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="!member" [disabled]="submitted || !monitorForm.valid" type="submit" class="btn btn-primary">Crear</button>
-      <button *ngIf="member" [disabled]="submitted || !monitorForm.valid || monitorForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
+      <button *ngIf="!monitor" [disabled]="submitted || !monitorForm.valid" type="submit" class="btn btn-primary">Crear</button>
+      <button *ngIf="monitor" [disabled]="submitted || !monitorForm.valid || monitorForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
       <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
     </div>
   </form>

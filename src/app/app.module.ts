@@ -23,6 +23,8 @@ import { MembersService } from './admin/containers/members/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
 import { ClassComponent } from './admin/containers/class/class.component';
+import { ClassService } from './admin/class.service';
+import { ClassDialogComponent } from './admin/components/class-dialog/class-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ClassComponent } from './admin/containers/class/class.component';
     ImageCropperComponent,
     MonitorsComponent,
     MonitorsDialogComponent,
-    ClassComponent
+    ClassComponent,
+    ClassDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +55,10 @@ import { ClassComponent } from './admin/containers/class/class.component';
   ],
   providers: [
     MembersService,
-    MonitorService
+    MonitorService,
+    ClassService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MembersDialogComponent, MonitorsDialogComponent]
+  entryComponents: [MembersDialogComponent, MonitorsDialogComponent, ClassDialogComponent]
 })
 export class AppModule { }

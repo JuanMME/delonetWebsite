@@ -1,0 +1,34 @@
+<div class="row container-members">
+    <div class="col-10 offset-1">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-secondary">Clases</h3>
+          <button class="btn btn-primary-outline text-primary" (click)="addClass()">
+            <i class="fa fa-user-plus"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="50"
+            [rows]="classes" [scrollbarV]="true" style="height: 85vh;">
+            <ngx-datatable-column name="Nombre" prop="nombre" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Hora" prop="hora" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Dias" prop="dias" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Número de plazas" prop="num_plazas" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Edad máxima" prop="edad_maxima" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Acciones" prop="" [flexGrow]="1">
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <div style="display: flex;">
+                  <button class="btn btn-primary-outline actions-buttons" (click)="editClass(row)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button class="btn btn-primary-outline actions-buttons" (click)="deleteClass(row)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
