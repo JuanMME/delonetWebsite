@@ -8,6 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageCropperComponent } from 'ng2-img-cropper';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -27,7 +28,8 @@ import { MembersDialogComponent } from './admin/components/members-dialog/member
     HomeComponent,
     MembersComponent,
     ContactComponent,
-    MembersDialogComponent
+    MembersDialogComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -38,8 +40,8 @@ import { MembersDialogComponent } from './admin/components/members-dialog/member
     ModalModule.forRoot(),
     ReservationsModule,
     NgxDatatableModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     MembersService
