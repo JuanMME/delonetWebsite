@@ -4,16 +4,17 @@ import { AppRoutingModule } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { MembersComponent } from './admin/members/members.component';
+import { MembersComponent } from './admin/containers/members/members.component';
 import { ContactComponent } from './contact/contact.component';
 
-import { MembersService } from './admin/members/members.service';
+import { MembersService } from './admin/containers/members/members.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MembersService } from './admin/members/members.service';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    ReservationsModule
+    ReservationsModule,
+    NgxDatatableModule
   ],
   providers: [
     MembersService
