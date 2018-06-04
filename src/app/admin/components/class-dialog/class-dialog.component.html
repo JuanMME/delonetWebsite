@@ -1,0 +1,41 @@
+<form [formGroup]="classForm" (ngSubmit)="classe ? modifyClass() : createClass(); bsModalRef.hide(classForm.value)" novalidate>
+    <div class="modal-header">
+      <h5 class="modal-title">Nueva Clase</h5>
+      <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-6 form-group">
+          <label>Nombre</label>
+          <input type="text" class="form-control" formControlName="nombre" autofocus />
+        </div>
+        <div class="col-6 form-group">
+          <label>Número de plazas</label>
+          <input type="text" class="form-control" formControlName="num_plazas" />
+        </div>
+        <div class="col-6 form-group">
+          <label>Nivel</label>
+          <input type="text" class="form-control" formControlName="nivel" />
+        </div>
+        <div class="col-6 form-group">
+          <label>Hora</label>
+          <input type="number" class="form-control" formControlName="hora" />
+        </div>
+        <div class="col-6 form-group">
+          <label>Edad_maxima</label>
+          <input type="text" class="form-control" formControlName="edad_maxima" />
+        </div>
+        <div class="col-6 form-group">
+            <label>Monitores</label>
+            <input type="text" class="form-control" formControlName="monitores" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="!classe" [disabled]="submitted || !classForm.valid" type="submit" class="btn btn-primary">Crear</button>
+      <button *ngIf="classe" [disabled]="submitted || !classForm.valid || classForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+    </div>
+  </form>
