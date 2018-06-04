@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClassService } from '../../class.service';
 import { Class } from '../../models/class';
 import { ClassDialogComponent } from '../../components/class-dialog/class-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-class',
@@ -60,12 +61,23 @@ export class ClassComponent implements OnInit {
   }
 
   deleteClass(classe: Class) {
-    this.classService.deleteClass(classe.id_clase).subscribe(data => {
-      if (data && data['affectedRows'] > 0) {
-        this.toastr.success('Operación realizada con éxito', 'La clase ha sido eliminada');
-        this.getClasses();
-      } else {
-        this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+    const initialState = {
+      title: 'Eliminar clase',
+      content: '¿Está seguro que desea borrar esta clase? Se eliminará permanentemente del sistema',
+      class: 'modal-lg'
+    };
+    this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Cerrar';
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this.classService.deleteClass(classe.id_clase).subscribe(data => {
+          if (data && data['affectedRows'] > 0) {
+            this.toastr.success('Operación realizada con éxito', 'La clase ha sido eliminada');
+            this.getClasses();
+          } else {
+            this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+          }
+        });
       }
     });
   }

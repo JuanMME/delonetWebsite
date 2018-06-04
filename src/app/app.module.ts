@@ -19,12 +19,13 @@ import { ContactComponent } from './contact/contact.component';
 import { MembersDialogComponent } from './admin/components/members-dialog/members-dialog.component';
 import { MonitorsComponent } from './admin/containers/monitors/monitors.component';
 
-import { MembersService } from './admin/containers/members/members.service';
+import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
 import { ClassDialogComponent } from './admin/components/class-dialog/class-dialog.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ClassDialogComponent } from './admin/components/class-dialog/class-dial
     MonitorsComponent,
     MonitorsDialogComponent,
     ClassComponent,
-    ClassDialogComponent
+    ClassDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,6 @@ import { ClassDialogComponent } from './admin/components/class-dialog/class-dial
     ClassService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MembersDialogComponent, MonitorsDialogComponent, ClassDialogComponent]
+  entryComponents: [MembersDialogComponent, MonitorsDialogComponent, ClassDialogComponent, ConfirmDialogComponent]
 })
 export class AppModule { }

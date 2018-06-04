@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
-import { MembersService } from "../../containers/members/members.service";
+import { MembersService } from "../../members.service";
 import { BsModalRef } from "ngx-bootstrap";
 import { Member } from "../../models/member";
 import { ImageCropperComponent, CropperSettings } from "ng2-img-cropper";
