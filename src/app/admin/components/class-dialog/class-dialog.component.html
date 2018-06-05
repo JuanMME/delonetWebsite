@@ -20,8 +20,20 @@
           <input type="text" class="form-control" formControlName="nivel" />
         </div>
         <div class="col-6 form-group">
-          <label>Hora</label>
-          <input type="number" class="form-control" formControlName="hora" />
+            <label>Hora</label>
+            <timepicker 
+             class="form-control" formControlName="hora"
+             [(ngModel)]="horaClase" 
+             [showMeridian]="isMeridian"
+             (isValid)="isValid($event)"
+             [min]="minTime"
+             [max]="maxTime"
+             [minuteStep]="mstep"
+             [class.alert-danger]="!valid"
+             ></timepicker>
+             <span *ngIf="!valid" class="text-danger">
+               Recuerde que el horario de clases disponible actualmente es desde las 9:00 hasta las 21:00.
+             </span>
         </div>
         <div class="col-6 form-group">
           <label>Edad_maxima</label>
