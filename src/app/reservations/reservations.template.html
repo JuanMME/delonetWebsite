@@ -53,12 +53,6 @@
             <alert *ngIf="!valid" type="danger">
               La hora estar comprendida entre las 16 y las 21. Los minutos deben ser 0.
             </alert>
-            <alert *ngIf="newReservation" type="success">
-              Reserva generada con éxito.
-            </alert>
-            <alert *ngIf="alreadyBooked" type="danger">
-              <strong>Error.</strong> Ya hay una reserva realizada ese día para la calle y hora seleccionadas.
-            </alert>
           </div>
         </div>
       </form>
