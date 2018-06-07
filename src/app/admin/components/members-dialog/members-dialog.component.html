@@ -18,7 +18,7 @@
               <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
           </div>
         </div>
-        <div class="m-auto" *ngIf="data.image && profilePhoto">
+        <div class="m-auto" *ngIf="data.image && data.image !== null && profilePhoto">
           <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
           <div>
               <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>

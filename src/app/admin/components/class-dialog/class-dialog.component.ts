@@ -36,7 +36,7 @@ export class ClassDialogComponent implements OnInit {
     private toastr: ToastrService,
     private monitorsService: MonitorService
   ) {
-    if (this.horaClase.getHours() < 16) {
+    if (this.horaClase.getHours() < 16 || this.horaClase.getMinutes() > 0) {
       this.horaClase.setHours(16);
       this.horaClase.setMinutes(0);
     } else if (this.horaClase.getHours() > 21) {

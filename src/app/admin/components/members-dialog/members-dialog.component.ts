@@ -91,7 +91,7 @@ export class MembersDialogComponent implements OnInit {
         profile_image: [this.member.profile_image]
       });
       if (this.member.profile_image && this.member.profile_image.length) {
-        this.data.image = this.member.profile_image;
+        this.data.image = 'data:image/JPEG;base64,' + this.member.profile_image;
         this.profilePhoto = this.data.image;
       }
     } else {
@@ -112,6 +112,7 @@ export class MembersDialogComponent implements OnInit {
   confirmPhoto() {
     this.profilePhoto = this.data.image;
     this.memberForm.controls['profile_image'].patchValue(this.profilePhoto);
+    this.memberForm.markAsDirty();
   }
 
   deleteImage() {
@@ -119,6 +120,7 @@ export class MembersDialogComponent implements OnInit {
     this.data.image = null;
     this.data = {};
     this.memberForm.controls['profile_image'].patchValue('');
+    this.memberForm.markAsDirty();
   }
 
   fileChangeListener($event) {
