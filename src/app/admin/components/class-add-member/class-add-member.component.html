@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h5 class="modal-title">Alumnos disponibles</h5>
+  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12">
+        <div *ngFor="let member of noMembers">
+            <input type="checkbox" [value]="member.id_socio" (click)="onChange(member)" [checked]="member.checked">
+            <label>{{ member.nombre }}</label>
+        </div>
+        <div *ngIf="noMembers && !noMembers.length">
+          No hay más socios disponibles para añadir a esta clase.
+        </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn btn-primary">Añadir</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+</div>

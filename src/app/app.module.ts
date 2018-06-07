@@ -27,6 +27,8 @@ import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
+import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
+import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { ClassService } from './admin/class.service';
     MonitorsDialogComponent,
     ClassComponent,
     ClassDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ClassDetailsComponent,
+    ClassAddMemberComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,11 @@ import { ClassService } from './admin/class.service';
     ClassService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MembersDialogComponent, MonitorsDialogComponent, ClassDialogComponent, ConfirmDialogComponent]
+  entryComponents: [
+    MembersDialogComponent, 
+    MonitorsDialogComponent, 
+    ClassDialogComponent, 
+    ConfirmDialogComponent,
+    ClassAddMemberComponent]
 })
 export class AppModule { }

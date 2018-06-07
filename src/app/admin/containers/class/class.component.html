@@ -15,9 +15,12 @@
             <ngx-datatable-column name="Dias" prop="dias" [flexGrow]="2"></ngx-datatable-column>
             <ngx-datatable-column name="Número de plazas" prop="num_plazas" [flexGrow]="2"></ngx-datatable-column>
             <ngx-datatable-column name="Edad máxima" prop="edad_maxima" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column name="Acciones" prop="" [flexGrow]="1">
+            <ngx-datatable-column name="Acciones" prop="" [flexGrow]="2">
               <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div style="display: flex;">
+                  <button class="btn btn-primary-outline actions-buttons" (click)="viewDetails(row)">
+                      <i class="fa fa-eye"></i>
+                  </button>
                   <button class="btn btn-primary-outline actions-buttons" (click)="editClass(row)">
                     <i class="fa fa-edit"></i>
                   </button>
