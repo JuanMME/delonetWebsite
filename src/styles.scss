@@ -119,6 +119,17 @@ body {
 
 // Styling cards to display data of Monitors, members, etc
 .container-members{
+    .card-header {
+        & button {
+            padding: 0;
+            padding-right: 20px;
+            padding-top: 6px;
+            & .icon-header {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+        }
+    }
     h3 {
         display: inline;
         font-family: roboto;

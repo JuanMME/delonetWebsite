@@ -4,7 +4,9 @@
         <div class="card-header">
           <h3 class="text-secondary">Clases</h3>
           <button class="btn btn-primary-outline text-primary" (click)="addClass()">
-            <i class="fa fa-user-plus"></i>
+              <i class="material-icons icon-header">
+                  add
+              </i>
           </button>
         </div>
         <div class="card-body">
@@ -19,13 +21,19 @@
               <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div style="display: flex;">
                   <button class="btn btn-primary-outline actions-buttons" (click)="viewDetails(row)">
-                      <i class="fa fa-eye"></i>
+                      <i class="material-icons">
+                        visibility
+                      </i>
                   </button>
                   <button class="btn btn-primary-outline actions-buttons" (click)="editClass(row)">
-                    <i class="fa fa-edit"></i>
+                      <i class="material-icons">
+                        edit
+                      </i>
                   </button>
                   <button class="btn btn-primary-outline actions-buttons" (click)="deleteClass(row)">
-                    <i class="fa fa-trash"></i>
+                      <i class="material-icons">
+                        delete
+                      </i>
                   </button>
                 </div>
               </ng-template>
