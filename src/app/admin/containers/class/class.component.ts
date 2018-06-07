@@ -7,6 +7,7 @@ import { ClassService } from '../../class.service';
 import { Class } from '../../models/class';
 import { ClassDialogComponent } from '../../components/class-dialog/class-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-class',
@@ -20,7 +21,8 @@ export class ClassComponent implements OnInit {
   constructor(
     private classService: ClassService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,6 @@ export class ClassComponent implements OnInit {
     this.classService.getClasses().subscribe(
       classes => {
         this.classes = classes;
-        console.log(classes);
       }
     );
   }
@@ -82,4 +83,8 @@ export class ClassComponent implements OnInit {
     });
   }
 
+
+  viewDetails(classe: Class) {
+    this.router.navigate(['/admin/clases/' + classe.id_clase]);
+  }
 }

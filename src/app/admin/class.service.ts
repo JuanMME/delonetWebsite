@@ -15,6 +15,11 @@ export class ClassService {
       .catch(this.handleError);
   }
 
+  getClasse(id_clase): Observable<any> {
+    return this._http.get(this.serverUrl + '-socios/' + id_clase)
+      .catch(this.handleError);
+  }
+
   createClases(classe: any) {
     return this._http.post(this.serverUrl, classe)
       .catch(this.handleError);
@@ -27,6 +32,11 @@ export class ClassService {
 
   deleteClass(classId: Number) {
     return this._http.delete(this.serverUrl + '/' + classId)
+      .catch(this.handleError);
+  }
+
+  getNotMembersInClass(id_clase) {
+    return this._http.get(this.serverUrl + '/' + id_clase + '/add-member')
       .catch(this.handleError);
   }
 

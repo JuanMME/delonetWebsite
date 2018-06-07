@@ -8,7 +8,6 @@ import {
   CalendarDateFormatter,
   DAYS_OF_WEEK
 } from 'angular-calendar';
-import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -16,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
 import { ReservationsService } from './reservations.service';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
@@ -27,12 +27,6 @@ defineLocale('es', esLocale);
   templateUrl: 'reservations.template.html',
   styleUrls: [
     'reservations.styles.scss'
-  ],
-  providers: [
-    {
-      provide: CalendarDateFormatter,
-      useClass: CustomDateFormatter
-    }
   ]
 })
 
@@ -57,7 +51,8 @@ export class ReservationsComponent implements OnInit {
     private fb: FormBuilder,
     private _reservationsService: ReservationsService,
     private localeService: BsLocaleService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private toastr: ToastrService
   ) {
     this.createForm();
     this.setMinMaxTime();
@@ -132,20 +127,20 @@ export class ReservationsComponent implements OnInit {
 
   createReservation() {
     this.combineDates();
-    if (this.reservationForm.valid && this.checkAvailability()) {
+    if (this.reservationForm.valid && !this.isAlreadyBooked()) {
       this.submitted = true;
       this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
         if (response.affectedRows === 1) {
-          this.newReservation = true;
+          this.toastr.success('Reserva añadida con éxito.');
           this.getReservations();
         } else {
-          this.newReservation = false;
+          this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
         }
       });
     }
   }
 
-  checkAvailability() {
+  isAlreadyBooked() {
     const calle = parseInt(this.reservationForm.controls.id_calle.value, 10) - 1;
     this.alreadyBooked = false;
     this.laneEvents[calle].events.forEach(event => {
@@ -154,7 +149,10 @@ export class ReservationsComponent implements OnInit {
         this.alreadyBooked = true;
       }
     });
-    console.log(this.alreadyBooked);
+    if (this.alreadyBooked) {
+      this.toastr.error('Ya hay una reserva realizada ese día para la calle y hora seleccionadas.', 'Error');
+    }
+    return this.alreadyBooked;
   }
 
   combineDates() {

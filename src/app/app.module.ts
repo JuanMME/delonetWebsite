@@ -8,7 +8,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ImageCropperComponent } from 'ng2-img-cropper';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -18,14 +18,18 @@ import { MembersComponent } from './admin/containers/members/members.component';
 import { ContactComponent } from './contact/contact.component';
 import { MembersDialogComponent } from './admin/components/members-dialog/members-dialog.component';
 import { MonitorsComponent } from './admin/containers/monitors/monitors.component';
+import { ImageCropperComponent } from 'ng2-img-cropper';
+import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
+import { ClassDialogComponent } from './admin/components/class-dialog/class-dialog.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
-import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
-import { ClassDialogComponent } from './admin/components/class-dialog/class-dialog.component';
-import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
+import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     MonitorsDialogComponent,
     ClassComponent,
     ClassDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ClassDetailsComponent,
+    ClassAddMemberComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +60,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     NgxDatatableModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   providers: [
     MembersService,
@@ -61,6 +68,11 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     ClassService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [MembersDialogComponent, MonitorsDialogComponent, ClassDialogComponent, ConfirmDialogComponent]
+  entryComponents: [
+    MembersDialogComponent, 
+    MonitorsDialogComponent, 
+    ClassDialogComponent, 
+    ConfirmDialogComponent,
+    ClassAddMemberComponent]
 })
 export class AppModule { }

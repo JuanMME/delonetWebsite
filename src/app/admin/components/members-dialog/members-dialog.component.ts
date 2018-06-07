@@ -103,7 +103,7 @@ export class MembersDialogComponent implements OnInit {
         fecha_baja: [new Date(), [<any>Validators.required]], // cambiar
         telefono: [, [<any>Validators.required]],
         email: [, [<any>Validators.required]],
-        id_clase: [2],
+        id_clase: [null],
         profile_image: ['']
       });
     }

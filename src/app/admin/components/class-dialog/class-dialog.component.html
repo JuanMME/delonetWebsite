@@ -20,15 +20,38 @@
           <input type="text" class="form-control" formControlName="nivel" />
         </div>
         <div class="col-6 form-group">
-          <label>Hora</label>
-          <input type="number" class="form-control" formControlName="hora" />
-        </div>
-        <div class="col-6 form-group">
           <label>Edad_maxima</label>
           <input type="text" class="form-control" formControlName="edad_maxima" />
         </div>
         <div class="col-6 form-group">
+          <label>Días</label>
+          <input type="text" class="form-control" formControlName="dias" />
+        </div>
+        <div class="col-12 form-group">
+            <label>Hora</label>
+            <timepicker 
+             formControlName="hora"
+             [(ngModel)]="horaClase" 
+             [showMeridian]="isMeridian"
+             (isValid)="isValid($event)"
+             [min]="minTime"
+             [max]="maxTime"
+             [minuteStep]="mstep"
+             [class.alert-danger]="!valid"
+             ></timepicker>
+             <span *ngIf="!valid" class="text-danger">
+               Recuerde que el horario de clases disponible actualmente es desde las 16:00 hasta las 21:00.
+             </span>
+             <span *ngIf="!horaEnPunto" class="text-danger">
+              La clase debe ser en una hora en punto.
+             </span>
+        </div>
+        <div class="col-12 form-group">
             <label>Monitores</label>
+            <div *ngFor="let monitor of monitors">
+                <input type="checkbox" [value]="monitor.id_monitor" (click)="onChange(monitor)" [checked]="monitor.checked">
+                <label>{{ monitor.nombre }}</label>
+            </div>
             <input type="text" class="form-control" formControlName="monitores" />
         </div>
       </div>
