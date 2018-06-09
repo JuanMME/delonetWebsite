@@ -7,7 +7,7 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-12 form-group text-right" style="display: flex;">
+      <div class="col-5 form-group text-right" style="display: flex;">
         <div class="m-auto" *ngIf="!profilePhoto">
           <div>
             <label for="input-file" class="button-file btn btn-primary" >Escoja la imagen de perfil</label>
@@ -18,32 +18,36 @@
               <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
           </div>
         </div>
-        <div class="m-auto" *ngIf="data.image && profilePhoto">
+        <div class="m-auto" *ngIf="data.image && data.image !== null && profilePhoto">
           <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
           <div>
               <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
           </div>
         </div>
       </div>
-      <div class="col-6 form-group">
-        <label>Nombre</label>
-        <input type="text" class="form-control" formControlName="nombre" autofocus />
-      </div>
-      <div class="col-6 form-group">
-        <label>Apellidos</label>
-        <input type="text" class="form-control" formControlName="apellidos" />
-      </div>
-      <div class="col-6 form-group">
-        <label>Dirección</label>
-        <input type="text" class="form-control" formControlName="direccion" />
-      </div>
-      <div class="col-6 form-group">
-        <label>Teléfono</label>
-        <input type="number" class="form-control" formControlName="telefono" />
-      </div>
-      <div class="col-6 form-group">
-        <label>Email</label>
-        <input type="text" class="form-control" formControlName="email" />
+      <div class="col-7">
+        <div class="row">
+          <div class="col-6 form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" autofocus />
+          </div>
+          <div class="col-6 form-group">
+            <label>Apellidos</label>
+            <input type="text" class="form-control" formControlName="apellidos" />
+          </div>
+          <div class="col-6 form-group">
+            <label>Dirección</label>
+            <input type="text" class="form-control" formControlName="direccion" />
+          </div>
+          <div class="col-6 form-group">
+            <label>Teléfono</label>
+            <input type="number" class="form-control" formControlName="telefono" />
+          </div>
+          <div class="col-6 form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" formControlName="email" />
+          </div>
+        </div>
       </div>
     </div>
   </div>

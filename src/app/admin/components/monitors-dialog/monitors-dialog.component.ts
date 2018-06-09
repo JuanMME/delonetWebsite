@@ -88,7 +88,7 @@ export class MonitorsDialogComponent implements OnInit {
         profile_image: [this.monitor.profile_image]
       });
       if (this.monitor.profile_image && this.monitor.profile_image.length) {
-        this.data.image = this.monitor.profile_image;
+        this.data.image = 'data:image/JPEG;base64,' + this.monitor.profile_image;
         this.profilePhoto = this.data.image;
       }
     } else {
@@ -106,6 +106,7 @@ export class MonitorsDialogComponent implements OnInit {
   confirmPhoto() {
     this.profilePhoto = this.data.image;
     this.monitorForm.controls['profile_image'].patchValue(this.profilePhoto);
+    this.monitorForm.markAsDirty();
   }
 
   deleteImage() {
@@ -113,6 +114,7 @@ export class MonitorsDialogComponent implements OnInit {
     this.data.image = null;
     this.data = {};
     this.monitorForm.controls['profile_image'].patchValue('');
+    this.monitorForm.markAsDirty();
   }
 
   fileChangeListener($event) {

@@ -4,7 +4,9 @@
       <div class="card-header">
         <h3 class="text-secondary">Socios</h3>
         <button class="btn btn-primary-outline text-primary" (click)="addMember()">
-          <i class="fa fa-user-plus"></i>
+            <i class="material-icons icon-header">
+                person_add
+            </i>
         </button>
       </div>
       <div class="card-body">
@@ -20,10 +22,14 @@
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
               <div style="display: flex;">
                 <button class="btn btn-primary-outline actions-buttons" (click)="editMember(row)">
-                  <i class="fa fa-edit"></i>
+                    <i class="material-icons">
+                        edit
+                    </i>
                 </button>
                 <button class="btn btn-primary-outline actions-buttons" (click)="deleteMember(row)">
-                  <i class="fa fa-trash"></i>
+                  <i class="material-icons">
+                      delete
+                  </i>
                 </button>
               </div>
             </ng-template>
