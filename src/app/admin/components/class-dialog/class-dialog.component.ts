@@ -61,7 +61,6 @@ export class ClassDialogComponent implements OnInit {
           Object.assign(monitor, {checked: false});
         }
       });
-      console.log(this.monitors);
     });
   }
 

@@ -38,19 +38,22 @@ export class ClassAddMemberComponent implements OnInit {
   }
 
   addAllMembersToClass() {
-    let ok = false;
+    let error: boolean;
     this.noMembers.forEach(member => {
       if (member['checked'] === true) {
         member.id_clase = this.id_clase;
         this.membersService.modifyMember(member.id_socio, member).subscribe(data => {
-          if (data) {
-            this.bsModalRef.content.ok = true;
-          } else {
-            this.bsModalRef.content.ok = false;
+          if (!data) {
+            error = true;
           }
         });
       }
     });
+    if (error) {
+      this.bsModalRef.content.ok = false;
+    } else {
+      this.bsModalRef.content.ok = true;
+    }
   }
 
 }
