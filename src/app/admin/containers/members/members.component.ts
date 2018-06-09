@@ -39,10 +39,9 @@ export class MembersComponent implements OnInit {
 
   addMember(): void {
     const initialState = {
-      member: null,
-      class: 'modal-lg'
+      member: null
     };
-    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
     this.modalService.onHide.subscribe(data => {
       this.getMembers();
@@ -51,10 +50,9 @@ export class MembersComponent implements OnInit {
 
   editMember(member: Member) {
     const initialState = {
-      member: member,
-      class: 'modal-lg'
+      member: member
     };
-    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
     this.bsModalRef.content.member = member;
     this.modalService.onHide.subscribe(data => {

@@ -7,7 +7,7 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-5 form-group text-right" style="display: flex;">
+      <div class="col-12 col-lg-5 form-group text-right" style="display: flex;">
         <div class="m-auto" *ngIf="!profilePhoto">
           <div>
             <label for="input-file" class="button-file btn btn-primary" >Escoja la imagen de perfil</label>
@@ -25,25 +25,25 @@
           </div>
         </div>
       </div>
-      <div class="col-7">
+      <div class="col-12 col-lg-7">
         <div class="row">
-          <div class="col-6 form-group">
+          <div class="col-12 col-lg-6 form-group">
             <label>Nombre</label>
             <input type="text" class="form-control" formControlName="nombre" autofocus />
           </div>
-          <div class="col-6 form-group">
+          <div class="col-12 col-lg-6 form-group">
             <label>Apellidos</label>
             <input type="text" class="form-control" formControlName="apellidos" />
           </div>
-          <div class="col-6 form-group">
+          <div class="col-12 col-lg-6 form-group">
             <label>Dirección</label>
             <input type="text" class="form-control" formControlName="direccion" />
           </div>
-          <div class="col-6 form-group">
+          <div class="col-12 col-lg-6 form-group">
             <label>Teléfono</label>
-            <input type="number" class="form-control" formControlName="telefono" />
+            <input type="text" class="form-control" formControlName="telefono" />
           </div>
-          <div class="col-6 form-group">
+          <div class="col-12 col-lg-6 form-group">
             <label>Email</label>
             <input type="text" class="form-control" formControlName="email" />
           </div>
@@ -52,8 +52,20 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!member" [disabled]="submitted || !memberForm.valid" type="submit" class="btn btn-primary">Crear</button>
-    <button *ngIf="member" [disabled]="submitted || !memberForm.valid || memberForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
-    <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+    <button *ngIf="!member" [disabled]="submitted || !memberForm.valid" type="submit" class="btn-actions">
+      <i class="material-icons">
+        check
+      </i>
+    </button>
+    <button *ngIf="member" [disabled]="submitted || !memberForm.valid || memberForm.pristine" type="submit" class="btn-actions">
+      <i class="material-icons">
+        check
+      </i>
+    </button>
+    <button type="button" (click)="bsModalRef.hide()" class="btn-actions">
+      <i class="material-icons">
+        arrow_back
+      </i>
+    </button>
   </div>
 </form>

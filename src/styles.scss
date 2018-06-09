@@ -4,7 +4,8 @@
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 $theme-colors: (
-  "primary": #377BB5
+  "primary": #1d8fc7,
+  "secondary": #191919
 );
 
 @import "node_modules/bootstrap/scss/bootstrap";
@@ -23,9 +24,14 @@ $theme-colors: (
 @import "~bootstrap/scss/mixins";
 @import "~ngx-toastr/toastr-bs4-alert";
 
+// Declaración de variables
+$primary-background: #377BB5;
+$light-text: #FFF;
+$light-background: #FFF;
+
 // Sobreescritura de clases principales de bootstrap
 .text-secondary {
-    color: #5c5e61;
+    color: #929599;
 }
 .bg-secondary {
     background-color: #EEEEEE;
@@ -35,6 +41,18 @@ $theme-colors: (
     box-shadow: none;
 }
 
+.btn-actions {
+    background-color: $light-background;
+    padding: 10px;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-actions:disabled {
+    color: #929599;
+    cursor: initial;
+}
 html {
     position: relative;
     min-height: 100%;
@@ -42,6 +60,7 @@ html {
 
 body {
     margin-bottom: 150px;
+    background-color: #e6ecf0;
 }
 
 @media only screen and (max-width: 660px) {
@@ -76,15 +95,6 @@ body {
     & .cal-hour-rows {
         overflow: hidden;
     }
-}
-
-// Grid de bootstrap
-.row {
-    margin: 0;
-}
-.col-12 {
-    padding-right: 0;
-    padding-left: 0;
 }
 
 // Módulo de las tablas (ngx datatable)
@@ -125,6 +135,7 @@ body {
 
 // Styling cards to display data of Monitors, members, etc
 .container-members{
+    margin: 0;
     button {
         float: right;
         background-color: #f7f7f7;
@@ -135,6 +146,7 @@ body {
     .card{
         margin-top: 30px;
         & .card-header{
+            background-color: $primary-background;
             box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
             padding-left: 2.2rem;
             padding-right: 3rem;
@@ -142,12 +154,15 @@ body {
                 display: inline;
                 font-family: roboto;
                 font-size: 1.9rem;
+                color: $light-text;
             }
             & button {
                 padding: 0;
                 padding-top: 6px;
+                background-color: $primary-background;
                 & .icon-header {
                     font-size: 1.6rem;
+                    color: $light-text;
                 }
             }
         }
@@ -158,16 +173,10 @@ body {
             background-color: transparent;
             padding: 0;
             padding-right: 15px;
+            color: #696868;
             i {
                 font-size: 1.4rem;
             }
         }
     }
-}
-
-// Modals
-
-.modal-dialog {
-    max-width: 60rem;
-    min-width: 60rem;
 }

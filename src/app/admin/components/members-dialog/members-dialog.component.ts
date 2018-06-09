@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { MembersService } from "../../members.service";
-import { BsModalRef } from "ngx-bootstrap";
-import { Member } from "../../models/member";
-import { ImageCropperComponent, CropperSettings } from "ng2-img-cropper";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MembersService } from '../../members.service';
+import { BsModalRef } from 'ngx-bootstrap';
+import { Member } from '../../models/member';
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 
 @Component({
-  selector: "app-members-dialog",
-  templateUrl: "./members-dialog.component.html",
-  styleUrls: ["./members-dialog.component.scss"]
+  selector: 'app-members-dialog',
+  templateUrl: './members-dialog.component.html',
+  styleUrls: ['./members-dialog.component.scss']
 })
 export class MembersDialogComponent implements OnInit {
   private memberForm: FormGroup;
@@ -17,7 +17,8 @@ export class MembersDialogComponent implements OnInit {
   member: Member;
   data: any;
   profilePhoto: String;
-  @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
+  @ViewChild('cropper', undefined)
+  cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
 
   constructor(
@@ -45,15 +46,15 @@ export class MembersDialogComponent implements OnInit {
   createMember() {
     this.submitted = true;
     this._membersService.createMember(this.memberForm.value).subscribe(data => {
-      if (data && data["affectedRows"] > 0) {
+      if (data && data['affectedRows'] > 0) {
         this.toastr.success(
-          "Operación realizada con éxito",
-          "El socio ha sido añadido"
+          'Operación realizada con éxito',
+          'El socio ha sido añadido'
         );
       } else {
         this.toastr.error(
-          "Algo ha fallado en la operación",
-          "Inténtelo más tarde"
+          'Algo ha fallado en la operación',
+          'Inténtelo más tarde'
         );
       }
     });
@@ -63,15 +64,15 @@ export class MembersDialogComponent implements OnInit {
     this._membersService
       .modifyMember(this.member.id_socio, this.memberForm.value)
       .subscribe(data => {
-        if (data && data["affectedRows"] > 0) {
+        if (data && data['affectedRows'] > 0) {
           this.toastr.success(
-            "Operación realizada con éxito",
-            "El socio ha sido modificado"
+            'Operación realizada con éxito',
+            'El socio ha sido modificado'
           );
         } else {
           this.toastr.error(
-            "Algo ha fallado en la operación",
-            "Inténtelo más tarde"
+            'Algo ha fallado en la operación',
+            'Inténtelo más tarde'
           );
         }
       });
@@ -124,17 +125,15 @@ export class MembersDialogComponent implements OnInit {
   }
 
   fileChangeListener($event) {
-    var image:any = new Image();
-    var file:File = $event.target.files[0];
-    var myReader:FileReader = new FileReader();
-    var that = this;
-    myReader.onloadend = function (loadEvent:any) {
-        image.src = loadEvent.target.result;
-        that.cropper.setImage(image);
-
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function(loadEvent: any) {
+      image.src = loadEvent.target.result;
+      that.cropper.setImage(image);
     };
 
     myReader.readAsDataURL(file);
   }
-
 }
