@@ -9,7 +9,7 @@ import { ReservationsModule } from './reservations/reservations.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { CollapseModule, BsDropdownModule, AlertModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, AlertModule, TooltipModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -68,6 +68,7 @@ import { AdminAuthGuardService } from './shared/services/admin-auth-guard.servic
     ToastrModule.forRoot(),
     TimepickerModule.forRoot(),
     AlertModule,
+    TooltipModule.forRoot(),
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
