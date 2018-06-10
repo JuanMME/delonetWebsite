@@ -7,16 +7,18 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { MonitorsComponent } from './admin/containers/monitors/monitors.component';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
-            { path: 'reservas', component: ReservationsComponent},
-            { path: 'admin/socios', component: MembersComponent },
-            { path: 'admin/monitores', component: MonitorsComponent },
-            { path: 'admin/clases', component: ClassComponent },
-            { path: 'admin/clases/:id', component: ClassDetailsComponent },
+            { path: 'reservas', component: ReservationsComponent, canActivate: [AuthGuardService]},
+            { path: 'admin/socios', component: MembersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/monitores', component: MonitorsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/clases', component: ClassComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/clases/:id', component: ClassDetailsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
             { path: 'contacto', component: ContactComponent },
             { path: '**', redirectTo: '', pathMatch: 'full' }
         ] , { preloadingStrategy: PreloadAllModules }) // ,  {enableTracing: true} )

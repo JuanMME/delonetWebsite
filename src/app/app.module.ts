@@ -8,8 +8,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TimepickerModule, AlertModule } from 'ngx-bootstrap';
-
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { CollapseModule, BsDropdownModule, AlertModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -30,6 +30,10 @@ import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
 import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 
 @NgModule({
@@ -48,7 +52,8 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
     ClassDialogComponent,
     ConfirmDialogComponent,
     ClassDetailsComponent,
-    ClassAddMemberComponent
+    ClassAddMemberComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -62,12 +67,17 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     TimepickerModule.forRoot(),
-    AlertModule
+    AlertModule,
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     MembersService,
     MonitorService,
-    ClassService
+    ClassService,
+    LoginService,
+    AuthGuardService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
