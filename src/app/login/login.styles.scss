@@ -1,21 +1,37 @@
 .nav-item {
-    margin-left: 20px;
-    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
 
     .nav-link {
-        color: white;
         cursor: pointer;
-        display: inline-block;
+        color: white;
     }
 
-    span {
-        position: absolute;
-        font-size: .8rem;
-        right: .5rem; 
-        top: -7px;
+    a.logged {
+        padding: 0.5rem 1rem .5rem 1.7rem;
+        display: inline-block;
+        position: relative;
+        color: white;
+
+        i {
+            position: absolute;
+            bottom: .5rem;
+            left: 0;
+        }
+
+        ul {
+            color: black;
+
+            li {
+                cursor: pointer;
+            }
+        }
     }
+
 }
 
 .nav-item-last {
-    position: relative;
+    display: inline-block;
+    height: 100%;
+    padding-right: 1rem;
 }

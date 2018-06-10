@@ -183,3 +183,7 @@ body {
         }
     }
 }
+
+.modal-open .modal {
+    z-index: 9001;
+}

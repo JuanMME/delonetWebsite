@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('user_name')) {
       this.userName = localStorage.getItem('user_name');
+      this.isLogged.emit(true);
+    }
+    if (localStorage.getItem('instructor_id')) {
+      this.isAdmin.emit(true);
     }
   }
 
