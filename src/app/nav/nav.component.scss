@@ -1,5 +1,4 @@
 .navbar {
-    height: 3.5rem;
     background-color: #191919;
 
     .navbar-brand {
@@ -9,19 +8,29 @@
 
         .logo {
             max-height: 100%;
+            max-width: 130px;
         }
     }
 
     .nav-item {
-        margin-left: 20px;
+        margin: 0 10px;
 
         .nav-link {
             color: white;
         }
     }
 
-    .nav-item-last {
-        margin-right: 20px;
-    }
+}
 
+.dropdown-menu {
+    background-color: #191919;
+    border: 0;
+    
+    .dropdown-item {
+        color: white;
+
+        &:hover {
+            background-color: #191919;
+        }
+    }
 }

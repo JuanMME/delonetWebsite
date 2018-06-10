@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,12 +10,15 @@ import { Router } from '@angular/router';
 
 export class NavbarComponent {
 
-  navItems: any[] = [
-    { routerLink: '', label: 'Home', active: false },
-    { routerLink: '/reservas', label: 'Reservas', active: false },
-    { routerLink: '/clases', label: 'Clases', active: false },
-    { routerLink: '/admin', label: 'Administración', active: false },
-    { routerLink: '/contacto', label: 'Contacto', active: false }
-  ];
+  isAdmin = false;
+  isLogged = false;
+  isCollapsed = true;
 
+  onLogin(isLogged: boolean) {
+    this.isLogged = isLogged;
+  }
+
+  onAdminLogin(isAdmin: boolean) {
+    this.isAdmin = isAdmin;
+  }
 }
