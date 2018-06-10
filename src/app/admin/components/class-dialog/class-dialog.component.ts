@@ -138,6 +138,7 @@ export class ClassDialogComponent implements OnInit {
     this.valid = event;
     this.horaEnPunto = true;
     const date = new Date(this.classForm.controls.hora.value);
+    console.log(date);
     if ( date.getHours() > 21) {
       this.valid = false;
     } else if (date.getHours() < 16) {

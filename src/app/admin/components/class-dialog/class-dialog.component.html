@@ -33,18 +33,20 @@
              formControlName="hora"
              [(ngModel)]="horaClase" 
              [showMeridian]="isMeridian"
-             (isValid)="isValid($event)"
+             (change)="isValid($event)"
              [min]="minTime"
              [max]="maxTime"
              [minuteStep]="mstep"
              [class.alert-danger]="!valid"
              ></timepicker>
-             <span *ngIf="!valid" class="text-danger">
-               Recuerde que el horario de clases disponible actualmente es desde las 16:00 hasta las 21:00.
-             </span>
-             <span *ngIf="!horaEnPunto" class="text-danger">
-              La clase debe ser en una hora en punto.
-             </span>
+        </div>
+        <div class="col-12">
+            <alert *ngIf="!horaEnPunto" type="danger">
+                La clase debe ser en una hora en punto.
+            </alert>
+            <alert *ngIf="!valid" type="danger">
+                Recuerde que el horario de clases disponible actualmente es desde las 16:00 hasta las 21:00.
+            </alert>
         </div>
         <div class="col-12 form-group">
             <label>Monitores</label>

@@ -8,7 +8,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ReservationsModule } from './reservations/reservations.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { TimepickerModule, AlertModule } from 'ngx-bootstrap';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -60,7 +61,8 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
     NgxDatatableModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    AlertModule
   ],
   providers: [
     MembersService,
@@ -69,9 +71,9 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    MembersDialogComponent, 
-    MonitorsDialogComponent, 
-    ClassDialogComponent, 
+    MembersDialogComponent,
+    MonitorsDialogComponent,
+    ClassDialogComponent,
     ConfirmDialogComponent,
     ClassAddMemberComponent]
 })
