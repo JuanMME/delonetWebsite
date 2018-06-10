@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid">Generar Reserva</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid || !valid">Generar Reserva</button>
           </div>
           <div class="col-12 mt-3">
             <alert *ngIf="!valid" type="danger">
