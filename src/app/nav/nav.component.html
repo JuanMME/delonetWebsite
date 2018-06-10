@@ -7,14 +7,22 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item" *ngFor="let navItem of navItems">
-        <a class="nav-link" [ngClass]="{active: navItem.active}" [routerLink]="navItem.routerLink">{{ navItem.label }}
-          <span class="sr-only" *ngIf="navItem.active">(current)</span>
-        </a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/'">Home</a>
       </li>
-      <li class="nav-item nav-item-last">
-        <a class="nav-link">Entrar</a>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/clases'">Clases</a>
       </li>
+      <li *ngIf="isLogged" class="nav-item">
+        <a class="nav-link" [routerLink]="'/reservas'">Reservas</a>
+      </li>
+      <li *ngIf="isLogged && isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="'/'">Administración</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/contacto'">Contacto</a>
+      </li>
+      <app-login (isAdmin)="onAdminLogin($event)" (isLogged)="onLogin($event)"></app-login>
     </ul>
   </div>
 </nav>

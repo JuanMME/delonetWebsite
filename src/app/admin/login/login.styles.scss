@@ -1,0 +1,14 @@
+.nav-item {
+  margin-left: 20px;
+  color: white;
+
+  .nav-link {
+      color: white;
+      cursor: pointer;
+      display: inline-block;
+  }
+
+  span {
+      margin-right: 15px;
+  }
+}
