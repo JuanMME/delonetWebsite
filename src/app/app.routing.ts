@@ -8,12 +8,15 @@ import { MonitorsComponent } from './admin/containers/monitors/monitors.componen
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
             { path: 'reservas', component: ReservationsComponent, canActivate: [AuthGuardService]},
+            /**  Ejemplo admin  **/
+            /* { path: 'admin/monitores', component: MonitorsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },*/
             { path: 'admin/socios', component: MembersComponent },
             { path: 'admin/monitores', component: MonitorsComponent },
             { path: 'admin/clases', component: ClassComponent },
