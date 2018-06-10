@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn-actions">
+  <button type="button" [disabled]="noMembers && noMembers.length <= 0" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn-actions">
     <i class="material-icons" tooltip="Añadir">
       check
     </i>

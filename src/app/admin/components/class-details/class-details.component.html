@@ -15,14 +15,14 @@
           </button>
         </div>
         <div class="card-body">
-          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="50"
-            [rows]="classe" [scrollbarV]="true" style="height: 85vh;" [messages]="my_messages">
-            <ngx-datatable-column name="Nombre del socio" prop="nombre" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column name="Email" prop="email" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Telefono" prop="telefono" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Acciones" prop="" [flexGrow]="1">
+          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
+            [rows]="classe" [scrollbarV]="true" [scrollbarH]="true" [messages]="my_messages">
+            <ngx-datatable-column name="Nombre del socio" prop="nombre"></ngx-datatable-column>
+            <ngx-datatable-column name="Email" prop="email"></ngx-datatable-column>
+            <ngx-datatable-column name="Telefono" prop="telefono"></ngx-datatable-column>
+            <ngx-datatable-column name="Acciones" prop="" [width]="50">
               <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                <button class="btn btn-primary-outline actions-buttons" (click)="deleteMember(row)">
+                <button class="btn btn-primary-outline actions-buttons" (click)="deleteMember(row)" style="float: none;">
                     <i class="material-icons actions-buttons">
                         delete
                     </i>
