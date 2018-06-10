@@ -1,10 +1,13 @@
 <li *ngIf="!userName" class="nav-item nav-item-last">
     <a class="nav-link" (click)="openLoginModal(loginModal)">Entrar</a>
 </li>
-<li *ngIf="userName" class="nav-item dropdown">
-    <a (click)="logout()" class="nav-link dropdown-toggle" href="#" id="logNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<li *ngIf="userName"  class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="material-icons">person</i>{{ userName }}
     </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" (click)="logout()">Cerrar Sesión</a>
+    </div>
 </li>
 
 <ng-template #loginModal>

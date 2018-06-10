@@ -1,37 +1,28 @@
 .nav-item {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 10px;
 
     .nav-link {
         cursor: pointer;
         color: white;
     }
 
-    a.logged {
-        padding: 0.5rem 1rem .5rem 1.7rem;
-        display: inline-block;
-        position: relative;
-        color: white;
-
-        i {
-            position: absolute;
-            bottom: .5rem;
-            left: 0;
-        }
-
-        ul {
-            color: black;
-
-            li {
-                cursor: pointer;
-            }
-        }
+    i {
+        margin-right: 5px;
+        vertical-align: bottom;
     }
 
 }
 
-.nav-item-last {
-    display: inline-block;
-    height: 100%;
-    padding-right: 1rem;
+.dropdown-menu {
+    background-color: #262626;
+    border: 0;
+    
+    .dropdown-item {
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #262626;
+        }
+    }
 }
