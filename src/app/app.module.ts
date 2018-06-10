@@ -33,6 +33,7 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
     MonitorService,
     ClassService,
     LoginService,
-    AuthGuardService
+    AuthGuardService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

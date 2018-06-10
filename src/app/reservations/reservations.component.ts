@@ -42,7 +42,7 @@ export class ReservationsComponent implements OnInit {
   maxTime: Date = new Date();
   mstep = 60;
   valid = true;
-  isAdmin = true;
+  isAdmin = false;
   newReservation = false;
   alreadyBooked = false;
 
@@ -54,6 +54,7 @@ export class ReservationsComponent implements OnInit {
     private datePipe: DatePipe,
     private toastr: ToastrService
   ) {
+    this.checkIsAdmin();
     this.createForm();
     this.setMinMaxTime();
     this.localeService.use(this.locale);
@@ -62,6 +63,12 @@ export class ReservationsComponent implements OnInit {
   ngOnInit() {
     this.getReservations();
     this.getClasses();
+  }
+
+  checkIsAdmin() {
+    if (localStorage.getItem('instructor_id')) {
+      this.isAdmin = true;
+    }
   }
 
   setMinMaxTime() {
@@ -111,7 +118,7 @@ export class ReservationsComponent implements OnInit {
     this.reservationForm = this.fb.group({
       id_socio: [null],
       id_calle: [null, [<any>Validators.required]],
-      id_clase: [, [<any>Validators.required]],
+      id_clase: [{value: null, disabled: !this.isAdmin}, [<any>Validators.required]],
       date: [now, [<any>Validators.required]],
       time: [{value: now, disabled: this.isAdmin}],
       fecha: []
@@ -127,6 +134,11 @@ export class ReservationsComponent implements OnInit {
 
   createReservation() {
     this.combineDates();
+    if (!this.isAdmin) {
+      this.reservationForm.controls.id_socio.setValue(localStorage.getItem('member_id'));
+      this.reservationForm.controls.id_clase.setValue(null);
+    }
+    console.log(this.reservationForm.value);
     if (this.reservationForm.valid && !this.isAlreadyBooked()) {
       this.submitted = true;
       this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
