@@ -15,12 +15,10 @@ import { AdminAuthGuardService } from './shared/services/admin-auth-guard.servic
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
             { path: 'reservas', component: ReservationsComponent, canActivate: [AuthGuardService]},
-            /**  Ejemplo admin  **/
-            /* { path: 'admin/monitores', component: MonitorsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },*/
-            { path: 'admin/socios', component: MembersComponent },
-            { path: 'admin/monitores', component: MonitorsComponent },
-            { path: 'admin/clases', component: ClassComponent },
-            { path: 'admin/clases/:id', component: ClassDetailsComponent },
+            { path: 'admin/socios', component: MembersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/monitores', component: MonitorsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/clases', component: ClassComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+            { path: 'admin/clases/:id', component: ClassDetailsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
             { path: 'contacto', component: ContactComponent },
             { path: '**', redirectTo: '', pathMatch: 'full' }
         ] , { preloadingStrategy: PreloadAllModules }) // ,  {enableTracing: true} )
