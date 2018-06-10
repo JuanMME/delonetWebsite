@@ -60,7 +60,13 @@ body {
 
 @media only screen and (max-width: 660px) {
     body {
-        margin-bottom: 220px;
+        margin-bottom: 250px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    body {
+        margin-bottom: 330px;
     }
 }
 
