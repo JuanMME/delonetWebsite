@@ -2,22 +2,31 @@
     <div class="col-10 offset-1">
       <div class="card">
         <div class="card-header">
-          <h3 class="text-secondary">Clases</h3>
+          <h3>Clases</h3>
           <button class="btn btn-primary-outline text-primary" (click)="addClass()">
               <i class="material-icons icon-header">
                   add
               </i>
           </button>
+          <button class="btn btn-primary-outline" (click)="openFilter()">
+              <i class="material-icons icon-header">
+                  search
+              </i>
+            </button>
+            <input *ngIf="openFilterMenu" class="form-control filterMenu" 
+            placeholder="Filtrar" (keyup)="onChangeFilter($event)" 
+            style="width: 60%; float: right;"
+            type="text" [autofocus]="'true'" (focusout)="closeFilter()">
         </div>
         <div class="card-body">
-          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="50"
-            [rows]="classes" [scrollbarV]="true" style="height: 85vh;">
-            <ngx-datatable-column name="Nombre" prop="nombre" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Hora" prop="hora" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column name="Dias" prop="dias" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Número de plazas" prop="num_plazas" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Edad máxima" prop="edad_maxima" [flexGrow]="1"></ngx-datatable-column>
-            <ngx-datatable-column name="Acciones" prop="" [flexGrow]="2">
+          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
+            [rows]="classesFiltered" [scrollbarV]="true" [scrollbarH]="true">
+            <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
+            <ngx-datatable-column name="Hora" prop="hora"></ngx-datatable-column>
+            <ngx-datatable-column name="Dias" prop="dias"></ngx-datatable-column>
+            <ngx-datatable-column name="Número de plazas" prop="num_plazas"></ngx-datatable-column>
+            <ngx-datatable-column name="Edad máxima" prop="edad_maxima"></ngx-datatable-column>
+            <ngx-datatable-column name="Acciones" prop="">
               <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
                 <div style="display: flex;">
                   <button class="btn btn-primary-outline actions-buttons" (click)="viewDetails(row)">

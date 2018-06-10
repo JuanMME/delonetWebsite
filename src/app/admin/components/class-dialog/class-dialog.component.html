@@ -1,33 +1,33 @@
 <form [formGroup]="classForm" (ngSubmit)="classe ? modifyClass() : createClass(); bsModalRef.hide(classForm.value)" novalidate>
     <div class="modal-header">
-      <h5 class="modal-title">Nueva Clase</h5>
+      <h5 class="modal-title">{{ title }}</h5>
       <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div class="row">
-        <div class="col-6 form-group">
+        <div class="col-12 col-sm-6 form-group">
           <label>Nombre</label>
           <input type="text" class="form-control" formControlName="nombre" autofocus />
         </div>
-        <div class="col-6 form-group">
+        <div class="col-12 col-sm-6 form-group">
           <label>Número de plazas</label>
           <input type="text" class="form-control" formControlName="num_plazas" />
         </div>
-        <div class="col-6 form-group">
+        <div class="col-12 col-sm-6 form-group">
           <label>Nivel</label>
           <input type="text" class="form-control" formControlName="nivel" />
         </div>
-        <div class="col-6 form-group">
+        <div class="col-12 col-sm-6 form-group">
           <label>Edad_maxima</label>
           <input type="text" class="form-control" formControlName="edad_maxima" />
         </div>
-        <div class="col-6 form-group">
+        <div class="col-12 col-sm-6 form-group">
           <label>Días</label>
           <input type="text" class="form-control" formControlName="dias" />
         </div>
-        <div class="col-12 form-group">
+        <div class="col-12 col-sm-6 form-group">
             <label>Hora</label>
             <timepicker 
              formControlName="hora"
@@ -49,16 +49,28 @@
         <div class="col-12 form-group">
             <label>Monitores</label>
             <div *ngFor="let monitor of monitors">
-                <input type="checkbox" [value]="monitor.id_monitor" (click)="onChange(monitor)" [checked]="monitor.checked">
+                <input type="checkbox" class="checkbox" [value]="monitor.id_monitor" (click)="onChange(monitor)" [checked]="monitor.checked">
                 <label>{{ monitor.nombre }}</label>
             </div>
-            <input type="text" class="form-control" formControlName="monitores" />
+            <input type="hidden" class="form-control" formControlName="monitores" />
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button *ngIf="!classe" [disabled]="submitted || !classForm.valid" type="submit" class="btn btn-primary">Crear</button>
-      <button *ngIf="classe" [disabled]="submitted || !classForm.valid || classForm.pristine" type="submit" class="btn btn-primary">Modificar</button>
-      <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+        <button *ngIf="!classe" [disabled]="submitted || !classForm.valid" type="submit" class="btn-actions">
+            <i class="material-icons">
+              check
+            </i>
+          </button>
+          <button *ngIf="classe" [disabled]="submitted || !classForm.valid || classForm.pristine" type="submit" class="btn-actions">
+            <i class="material-icons">
+              check
+            </i>
+          </button>
+          <button type="button" (click)="bsModalRef.hide()" class="btn-actions">
+            <i class="material-icons">
+              arrow_back
+            </i>
+          </button>
     </div>
   </form>

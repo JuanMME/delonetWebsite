@@ -7,20 +7,26 @@ import { MonitorService } from '../../monitor.service';
 import { Monitor } from '../../models/monitor';
 import { MonitorsDialogComponent } from '../../components/monitors-dialog/monitors-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-monitors',
   templateUrl: './monitors.component.html',
-  styleUrls: ['./monitors.component.scss']
+  styleUrls: ['./monitors.component.scss'],
+  providers: [FilterPipe]
 })
 export class MonitorsComponent implements OnInit {
-  private monitors: Monitor[];
-  private bsModalRef: BsModalRef;
+  monitorsFiltered: Monitor[];
+  monitors: Monitor[];
+  bsModalRef: BsModalRef;
+  openFilterMenu: boolean;
+
 
   constructor(
     private monitorsService: MonitorService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private filter: FilterPipe
   ) { }
 
   ngOnInit() {
@@ -31,16 +37,17 @@ export class MonitorsComponent implements OnInit {
     this.monitorsService.getMonitors().subscribe(
       monitors => {
         this.monitors = monitors;
+        this.monitorsFiltered = this.monitors;
       }
     );
   }
-  
+
   addMonitor(): void {
     const initialState = {
       monitor: null,
-      class: 'modal-lg'
+      title: 'Añadir monitor'
     };
-    this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
       this.getMonitors();
@@ -50,7 +57,7 @@ export class MonitorsComponent implements OnInit {
   editMonitor(monitor: Monitor) {
     const initialState = {
       monitor: monitor,
-      class: 'modal-lg'
+      title: 'Editar monitor'
     };
     this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
@@ -63,9 +70,8 @@ export class MonitorsComponent implements OnInit {
     const initialState = {
       title: 'Eliminar monitor',
       content: '¿Está seguro que desea borrar a este monitor? Se eliminará permanentemente del sistema',
-      class: 'modal-lg'
     };
-    this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
     this.modalService.onHide.subscribe(useless => {
       if (this.bsModalRef.content.borrar) {
@@ -76,9 +82,28 @@ export class MonitorsComponent implements OnInit {
           } else {
             this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
           }
-        }); 
+        });
       }
     });
   }
+
+  openFilter() {
+    if (this.openFilterMenu) {
+      this.openFilterMenu = false;
+    } else {
+     this.openFilterMenu = true;
+    }
+   }
+
+   closeFilter() {
+     this.openFilterMenu = false;
+   }
+
+   onChangeFilter(event) {
+     this.monitorsFiltered = this.filter.transform(
+       this.monitors,
+       event.target.value.toLowerCase()
+     );
+   }
 
 }

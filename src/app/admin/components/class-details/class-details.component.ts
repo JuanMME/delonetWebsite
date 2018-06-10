@@ -8,6 +8,7 @@ import { ClassAddMemberComponent } from '../class-add-member/class-add-member.co
 import { ToastrService } from 'ngx-toastr';
 import { Member } from '../../models/member';
 import { Class } from '../../models/class';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-class-details',
@@ -68,13 +69,23 @@ export class ClassDetailsComponent implements OnInit {
 
   deleteMember(member: Member) {
     member.id_clase = null;
-    this.membersService.modifyMember(member.id_socio, member).subscribe(data => {
-      if (data && data['affectedRows'] > 0) {
-        this.toastr.success('El socio ya no está en esta clase', 'Operación realizada con éxito');
-      } else {
-        this.toastr.error('Inténtelo más tarde','Algo ha fallado en la operación');
+    const initialState = {
+      title: 'Eliminar clase',
+      content: '¿Está seguro que desea borrar esta clase? Se eliminará permanentemente del sistema'
+    };
+    this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Cerrar';
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this.membersService.modifyMember(member.id_socio, member).subscribe(data => {
+          if (data && data['affectedRows'] > 0) {
+            this.toastr.success('El socio ya no está en esta clase', 'Operación realizada con éxito');
+          } else {
+            this.toastr.error('Inténtelo más tarde', 'Algo ha fallado en la operación');
+          }
+          this.getClasse();
+        });
       }
-      this.getClasse();
     });
   }
 

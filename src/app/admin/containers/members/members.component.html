@@ -8,17 +8,26 @@
                 person_add
             </i>
         </button>
+        <button class="btn btn-primary-outline" (click)="openFilter()">
+          <i class="material-icons icon-header">
+              search
+          </i>
+        </button>
+        <input *ngIf="openFilterMenu" class="form-control filterMenu" 
+        placeholder="Filtrar" (keyup)="onChangeFilter($event)" 
+        style="width: 60%; float: right;"
+        type="text" [autofocus]="'true'" (focusout)="closeFilter()">
       </div>
       <div class="card-body">
         <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
-          [rows]="members" [scrollbarV]="true" [scrollbarH]="true" style="height: 85vh;">
+          [rows]="membersFiltered" [scrollbarV]="true" [scrollbarH]="true">
           <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
           <ngx-datatable-column name="Apellidos" prop="apellidos"></ngx-datatable-column>
           <ngx-datatable-column name="Email" prop="email" [width]="200"></ngx-datatable-column>
           <ngx-datatable-column name="Teléfono" prop="telefono"></ngx-datatable-column>
           <ngx-datatable-column name="Dirección" prop="direccion" [width]="300"></ngx-datatable-column>
-          <ngx-datatable-column name="Clase" prop="id_clase"></ngx-datatable-column>
-          <ngx-datatable-column name="Acciones" prop="">
+          <ngx-datatable-column name="Clase" prop="nombre_clase" [width]="200"></ngx-datatable-column>
+          <ngx-datatable-column name="Acciones" prop="" [width]="100">
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
               <div style="display: flex;">
                 <button class="btn btn-primary-outline actions-buttons" (click)="editMember(row)">

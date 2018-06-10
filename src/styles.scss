@@ -99,6 +99,7 @@ body {
 
 // Módulo de las tablas (ngx datatable)
 .ngx-datatable{
+    height: 60vh;
     & .datatable-header-cell:hover {
         // border-bottom: 1.9rem solid #377BB5;
         & .resize-handle {
@@ -163,6 +164,7 @@ body {
                 & .icon-header {
                     font-size: 1.6rem;
                     color: $light-text;
+                    margin-left: 15px;
                 }
             }
         }

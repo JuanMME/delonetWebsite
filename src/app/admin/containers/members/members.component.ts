@@ -1,45 +1,52 @@
-import { Component, TemplateRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MembersService } from '../../members.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MembersDialogComponent } from '../../components/members-dialog/members-dialog.component';
 import { Member } from '../../models/member';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'members.component.html',
-  styleUrls: ['members.component.scss']
+  styleUrls: ['members.component.scss'],
+  providers: [FilterPipe]
 })
 
 export class MembersComponent implements OnInit {
 
-  private members: Member[];
-  private bsModalRef: BsModalRef;
+  members: Member[];
+  membersFiltered: Member[];
+  bsModalRef: BsModalRef;
+  openFilterMenu: boolean;
 
   constructor(
     private _membersService: MembersService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private filter: FilterPipe
   ) { }
 
   ngOnInit() {
     this.getMembers();
+    this.openFilterMenu = false;
   }
 
   getMembers() {
     this._membersService.getMembers().subscribe(
       members => {
         this.members = members;
+        this.membersFiltered = this.members;
       }
     );
   }
 
   addMember(): void {
     const initialState = {
-      member: null
+      member: null,
+      title: 'Añadir socio'
     };
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
@@ -50,7 +57,8 @@ export class MembersComponent implements OnInit {
 
   editMember(member: Member) {
     const initialState = {
-      member: member
+      member: member,
+      title: 'Editar socio'
     };
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
@@ -63,8 +71,7 @@ export class MembersComponent implements OnInit {
   deleteMember(member: Member) {
     const initialState = {
       title: 'Eliminar socio',
-      content: '¿Está seguro que desea borrar a este socio? Se eliminará permanentemente del sistema',
-      class: 'modal-lg'
+      content: '¿Está seguro que desea borrar a este socio? Se eliminará permanentemente del sistema'
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
@@ -80,6 +87,25 @@ export class MembersComponent implements OnInit {
         });
       }
     });
+  }
+
+  openFilter() {
+   if (this.openFilterMenu) {
+     this.openFilterMenu = false;
+   } else {
+    this.openFilterMenu = true;
+   }
+  }
+
+  closeFilter() {
+    this.openFilterMenu = false;
+  }
+
+  onChangeFilter(event) {
+    this.membersFiltered = this.filter.transform(
+      this.members,
+      event.target.value.toLowerCase()
+    );
   }
 
 }

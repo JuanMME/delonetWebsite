@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { BsModalRef } from "ngx-bootstrap";
-import { Class } from "../../models/class";
-import { ClassService } from "../../class.service";
-import { MonitorService } from "../../monitor.service";
-import { Monitor } from "../../models/monitor";
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalRef } from 'ngx-bootstrap';
+import { Class } from '../../models/class';
+import { ClassService } from '../../class.service';
+import { MonitorService } from '../../monitor.service';
+import { Monitor } from '../../models/monitor';
 
 @Component({
   selector: 'app-class-dialog',
@@ -51,7 +51,7 @@ export class ClassDialogComponent implements OnInit {
     this.setMinMaxTime();
   }
 
-  getMonitors(){
+  getMonitors() {
     this.monitorsService.getMonitors().subscribe(data => {
       this.monitors = data;
       this.monitors.forEach(monitor => {
@@ -71,13 +71,13 @@ export class ClassDialogComponent implements OnInit {
     this.classService.createClases(this.classForm.value).subscribe(data => {
       if (data) {
         this.toastr.success(
-          "Operación realizada con éxito",
-          "La clase ha sido añadida"
+          'Operación realizada con éxito',
+          'La clase ha sido añadida'
         );
       } else {
         this.toastr.error(
-          "Algo ha fallado en la operación",
-          "Inténtelo más tarde"
+          'Algo ha fallado en la operación',
+          'Inténtelo más tarde'
         );
       }
     });
@@ -92,13 +92,13 @@ export class ClassDialogComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           this.toastr.success(
-            "Operación realizada con éxito",
-            "La clase ha sido modificada"
+            'Operación realizada con éxito',
+            'La clase ha sido modificada'
           );
         } else {
           this.toastr.error(
-            "Algo ha fallado en la operación",
-            "Inténtelo más tarde"
+            'Algo ha fallado en la operación',
+            'Inténtelo más tarde'
           );
         }
       });
@@ -108,9 +108,9 @@ export class ClassDialogComponent implements OnInit {
     if (this.classe) {
       // Modificamos los valores de la hora para que se muestren en pantalla
       const time = this.classe.hora.split(':');
-      this.horaClase.setHours(parseInt(time[0]));
-      this.horaClase.setMinutes(parseInt(time[1]));
-      this.horaClase.setSeconds(parseInt(time[2]));
+      this.horaClase.setHours(parseInt(time[0], null));
+      this.horaClase.setMinutes(parseInt(time[1], null));
+      this.horaClase.setSeconds(parseInt(time[2], null));
       // Creamos el formulario
       this.classForm = this.fb.group({
         nombre: [this.classe.nombre, [<any>Validators.required]],
@@ -173,9 +173,9 @@ export class ClassDialogComponent implements OnInit {
         if (inputValue.length >= 1) {
           this.classForm.controls.monitores.patchValue(inputValue + ',' + monitor.id_monitor);
         } else {
-          this.classForm.controls.monitores.patchValue(monitor.id_monitor); 
+          this.classForm.controls.monitores.patchValue(monitor.id_monitor);
         }
       }
-    }   
+    }
   }
 }

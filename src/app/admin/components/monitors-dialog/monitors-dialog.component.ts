@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { BsModalRef } from "ngx-bootstrap";
-import { ImageCropperComponent, CropperSettings } from "ng2-img-cropper";
-import { Monitor } from "../../models/monitor";
-import { MonitorService } from "../../monitor.service";
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalRef } from 'ngx-bootstrap';
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
+import { Monitor } from '../../models/monitor';
+import { MonitorService } from '../../monitor.service';
 
 @Component({
   selector: 'app-monitors-dialog',
@@ -16,8 +16,9 @@ export class MonitorsDialogComponent implements OnInit {
   private submitted: Boolean;
   monitor: Monitor;
   data: any;
+  title: string;
   profilePhoto: String;
-  @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
+  @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
 
   constructor(
@@ -45,15 +46,15 @@ export class MonitorsDialogComponent implements OnInit {
   createMonitor() {
     this.submitted = true;
     this.monitorService.createMonitor(this.monitorForm.value).subscribe(data => {
-      if (data && data["affectedRows"] > 0) {
+      if (data && data['affectedRows'] > 0) {
         this.toastr.success(
-          "Operación realizada con éxito",
-          "El monitor ha sido añadido"
+          'Operación realizada con éxito',
+          'El monitor ha sido añadido'
         );
       } else {
         this.toastr.error(
-          "Algo ha fallado en la operación",
-          "Inténtelo más tarde"
+          'Algo ha fallado en la operación',
+          'Inténtelo más tarde'
         );
       }
     });
@@ -63,15 +64,15 @@ export class MonitorsDialogComponent implements OnInit {
     this.monitorService
       .modifyMonitor(this.monitor.id_monitor, this.monitorForm.value)
       .subscribe(data => {
-        if (data && data["affectedRows"] > 0) {
+        if (data && data['affectedRows'] > 0) {
           this.toastr.success(
-            "Operación realizada con éxito",
-            "El monitor ha sido modificado"
+            'Operación realizada con éxito',
+            'El monitor ha sido modificado'
           );
         } else {
           this.toastr.error(
-            "Algo ha fallado en la operación",
-            "Inténtelo más tarde"
+            'Algo ha fallado en la operación',
+            'Inténtelo más tarde'
           );
         }
       });
@@ -118,11 +119,11 @@ export class MonitorsDialogComponent implements OnInit {
   }
 
   fileChangeListener($event) {
-    var image:any = new Image();
-    var file:File = $event.target.files[0];
-    var myReader:FileReader = new FileReader();
-    var that = this;
-    myReader.onloadend = function (loadEvent:any) {
+    const image: any = new Image();
+    const file: File = $event.target.files[0];
+    const myReader: FileReader = new FileReader();
+    const that = this;
+    myReader.onloadend = function (loadEvent: any) {
         image.src = loadEvent.target.result;
         that.cropper.setImage(image);
 

@@ -1,28 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ClassService } from '../../class.service';
 import { Class } from '../../models/class';
 import { ClassDialogComponent } from '../../components/class-dialog/class-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { FilterPipe } from '../../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-class',
   templateUrl: './class.component.html',
-  styleUrls: ['./class.component.scss']
+  styleUrls: ['./class.component.scss'],
+  providers: [FilterPipe]
 })
 export class ClassComponent implements OnInit {
-  private classes: Class[];
-  private bsModalRef: BsModalRef;
+
+  classesFiltered: Class[];
+  classes: Class[];
+  bsModalRef: BsModalRef;
+  openFilterMenu: boolean;
 
   constructor(
     private classService: ClassService,
     private modalService: BsModalService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private filter: FilterPipe
   ) { }
 
   ngOnInit() {
@@ -33,6 +38,7 @@ export class ClassComponent implements OnInit {
     this.classService.getClasses().subscribe(
       classes => {
         this.classes = classes;
+        this.classesFiltered = this.classes;
       }
     );
   }
@@ -40,9 +46,9 @@ export class ClassComponent implements OnInit {
   addClass(): void {
     const initialState = {
       classe: null,
-      class: 'modal-lg'
+      title: 'Añadir clase'
     };
-    this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState,  class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
       this.getClasses();
@@ -52,9 +58,9 @@ export class ClassComponent implements OnInit {
   editClass(classe: Class) {
     const initialState = {
       classe: classe,
-      class: 'modal-lg'
+      title: 'Editar clase'
     };
-    this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
       this.getClasses();
@@ -64,8 +70,7 @@ export class ClassComponent implements OnInit {
   deleteClass(classe: Class) {
     const initialState = {
       title: 'Eliminar clase',
-      content: '¿Está seguro que desea borrar esta clase? Se eliminará permanentemente del sistema',
-      class: 'modal-lg'
+      content: '¿Está seguro que desea borrar esta clase? Se eliminará permanentemente del sistema'
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
@@ -83,8 +88,26 @@ export class ClassComponent implements OnInit {
     });
   }
 
-
   viewDetails(classe: Class) {
     this.router.navigate(['/admin/clases/' + classe.id_clase]);
   }
+
+  openFilter() {
+    if (this.openFilterMenu) {
+      this.openFilterMenu = false;
+    } else {
+     this.openFilterMenu = true;
+    }
+   }
+
+   closeFilter() {
+     this.openFilterMenu = false;
+   }
+
+   onChangeFilter(event) {
+     this.classesFiltered = this.filter.transform(
+       this.classes,
+       event.target.value.toLowerCase()
+     );
+   }
 }

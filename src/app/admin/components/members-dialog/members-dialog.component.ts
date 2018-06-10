@@ -16,6 +16,7 @@ export class MembersDialogComponent implements OnInit {
   private submitted: Boolean;
   member: Member;
   data: any;
+  title: string;
   profilePhoto: String;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;

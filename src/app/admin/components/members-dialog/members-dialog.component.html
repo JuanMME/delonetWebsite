@@ -1,6 +1,6 @@
 <form [formGroup]="memberForm" (ngSubmit)="member ? modifyMember() : createMember(); bsModalRef.hide(memberForm.value)" novalidate>
   <div class="modal-header">
-    <h5 class="modal-title">Nuevo Socio</h5>
+    <h5 class="modal-title">{{title}}</h5>
     <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -10,18 +10,18 @@
       <div class="col-12 col-lg-5 form-group text-right" style="display: flex;">
         <div class="m-auto" *ngIf="!profilePhoto">
           <div>
-            <label for="input-file" class="button-file btn btn-primary" >Escoja la imagen de perfil</label>
+            <label for="input-file" class="button-file btn btn-primary">Escoja la imagen de perfil</label>
             <input type="file" id="input-file" name="input-file" (change)="fileChangeListener($event)" style="display: none">
           </div>
           <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
           <div *ngIf="data && data.image && data.image.length">
-              <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
+            <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
           </div>
         </div>
         <div class="m-auto" *ngIf="data.image && data.image !== null && profilePhoto">
           <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
           <div>
-              <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
+            <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
           </div>
         </div>
       </div>
