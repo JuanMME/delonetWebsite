@@ -1,7 +1,7 @@
 <form [formGroup]="classForm" (ngSubmit)="classe ? modifyClass() : createClass(); bsModalRef.hide(classForm.value)" novalidate>
     <div class="modal-header">
       <h5 class="modal-title">{{ title }}</h5>
-      <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+      <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()" tooltip="Cerrar">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -65,12 +65,12 @@
             </i>
           </button>
           <button *ngIf="classe" [disabled]="submitted || !classForm.valid || classForm.pristine" type="submit" class="btn-actions">
-            <i class="material-icons">
+            <i class="material-icons" tooltip="Añadir">
               check
             </i>
           </button>
           <button type="button" (click)="bsModalRef.hide()" class="btn-actions">
-            <i class="material-icons">
+            <i class="material-icons" tooltip="Cancelar">
               arrow_back
             </i>
           </button>

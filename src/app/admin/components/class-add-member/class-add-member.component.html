@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h5 class="modal-title">Alumnos disponibles</h5>
-  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+  <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()" tooltip="Cerrar">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -18,6 +18,14 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn btn-primary">Añadir</button>
-  <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancelar</button>
+  <button type="button" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn-actions">
+    <i class="material-icons" tooltip="Añadir">
+      check
+    </i>
+  </button>
+  <button type="button" class="btn-actions" (click)="bsModalRef.hide()">
+    <i class="material-icons"  tooltip="Cancelar">
+      arrow_back
+    </i>
+  </button>
 </div>

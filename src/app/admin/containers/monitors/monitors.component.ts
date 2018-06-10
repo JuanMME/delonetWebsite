@@ -59,7 +59,7 @@ export class MonitorsComponent implements OnInit {
       monitor: monitor,
       title: 'Editar monitor'
     };
-    this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState});
+    this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
       this.getMonitors();
