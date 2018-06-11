@@ -1,8 +1,9 @@
-## <img src=".src/assets/deloPNGblue.png">
+## <img src="./src/assets/deloSVGblue.svg">
 
 <br/>
 Esta es web del proyecto delonet.
 <br/><br/>
+
 ## Instalación
 <ol>
     <li> Descargar el backend de este <a href="https://github.com/AntonioDuprez/delonetServer">proyecto</a> y seguir todos sus pasos. </li>
