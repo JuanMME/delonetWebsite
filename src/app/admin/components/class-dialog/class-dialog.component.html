@@ -6,55 +6,62 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="row">
-        <div class="col-12 col-sm-6 form-group">
-          <label>Nombre</label>
-          <input type="text" class="form-control" formControlName="nombre" autofocus />
-        </div>
-        <div class="col-12 col-sm-6 form-group">
-          <label>Número de plazas</label>
-          <input type="text" class="form-control" formControlName="num_plazas" />
-        </div>
-        <div class="col-12 col-sm-6 form-group">
-          <label>Nivel</label>
-          <input type="text" class="form-control" formControlName="nivel" />
-        </div>
-        <div class="col-12 col-sm-6 form-group">
-          <label>Edad_maxima</label>
-          <input type="text" class="form-control" formControlName="edad_maxima" />
-        </div>
-        <div class="col-12 col-sm-6 form-group">
-          <label>Días</label>
-          <input type="text" class="form-control" formControlName="dias" />
-        </div>
-        <div class="col-12 col-sm-6 form-group">
-            <label>Hora</label>
-            <timepicker 
-             formControlName="hora"
-             [(ngModel)]="horaClase" 
-             [showMeridian]="isMeridian"
-             (change)="isValid($event)"
-             [min]="minTime"
-             [max]="maxTime"
-             [minuteStep]="mstep"
-             [class.alert-danger]="!valid"
-             ></timepicker>
-        </div>
-        <div class="col-12">
-            <alert *ngIf="!horaEnPunto" type="danger">
-                La clase debe ser en una hora en punto.
-            </alert>
-            <alert *ngIf="!valid" type="danger">
-                Recuerde que el horario de clases disponible actualmente es desde las 16:00 hasta las 21:00.
-            </alert>
-        </div>
-        <div class="col-12 form-group">
-            <label>Monitores</label>
-            <div *ngFor="let monitor of monitors">
-                <input type="checkbox" class="checkbox" [value]="monitor.id_monitor" (click)="onChange(monitor)" [checked]="monitor.checked">
-                <label>{{ monitor.nombre }}</label>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-6 form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" autofocus />
+          </div>
+          <div class="col-12 col-sm-6 form-group">
+            <label>Número de plazas</label>
+            <input type="text" class="form-control" formControlName="num_plazas" />
+          </div>
+          <div class="col-12 col-sm-6 form-group">
+            <label>Nivel</label>
+            <input type="text" class="form-control" formControlName="nivel" />
+          </div>
+          <div class="col-12 col-sm-6 form-group">
+            <label>Edad_maxima</label>
+            <input type="text" class="form-control" formControlName="edad_maxima" />
+          </div>
+          <div class="col-12 datepicker-title">
+            <label>Días y hora</label>
+          </div>
+          <div class="col-12">
+            <div class="row datepicker">
+              <div class="col-6 form-group">
+                <input type="text" class="form-control" formControlName="dias" />
+              </div>
+              <div class="col-6 form-group">
+                <timepicker 
+                  formControlName="hora"
+                  [(ngModel)]="horaClase" 
+                  [showMeridian]="isMeridian"
+                  (change)="isValid($event)"
+                  [min]="minTime"
+                  [max]="maxTime"
+                  [minuteStep]="mstep"
+                  [class.alert-danger]="!valid">
+                </timepicker>
+              </div>
             </div>
-            <input type="hidden" class="form-control" formControlName="monitores" />
+          </div>
+          <div class="col-12">
+              <alert *ngIf="!horaEnPunto" type="danger">
+                  La clase debe ser en una hora en punto.
+              </alert>
+              <alert *ngIf="!valid" type="danger">
+                  Recuerde que el horario de clases disponible actualmente es desde las 16:00 hasta las 21:00.
+              </alert>
+          </div>
+          <div class="col-12 form-group">
+              <label>Monitores</label>
+              <div *ngFor="let monitor of monitors">
+                  <input type="checkbox" class="checkbox" [value]="monitor.id_monitor" (click)="onChange(monitor)" [checked]="monitor.checked">
+                  <label>{{ monitor.nombre }}</label>
+              </div>
+              <input type="hidden" class="form-control" formControlName="monitores" />
+          </div>
         </div>
       </div>
     </div>
