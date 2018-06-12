@@ -61,6 +61,7 @@ export class LoginComponent implements OnInit {
             this.createSession(response);
             this.modalRef.hide();
             this.loginForm.reset();
+            this.router.navigate(['/login']);
           } else if (response.message === 'Usuario no encontrado') {
             this.toastr.error('Usuario no encontrado');
           } else if (response.message === 'Contraseña incorrecta') {
@@ -94,6 +95,6 @@ export class LoginComponent implements OnInit {
     this.isLogged.emit(false);
     this.isAdmin.emit(false);
     this.toastr.success('Sesión cerrada con éxito');
-    this.router.navigate(['/']);
+    this.router.navigate(['/logout']);
   }
 }

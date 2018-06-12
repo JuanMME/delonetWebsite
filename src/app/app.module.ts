@@ -35,6 +35,7 @@ import { LoginService } from './login/login.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
+import { CloseMenuDirective } from './nav/close-menu.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminAuthGuardService } from './shared/services/admin-auth-guard.servic
     ConfirmDialogComponent,
     ClassDetailsComponent,
     ClassAddMemberComponent,
-    LoginComponent
+    LoginComponent,
+    CloseMenuDirective
   ],
   imports: [
     BrowserModule,
