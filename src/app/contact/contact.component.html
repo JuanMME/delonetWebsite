@@ -9,25 +9,25 @@
         </div>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6090.688458011018!2d-2.6329853431422876!3d36.801507542212136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd706e3229609855%3A0x19e44df28e45740a!2sAv.+Argentina%2C+24%2C+04738+V%C3%ADcar%2C+Almer%C3%ADa!5e0!3m2!1sen!2ses!4v1527423808118" height="450" frameborder="0" style="border:0; width: 100%" allowfullscreen></iframe>  
     </div>
-    <div class="col-md-6 offset-md-1 my-3">
+    <form [formGroup]="contactForm" (ngSubmit)="sendContactForm()" class="col-md-6 offset-md-1 my-3">
         <h3>¿Podemos ayudarte?</h3>
         <br><br>
         <div class="row">
           <div class="col-md-6 my-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre">
+            <input formControlName="name" type="text" class="form-control">
           </div>
           <div class="w-100"></div>
           <div class="col-md-6 my-3">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email">
+            <input formControlName="email" type="text" class="form-control">
           </div>
           <div class="col-12 my-3">
             <label for="mensaje">Mensaje</label>
-            <textarea class="form-control" rows="6" id="mensaje"></textarea>
+            <textarea formControlName="body" class="form-control" rows="6"></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary float-right">Enviar</button>
-    </div>
+        <button [disabled]="submitted || !contactForm.valid" type="submit" class="btn btn-primary float-right">Enviar</button>
+      </form>
   </div>
 </div>

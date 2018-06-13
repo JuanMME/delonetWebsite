@@ -28,6 +28,7 @@ import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
+import { ContactService } from './contact/contact.service';
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
 import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
 import { LoginComponent } from './login/login.component';
@@ -79,6 +80,7 @@ import { CloseMenuDirective } from './nav/close-menu.directive';
     MonitorService,
     ClassService,
     LoginService,
+    ContactService,
     AuthGuardService,
     AdminAuthGuardService
   ],
