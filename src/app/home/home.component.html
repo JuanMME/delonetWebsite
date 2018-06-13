@@ -51,45 +51,16 @@
 
 <div class="container">
   <!-- Instructors -->
-  <div class="row">
-    <div class="col-md-4 p-3">
+  <div class="row instructor-row">
+    <div class="col-md-4 p-3" *ngFor="let instructor of instructors">
       <div class="row">
         <div class="col-5">
-          <img class="img-fluid rounded-circle" src="assets/images/instructor.jpg">
+          <img class="img-fluid rounded-circle" [src]="instructor.profile_image ? 'data:image/JPEG;base64,' + instructor.profile_image : 'assets/images/silhouette.jpg'">
         </div>
         <div class="col-7 instructor-info-container">
           <div class="instructor-info">
-            <span>Sofía</span>
-            <span>sofia@gmail.com</span>
-            <span>Monitora de principiantes</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 p-3">
-      <div class="row">
-        <div class="col-5">
-          <img class="img-fluid rounded-circle" src="assets/images/instructor.jpg">
-        </div>
-        <div class="col-7 instructor-info-container">
-          <div class="instructor-info">
-            <span>Sofía</span>
-            <span>sofia@gmail.com</span>
-            <span>Monitora de principiantes</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 p-3">
-      <div class="row">
-        <div class="col-5">
-          <img class="img-fluid rounded-circle" src="assets/images/instructor.jpg">
-        </div>
-        <div class="col-7 instructor-info-container">
-          <div class="instructor-info">
-            <span>Sofía</span>
-            <span>sofia@gmail.com</span>
-            <span>Monitora de principiantes</span>
+            <span>{{ instructor.nombre }}</span>
+            <span>{{ instructor.email }}</span>
           </div>
         </div>
       </div>
