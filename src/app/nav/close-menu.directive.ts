@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Directive({
@@ -9,8 +9,7 @@ export class CloseMenuDirective implements OnInit {
     public menu: any;
 
     constructor(
-      private router: Router,
-      private element: ElementRef
+      private router: Router
     ) {}
 
     ngOnInit() {
