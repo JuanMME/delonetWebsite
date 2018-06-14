@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
     this._monitorService.getMonitors().subscribe(
       instructors => {
         this.instructors = instructors;
-        console.log(instructors);
       }
     );
   }
