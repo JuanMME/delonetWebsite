@@ -26,17 +26,17 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
 import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ClassComponent } from './admin/containers/class/class.component';
 
 import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
-import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
 import { ContactService } from './contact/contact.service';
 import { LoginService } from './login/login.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
-import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
-import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
+import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 import { CloseMenuDirective } from './nav/close-menu.directive';
 
