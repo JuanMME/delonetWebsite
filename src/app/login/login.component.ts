@@ -1,7 +1,7 @@
 import { Component, TemplateRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from './login.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   @Output() isLogged = new EventEmitter<boolean>();
   @Output() isAdmin = new EventEmitter<boolean>();
 
-  loginData;
   modalRef: BsModalRef;
   loginForm: FormGroup;
   userName: string;

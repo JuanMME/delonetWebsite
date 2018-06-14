@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -10,14 +10,21 @@ import { Component } from '@angular/core';
 
 export class NavbarComponent {
 
-  isAdmin = false;
-  isLogged = false;
+  isAdmin: boolean;
+  isLogged: boolean;
+
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   onLogin(isLogged: boolean) {
     this.isLogged = isLogged;
+    this.cdr.detectChanges();
   }
 
   onAdminLogin(isAdmin: boolean) {
     this.isAdmin = isAdmin;
+    this.cdr.detectChanges();
   }
+
 }
