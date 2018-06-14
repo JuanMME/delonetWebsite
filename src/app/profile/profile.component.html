@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="form" *ngIf="profile" (ngSubmit)="updateProfile()">
-    <div class="row">
-      <div class="col-12 col-lg-5 form-group text-right" style="display: flex;">
+    <div class="row  mt-5">
+      <div class="col-12 col-lg-4 form-group text-right" style="display: flex;">
         <div class="m-auto" *ngIf="!profilePhoto">
           <div>
             <label for="input-file" class="button-file btn btn-primary">Escoja la imagen de perfil</label>
@@ -19,25 +19,25 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-7">
+      <div class="col-12 col-lg-8">
         <div class="row">
           <div class="col-12 col-lg-6 form-group">
             <label>Nombre</label>
-            <input type="text" class="form-control" formControlName="nombre" autofocus />
+            <input type="text" class="form-control" formControlName="nombre" readonly />
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Apellidos</label>
-            <input type="text" class="form-control" formControlName="apellidos" />
+            <input type="text" class="form-control" formControlName="apellidos" readonly />
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Dirección</label>
-            <input type="text" class="form-control" formControlName="direccion" />
+            <input type="text" class="form-control" formControlName="direccion" autofocus/>
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Teléfono</label>
             <input type="text" class="form-control" formControlName="telefono" />
           </div>
-          <div class="col-12 col-lg-6 form-group">
+          <div class="col-12 form-group">
             <label>Email</label>
             <input type="text" class="form-control" formControlName="email" />
           </div>
@@ -54,11 +54,8 @@
               </div>
           </div>
           <div class="col-12 col-lg-12 form-group">
-            <button [disabled]="submitted || !form.valid || form.pristine" type="submit" class="btn btn-primary">
+            <button [disabled]="submitted || !form.valid || form.pristine" type="submit" class="btn btn-primary float-right">
               Guardar
-            </button>
-            <button type="button" class="btn btn-primary">
-              Eliminar perfil
             </button>
           </div>
         </div>
