@@ -2,7 +2,7 @@
 
 <br/>
 Esta es web del proyecto delonet.
-
+<br/>
 Una página dedicada a la gestión de las reservas de una piscina y al mantenimiento de sus monitores y socios, permitiendo una gestión sencilla, rápida y muy eficaz.
 <br/><br/>
 
