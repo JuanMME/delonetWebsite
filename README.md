@@ -47,3 +47,5 @@ Tardará un poco, pero luego ya tendremos nuestra web totalmente funcional. Sola
 ## Contribuidores
 Este proyecto ha sido realizado por Juan Manuel Martín Escobar y <a href="https://github.com/AntonioDuprez">Antonio Duprez Hernández</a>. <br>
 Proyecto de fin de curso de 2º de DAW.
+
+<img src="./src/assets/bruni.jpeg" width="250px"> <img src="./src/assets/gordito.jpeg" width="250px">
