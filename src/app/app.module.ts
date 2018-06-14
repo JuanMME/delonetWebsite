@@ -31,12 +31,14 @@ import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
+import { ContactService } from './contact/contact.service';
 import { LoginService } from './login/login.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 
+import { CloseMenuDirective } from './nav/close-menu.directive';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { ProfileService } from './profile/profile.service';
     ClassDetailsComponent,
     ClassAddMemberComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    CloseMenuDirective
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import { ProfileService } from './profile/profile.service';
     MonitorService,
     ClassService,
     LoginService,
+    ContactService,
     AuthGuardService,
     AdminAuthGuardService,
     ProfileService

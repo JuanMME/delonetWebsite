@@ -12,7 +12,6 @@ export class NavbarComponent {
 
   isAdmin = false;
   isLogged = false;
-  isCollapsed = true;
 
   onLogin(isLogged: boolean) {
     this.isLogged = isLogged;

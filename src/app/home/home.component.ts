@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MonitorService } from '../admin/monitor.service';
 
 @Component({
   moduleId: module.id,
@@ -8,6 +9,20 @@ import { Component } from '@angular/core';
   ]
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  instructors: any[];
+
+  constructor(
+    private _monitorService: MonitorService) {}
+
+  ngOnInit() {
+    this._monitorService.getMonitors().subscribe(
+      instructors => {
+        this.instructors = instructors;
+        console.log(instructors);
+      }
+    );
+  }
 
 }

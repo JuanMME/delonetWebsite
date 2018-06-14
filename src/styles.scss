@@ -90,6 +90,7 @@ body {
 .cal-hour {
     min-width: 20px !important;
     max-width: 100% !important;
+    background-color: #fafafa;
 }
 
 .cal-day-view {
@@ -186,4 +187,8 @@ body {
 
 .modal-open .modal {
     z-index: 9001;
+}
+
+.toast-message {
+    color: black;
 }
