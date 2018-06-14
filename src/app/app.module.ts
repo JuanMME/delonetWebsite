@@ -23,17 +23,19 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { MonitorsDialogComponent } from './admin/components/monitors-dialog/monitors-dialog.component';
 import { ClassDialogComponent } from './admin/components/class-dialog/class-dialog.component';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
+import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
+import { LoginComponent } from './login/login.component';
 
 import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassService } from './admin/class.service';
-import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
-import { ClassAddMemberComponent } from './admin/components/class-add-member/class-add-member.component';
-import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from './profile/profile.service';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { AdminAuthGuardService } from './shared/services/admin-auth-guard.servic
     ConfirmDialogComponent,
     ClassDetailsComponent,
     ClassAddMemberComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { AdminAuthGuardService } from './shared/services/admin-auth-guard.servic
     ClassService,
     LoginService,
     AuthGuardService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    ProfileService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef } from 'ngx-bootstrap';
@@ -13,11 +13,11 @@ import { MonitorService } from '../../monitor.service';
 })
 export class MonitorsDialogComponent implements OnInit {
   private monitorForm: FormGroup;
-  private submitted: Boolean;
+  submitted: boolean;
   monitor: Monitor;
   data: any;
   title: string;
-  profilePhoto: String;
+  profilePhoto: string;
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
 

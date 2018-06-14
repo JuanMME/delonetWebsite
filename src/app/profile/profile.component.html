@@ -1,0 +1,68 @@
+<div class="container">
+  <form [formGroup]="form" *ngIf="profile" (ngSubmit)="updateProfile()">
+    <div class="row">
+      <div class="col-12 col-lg-5 form-group text-right" style="display: flex;">
+        <div class="m-auto" *ngIf="!profilePhoto">
+          <div>
+            <label for="input-file" class="button-file btn btn-primary">Escoja la imagen de perfil</label>
+            <input type="file" id="input-file" name="input-file" (change)="fileChangeListener($event)" style="display: none">
+          </div>
+          <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          <div *ngIf="data && data.image && data.image.length">
+            <button class="btn btn-primary" type="button" (click)="confirmPhoto()">Confirmar</button>
+          </div>
+        </div>
+        <div class="m-auto" *ngIf="data.image && profilePhoto">
+          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight" style="margin-bottom: 10px;">
+          <div>
+            <button class="btn btn-primary" (click)="deleteImage()">Borrar</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-7">
+        <div class="row">
+          <div class="col-12 col-lg-6 form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" autofocus />
+          </div>
+          <div class="col-12 col-lg-6 form-group">
+            <label>Apellidos</label>
+            <input type="text" class="form-control" formControlName="apellidos" />
+          </div>
+          <div class="col-12 col-lg-6 form-group">
+            <label>Dirección</label>
+            <input type="text" class="form-control" formControlName="direccion" />
+          </div>
+          <div class="col-12 col-lg-6 form-group">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" formControlName="telefono" />
+          </div>
+          <div class="col-12 col-lg-6 form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" formControlName="email" />
+          </div>
+          <div class="col-12 col-lg-12 form-group">
+            <div class="row">
+                <div class="col-12 col-lg-6 form-group">
+                    <label>Nueva contraseña</label>
+                    <input type="password" class="form-control" formControlName="password" />
+                </div>
+                <div class="col-12 col-lg-6 form-group">
+                    <label>Repita la contraseña</label>
+                    <input type="password" class="form-control" formControlName="_password" />
+                </div>
+              </div>
+          </div>
+          <div class="col-12 col-lg-12 form-group">
+            <button [disabled]="submitted || !form.valid || form.pristine" type="submit" class="btn btn-primary">
+              Guardar
+            </button>
+            <button type="button" class="btn btn-primary">
+              Eliminar perfil
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
