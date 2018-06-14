@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable()
 export class ProfileService {
@@ -59,6 +60,7 @@ export class ProfileService {
    * @returns {any} affectedRows
    */
   updatePassword(profile: any, id, type): Observable<any> {
+    profile.password = Md5.hashStr(profile.password);
     Object.assign(profile, {type: type});
     return this._http.put(`${this.serverUrl}/password/${id}`, profile)
       .catch(this.handleError);
