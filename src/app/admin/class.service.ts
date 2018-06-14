@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Response, RequestOptions } from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { Class } from './models/class';
 @Injectable()
 export class ClassService {
 
@@ -10,32 +11,62 @@ export class ClassService {
 
   constructor(private _http: HttpClient) {}
 
-  getClasses(): Observable<any> {
-    return this._http.get(this.serverUrl)
+  /**
+   * Devuelve todas las clases
+   * @returns {Class[]} clases
+   */
+  getClasses(): Observable<Class[]> {
+    return this._http.get<Class[]>(this.serverUrl)
       .catch(this.handleError);
   }
 
-  getClasse(id_clase): Observable<any> {
-    return this._http.get(this.serverUrl + '-socios/' + id_clase)
+  /**
+   * Devuelve una clase concreta
+   * @param id_clase
+   * @returns {Class} clase
+   */
+  getClasse(id_clase): Observable<Class> {
+    return this._http.get<Class>(this.serverUrl + '-socios/' + id_clase)
       .catch(this.handleError);
   }
 
-  createClases(classe: any) {
-    return this._http.post(this.serverUrl, classe)
+  /**
+   * Crea una nueva clase
+   * @param classe
+   * @returns {any} affectedRows
+   */
+  createClases(classe: any): Observable<any> {
+    return this._http.post<any>(this.serverUrl, classe)
       .catch(this.handleError);
   }
 
-  modifyClass(classId: Number, classe: any) {
-    return this._http.put(this.serverUrl + '/' + classId, classe)
+  /**
+   * Modifica cualquier dato o todos de una clase
+   * @param classId
+   * @param classe
+   * @returns {any} affectedRows
+   */
+  modifyClass(classId: Number, classe: any): Observable<any> {
+    return this._http.put<any>(this.serverUrl + '/' + classId, classe)
       .catch(this.handleError);
   }
 
-  deleteClass(classId: Number) {
+  /**
+   * Borra una clase
+   * @param classId
+   * @returns {any} affectedRows
+   */
+  deleteClass(classId: Number): Observable<any> {
     return this._http.delete(this.serverUrl + '/' + classId)
       .catch(this.handleError);
   }
 
-  getNotMembersInClass(id_clase) {
+  /**
+   * Devuelve aquellos miembros que no están asociados a una clase
+   * @param id_clase
+   * @returns {Members[]} members
+   */
+  getNotMembersInClass(id_clase): Observable<any> {
     return this._http.get(this.serverUrl + '/' + id_clase + '/add-member')
       .catch(this.handleError);
   }

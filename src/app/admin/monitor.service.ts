@@ -3,6 +3,7 @@ import { Response, RequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { Monitor } from './models/monitor';
 
 @Injectable()
 export class MonitorService {
@@ -11,21 +12,41 @@ export class MonitorService {
 
   constructor(private _http: HttpClient) {}
 
-  getMonitors(): Observable<any> {
-    return this._http.get(this.serverUrl)
+  /**
+   * Devuelve todos los monitores existentes
+   * @returns {Monitor[]} monitors
+   */
+  getMonitors(): Observable<Monitor[]> {
+    return this._http.get<Monitor[]>(this.serverUrl)
       .catch(this.handleError);
   }
 
-  createMonitor(monitor: any) {
+  /**
+   * Crea un nuevo monitor
+   * @param monitor
+   * @returns {any} affectedRows
+   */
+  createMonitor(monitor: any): Observable<any> {
     return this._http.post(this.serverUrl, monitor)
       .catch(this.handleError);
   }
 
-  modifyMonitor(monitorId: Number, monitor: any) {
+  /**
+   * Modifica los datos de un monitor
+   * @param monitorId
+   * @param monitor
+   * @returns {any} affectedRows
+   */
+  modifyMonitor(monitorId: Number, monitor: any): Observable<any> {
     return this._http.put(this.serverUrl + '/' + monitorId, monitor)
       .catch(this.handleError);
   }
 
+  /**
+   * Borra un monitor de la base de datos
+   * @param monitorId
+   * @returns {any} affectedRows
+   */
   deleteMonitor(monitorId: Number) {
     return this._http.delete(this.serverUrl + '/' + monitorId)
       .catch(this.handleError);

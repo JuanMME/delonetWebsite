@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Response, RequestOptions } from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import { Member } from './models/member';
 
 @Injectable()
 export class MembersService {
@@ -11,22 +12,42 @@ export class MembersService {
 
   constructor(private _http: HttpClient) {}
 
-  getMembers(): Observable<any> {
-    return this._http.get(this.serverUrl)
+  /**
+   * Devuelve todos los miembros existentes
+   * @returns {Member[]} members
+   */
+  getMembers(): Observable<Member[]> {
+    return this._http.get<Member[]>(this.serverUrl)
       .catch(this.handleError);
   }
 
-  createMember(member: any) {
-    return this._http.post(this.serverUrl, member)
+  /**
+   * Crea un nuevo miembro
+   * @param member
+   * @returns {any} affectedRows
+   */
+  createMember(member: any): Observable<any> {
+    return this._http.post<any>(this.serverUrl, member)
       .catch(this.handleError);
   }
 
-  modifyMember(memberId: Number, member: any) {
+  /**
+   * Modifica los datos de un miembro
+   * @param memberId
+   * @param member
+   * @returns {any} affectedRows
+   */
+  modifyMember(memberId: Number, member: any): Observable<any> {
     return this._http.put(this.serverUrl + '/' + memberId, member)
       .catch(this.handleError);
   }
 
-  deleteMember(memberId: Number) {
+  /**
+   * Borra un miembro de la base de datos
+   * @param memberId
+   * @returns {any} affectedRows
+   */
+  deleteMember(memberId: Number): Observable<any> {
     return this._http.delete(this.serverUrl + '/' + memberId)
       .catch(this.handleError);
   }

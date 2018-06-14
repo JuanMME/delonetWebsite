@@ -116,6 +116,11 @@ export class ProfileComponent implements OnInit {
     this.form.markAsDirty();
   }
 
+  /**
+   * Modifica el valor del selector de archivos implementado por el
+   * modulo de cropper por el valor que tiene nuestro input file
+   * @param $event
+   */
   fileChangeListener($event) {
     const image: any = new Image();
     const file: File = $event.target.files[0];
