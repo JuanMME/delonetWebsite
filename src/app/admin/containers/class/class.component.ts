@@ -77,11 +77,13 @@ export class ClassComponent implements OnInit {
     this.modalService.onHide.subscribe(useless => {
       if (this.bsModalRef.content.borrar) {
         this.classService.deleteClass(classe.id_clase).subscribe(data => {
-          if (data && data['affectedRows'] > 0) {
-            this.toastr.success('La clase ha sido eliminada correctamente');
-            this.getClasses();
-          } else {
-            this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('La clase ha sido eliminada correctamente');
+              this.getClasses();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
           }
         });
       }

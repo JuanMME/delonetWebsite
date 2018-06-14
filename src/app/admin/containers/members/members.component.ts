@@ -78,11 +78,13 @@ export class MembersComponent implements OnInit {
     this.modalService.onHide.subscribe(useless => {
       if (this.bsModalRef.content.borrar) {
         this._membersService.deleteMember(member.id_socio).subscribe(data => {
-          if (data && data['affectedRows'] > 0) {
-            this.toastr.success('El socio ha sido eliminado correctamente');
-            this.getMembers();
-          } else {
-            this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('El socio ha sido eliminado correctamente');
+              this.getMembers();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
           }
         });
       }

@@ -47,14 +47,16 @@ export class MembersDialogComponent implements OnInit {
   createMember() {
     this.submitted = true;
     this._membersService.createMember(this.memberForm.value).subscribe(data => {
-      if (data && data['affectedRows'] > 0) {
-        this.toastr.success(
-          'El socio ha sido añadido correctamente'
-        );
-      } else {
-        this.toastr.error(
-          'Algo ha salido mal. Inténtelo más tarde'
-        );
+      if (data) {
+        if (data.affectedRows > 0) {
+          this.toastr.success(
+            'El socio ha sido añadido correctamente'
+          );
+        } else {
+          this.toastr.error(
+            'Algo ha salido mal. Inténtelo más tarde'
+          );
+        }
       }
     });
   }
@@ -63,14 +65,16 @@ export class MembersDialogComponent implements OnInit {
     this._membersService
       .modifyMember(this.member.id_socio, this.memberForm.value)
       .subscribe(data => {
-        if (data && data['affectedRows'] > 0) {
-          this.toastr.success(
-            'El socio ha sido modificado correctamente'
-          );
-        } else {
-          this.toastr.error(
-            'Algo ha salido mal. Inténtelo más tarde'
-          );
+        if (data) {
+          if (data.affectedRows > 0) {
+            this.toastr.success(
+              'El socio ha sido modificado correctamente'
+            );
+          } else {
+            this.toastr.error(
+              'Algo ha salido mal. Inténtelo más tarde'
+            );
+          }
         }
       });
   }

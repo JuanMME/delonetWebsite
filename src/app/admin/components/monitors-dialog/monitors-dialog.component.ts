@@ -46,14 +46,16 @@ export class MonitorsDialogComponent implements OnInit {
   createMonitor() {
     this.submitted = true;
     this.monitorService.createMonitor(this.monitorForm.value).subscribe(data => {
-      if (data && data['affectedRows'] > 0) {
-        this.toastr.success(
-          'El monitor ha sido añadido correctamente'
-        );
-      } else {
-        this.toastr.error(
-          'Algo ha salido mal. Inténtelo más tarde'
-        );
+      if (data) {
+        if (data.affectedRows > 0) {
+          this.toastr.success(
+            'El monitor ha sido añadido correctamente'
+          );
+        } else {
+          this.toastr.error(
+            'Algo ha salido mal. Inténtelo más tarde'
+          );
+        }
       }
     });
   }
@@ -62,14 +64,16 @@ export class MonitorsDialogComponent implements OnInit {
     this.monitorService
       .modifyMonitor(this.monitor.id_monitor, this.monitorForm.value)
       .subscribe(data => {
-        if (data && data['affectedRows'] > 0) {
-          this.toastr.success(
-            'El monitor ha sido modificado correctamente'
-          );
-        } else {
-          this.toastr.error(
-            'Algo ha salido mal. Inténtelo más tarde'
-          );
+        if (data) {
+          if (data.affectedRows > 0) {
+            this.toastr.success(
+              'El monitor ha sido modificado correctamente'
+            );
+          } else {
+            this.toastr.error(
+              'Algo ha salido mal. Inténtelo más tarde'
+            );
+          }
         }
       });
   }

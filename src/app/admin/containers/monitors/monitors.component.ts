@@ -75,11 +75,13 @@ export class MonitorsComponent implements OnInit {
     this.modalService.onHide.subscribe(useless => {
       if (this.bsModalRef.content.borrar) {
         this.monitorsService.deleteMonitor(monitor.id_monitor).subscribe(data => {
-          if (data && data['affectedRows'] > 0) {
-            this.toastr.success('El monitor ha sido eliminado correctamente');
-            this.getMonitors();
-          } else {
-            this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('El monitor ha sido eliminado correctamente');
+              this.getMonitors();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
           }
         });
       }
