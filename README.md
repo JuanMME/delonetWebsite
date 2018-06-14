@@ -45,5 +45,5 @@ Tardará un poco, pero luego ya tendremos nuestra web totalmente funcional. Sola
 - Modificar cualquier dato de su perfil
 
 ## Contribuidores
-Este proyecto ha sido realizado por Juan Manuel Martín Escobar y Antonio Duprez Hernández. <br>
+Este proyecto ha sido realizado por Juan Manuel Martín Escobar y <a href="https://github.com/AntonioDuprez">Antonio Duprez Hernández</a>. <br>
 Proyecto de fin de curso de 2º de DAW.
