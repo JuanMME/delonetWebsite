@@ -49,13 +49,11 @@ export class MembersDialogComponent implements OnInit {
     this._membersService.createMember(this.memberForm.value).subscribe(data => {
       if (data && data['affectedRows'] > 0) {
         this.toastr.success(
-          'Operación realizada con éxito',
-          'El socio ha sido añadido'
+          'El socio ha sido añadido correctamente'
         );
       } else {
         this.toastr.error(
-          'Algo ha fallado en la operación',
-          'Inténtelo más tarde'
+          'Algo ha salido mal. Inténtelo más tarde'
         );
       }
     });
@@ -67,13 +65,11 @@ export class MembersDialogComponent implements OnInit {
       .subscribe(data => {
         if (data && data['affectedRows'] > 0) {
           this.toastr.success(
-            'Operación realizada con éxito',
-            'El socio ha sido modificado'
+            'El socio ha sido modificado correctamente'
           );
         } else {
           this.toastr.error(
-            'Algo ha fallado en la operación',
-            'Inténtelo más tarde'
+            'Algo ha salido mal. Inténtelo más tarde'
           );
         }
       });

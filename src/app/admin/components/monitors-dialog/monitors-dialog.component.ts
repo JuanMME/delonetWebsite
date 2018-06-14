@@ -48,13 +48,11 @@ export class MonitorsDialogComponent implements OnInit {
     this.monitorService.createMonitor(this.monitorForm.value).subscribe(data => {
       if (data && data['affectedRows'] > 0) {
         this.toastr.success(
-          'Operación realizada con éxito',
-          'El monitor ha sido añadido'
+          'El monitor ha sido añadido correctamente'
         );
       } else {
         this.toastr.error(
-          'Algo ha fallado en la operación',
-          'Inténtelo más tarde'
+          'Algo ha salido mal. Inténtelo más tarde'
         );
       }
     });
@@ -66,13 +64,11 @@ export class MonitorsDialogComponent implements OnInit {
       .subscribe(data => {
         if (data && data['affectedRows'] > 0) {
           this.toastr.success(
-            'Operación realizada con éxito',
-            'El monitor ha sido modificado'
+            'El monitor ha sido modificado correctamente'
           );
         } else {
           this.toastr.error(
-            'Algo ha fallado en la operación',
-            'Inténtelo más tarde'
+            'Algo ha salido mal. Inténtelo más tarde'
           );
         }
       });

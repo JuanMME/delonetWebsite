@@ -71,13 +71,11 @@ export class ClassDialogComponent implements OnInit {
     this.classService.createClases(this.classForm.value).subscribe(data => {
       if (data) {
         this.toastr.success(
-          'Operación realizada con éxito',
-          'La clase ha sido añadida'
+          'La clase ha sido añadida correctamente'
         );
       } else {
         this.toastr.error(
-          'Algo ha fallado en la operación',
-          'Inténtelo más tarde'
+          'Algo ha salido mal. Inténtelo más tarde'
         );
       }
     });
@@ -92,13 +90,11 @@ export class ClassDialogComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           this.toastr.success(
-            'Operación realizada con éxito',
-            'La clase ha sido modificada'
+            'La clase ha sido modificada con éxito'
           );
         } else {
           this.toastr.error(
-            'Algo ha fallado en la operación',
-            'Inténtelo más tarde'
+            'Algo ha salido mal. Inténtelo más tarde'
           );
         }
       });

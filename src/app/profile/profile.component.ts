@@ -81,7 +81,7 @@ export class ProfileComponent implements OnInit {
               if (passwordData.affectedRows > 0) {
                 this.toastr.success('Operación realizada con éxito');
               } else {
-                this.toastr.error('Uups, algo ha salido mal. Inténtalo más tarde');
+                this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
               }
             }
           });
@@ -90,7 +90,7 @@ export class ProfileComponent implements OnInit {
             if (data.affectedRows > 0) {
               this.toastr.success('Operación realizada con éxito');
             } else {
-              this.toastr.error('Uups, algo ha salido mal. Inténtalo más tarde');
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
             }
           }
           this.getProfile();

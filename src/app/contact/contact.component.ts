@@ -39,7 +39,7 @@ export class ContactComponent {
           this.toastr.success('Pronto nos pondremos en contacto contigo.');
           this.submitted = true;
         } else {
-          this.toastr.error('Se produjo un error. Inténtalo de nuevo más tarde.');
+          this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
         }
       }
     );

@@ -143,10 +143,10 @@ export class ReservationsComponent implements OnInit {
       this.submitted = true;
       this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
         if (response.affectedRows === 1) {
-          this.toastr.success('Reserva añadida con éxito.');
+          this.toastr.success('La reserva ha sido añadida correctamente');
           this.getReservations();
         } else {
-          this.toastr.error('Algo ha fallado en la operación', 'Inténtelo más tarde');
+          this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
         }
       });
     }

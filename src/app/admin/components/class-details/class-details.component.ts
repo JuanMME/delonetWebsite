@@ -59,9 +59,9 @@ export class ClassDetailsComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
       if (this.bsModalRef.content.ok === true) {
-        this.toastr.success('Se han añadido correctamente todos los socios a esta clase', 'Operación completada con éxito');
+        this.toastr.success('Operación completada con éxito');
       } else if (this.bsModalRef.content.ok === false) {
-        this.toastr.error('Algo ha salido mal, inténtelo más tarde.', 'Error');
+        this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
       }
       this.getClasse();
     });
@@ -79,9 +79,9 @@ export class ClassDetailsComponent implements OnInit {
       if (this.bsModalRef.content.borrar) {
         this.membersService.modifyMember(member.id_socio, member).subscribe(data => {
           if (data && data['affectedRows'] > 0) {
-            this.toastr.success('El socio ya no está en esta clase', 'Operación realizada con éxito');
+            this.toastr.success('El socio ya no está en esta clase');
           } else {
-            this.toastr.error('Inténtelo más tarde', 'Algo ha fallado en la operación');
+            this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
           }
           this.getClasse();
         });
