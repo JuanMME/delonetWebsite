@@ -48,7 +48,6 @@ export class ProfileService {
    * @returns {any} affectedRows
    */
   updateProfile(profile: any, id, type): Observable<any> {
-    console.log(profile);
     return this._http.put(`${this.serverUrl}/${type}/${id}`, profile)
       .catch(this.handleError);
   }
