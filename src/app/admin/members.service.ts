@@ -9,6 +9,7 @@ import { Member } from './models/member';
 export class MembersService {
 
   serverUrl = 'http://localhost:3001/api' + '/socios';
+  serverUrl_v2 = 'http://localhost:3001/api' + '/usuarios';
 
   constructor(private _http: HttpClient) {}
 
@@ -50,6 +51,20 @@ export class MembersService {
   deleteMember(memberId: Number): Observable<any> {
     return this._http.delete(this.serverUrl + '/' + memberId)
       .catch(this.handleError);
+  }
+
+  /**
+   * Comprueba que el email no está siendo usado por ningún otro usuario
+   * @param email
+   * @returns {boolean} invalid
+   */
+  checkEmail(email: string): Observable<any> {
+    return this._http.get<any>(this.serverUrl_v2 + '/check-email', {
+      params: {
+        email: email
+      }
+    })
+    .catch(this.handleError);
   }
 
   private handleError(error: Response) {

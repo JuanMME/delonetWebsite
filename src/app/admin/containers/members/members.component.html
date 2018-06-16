@@ -19,7 +19,8 @@
         type="text" [autofocus]="'true'" (focusout)="closeFilter()">
       </div>
       <div class="card-body">
-        <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
+        <md-progress-bar mode="indeterminate" *ngIf="!membersFiltered"></md-progress-bar>
+        <ngx-datatable *ngIf="membersFiltered" #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
           [rows]="membersFiltered" [scrollbarV]="true" [scrollbarH]="true">
           <ngx-datatable-column name="Nombre" prop="nombre"></ngx-datatable-column>
           <ngx-datatable-column name="Apellidos" prop="apellidos"></ngx-datatable-column>

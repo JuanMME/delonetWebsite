@@ -6,9 +6,10 @@
 </div>
 <div class="modal-body">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" *ngIf="classe">
         <div *ngFor="let member of noMembers">
-            <input type="checkbox" [value]="member.id_socio" (click)="onChange(member)" [checked]="member.checked">
+            <input type="checkbox" [value]="member.id_socio" (click)="onChange(member)" [checked]="member.checked" 
+            [disabled]="(classe.num_plazas === membersToAdd && member.checked === false) || (members >= classe.num_plazas)">
             <label>{{ member.nombre }}</label>
         </div>
         <div *ngIf="noMembers && !noMembers.length">
@@ -18,7 +19,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" [disabled]="noMembers && noMembers.length <= 0" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn-actions">
+  <button type="button" [disabled]="(noMembers && noMembers.length <= 0) || membersToAdd === 0" (click)="addAllMembersToClass(); bsModalRef.hide();" class="btn-actions">
     <i class="material-icons" tooltip="Añadir">
       check
     </i>

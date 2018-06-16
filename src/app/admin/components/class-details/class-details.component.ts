@@ -18,7 +18,7 @@ import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-d
 export class ClassDetailsComponent implements OnInit {
 
   id_clase;
-  classe: Class;
+  classe: Class[];
   my_messages = {
     'emptyMessage': '¡Esta clase no tiene aún socios apuntados!',
     'totalMessage': 'registros totales'
@@ -42,7 +42,7 @@ export class ClassDetailsComponent implements OnInit {
   }
 
   getClasse() {
-    this.classService.getClasse(this.id_clase).subscribe(data => {
+    this.classService.getClassMembers(this.id_clase).subscribe(data => {
       this.classe = data;
     });
   }
@@ -53,6 +53,7 @@ export class ClassDetailsComponent implements OnInit {
   addMember() {
     const initialState = {
       id_clase: this.id_clase,
+      members: this.classe.length,
       class: 'modal-lg'
     };
     this.bsModalRef = this.modalService.show(ClassAddMemberComponent, {initialState});

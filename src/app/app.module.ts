@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { CollapseModule, BsDropdownModule, AlertModule, TooltipModule } from 'ngx-bootstrap';
+import { MdProgressBarModule } from '@angular2-material/progress-bar';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
@@ -76,7 +77,8 @@ import { CloseMenuDirective } from './nav/close-menu.directive';
     AlertModule,
     TooltipModule.forRoot(),
     CollapseModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    MdProgressBarModule
   ],
   providers: [
     MembersService,

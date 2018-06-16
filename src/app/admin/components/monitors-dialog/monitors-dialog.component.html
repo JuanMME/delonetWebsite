@@ -46,19 +46,20 @@
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Email</label>
-            <input type="text" class="form-control" formControlName="email" />
+            <input type="text" class="form-control" formControlName="email" (keyup)="checkEmail($event)"/>
+            <div class="text-danger" *ngIf="invalidEmail">Este email ya está siendo utilizado</div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button *ngIf="!monitor" [disabled]="submitted || !monitorForm.valid" type="submit" class="btn-actions">
+    <button *ngIf="!monitor" [disabled]="submitted || !monitorForm.valid || invalidEmail === true" type="submit" class="btn-actions">
       <i class="material-icons" tooltip="Guardar">
         check
       </i>
     </button>
-    <button *ngIf="monitor" [disabled]="submitted || !monitorForm.valid || monitorForm.pristine"
+    <button *ngIf="monitor" [disabled]="submitted || !monitorForm.valid || monitorForm.pristine || invalidEmail === true"
        type="submit" class="btn-actions">
        <i class="material-icons" tooltip="Guardar">
           check

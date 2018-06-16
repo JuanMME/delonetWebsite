@@ -66,6 +66,20 @@ export class ProfileService {
       .catch(this.handleError);
   }
 
+  /**
+   * Comprueba que el email no está siendo usado por ningún otro usuario
+   * @param email
+   * @returns {boolean} invalid
+   */
+  checkEmail(email: string): Observable<any> {
+    return this._http.get<any>(this.serverUrl + '/usuarios/check-email', {
+      params: {
+        email: email
+      }
+    })
+    .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
     const msg = 'Error status code' + error.status + 'status' + error.statusText + ' at ' + error.url;
     return Observable.throw(msg);

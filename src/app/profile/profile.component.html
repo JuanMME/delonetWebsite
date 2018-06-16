@@ -39,7 +39,8 @@
           </div>
           <div class="col-12 form-group">
             <label>Email</label>
-            <input type="text" class="form-control" formControlName="email" />
+            <input type="text" class="form-control" formControlName="email" (keyup)="checkEmail($event)"/>
+            <div class="text-danger" *ngIf="invalidEmail">Este email ya está siendo utilizado</div>
           </div>
           <div class="col-12 col-lg-12 form-group">
             <div class="row">
@@ -54,7 +55,7 @@
               </div>
           </div>
           <div class="col-12 col-lg-12 form-group">
-            <button [disabled]="submitted || !form.valid || form.pristine" type="submit" class="btn btn-primary float-right">
+            <button [disabled]="submitted || !form.valid || form.pristine || invalidEmail" type="submit" class="btn btn-primary float-right">
               Guardar
             </button>
           </div>

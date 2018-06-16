@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   data: any;
   profilePhoto: string;
+  invalidEmail: boolean;
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
 
@@ -100,6 +101,18 @@ export class ProfileComponent implements OnInit {
       this.toastr.error('Introduce dos contraseña iguales');
       this.form.setErrors({ incorrect: true });
     }
+  }
+
+  checkEmail(event) {
+    const value = event.target.value;
+    this.profileService.checkEmail(value).subscribe(data => {
+      if (data) {
+        if (data.email !== this.profile.email) {
+          this.form.setErrors({incorrect: data.invalid});
+          this.invalidEmail = data.invalid;
+        }
+      }
+    });
   }
 
   confirmPhoto() {
