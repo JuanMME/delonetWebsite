@@ -59,6 +59,7 @@ export class ClassDetailsComponent implements OnInit {
     this.bsModalRef = this.modalService.show(ClassAddMemberComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
     this.modalService.onHide.subscribe(data => {
+      console.log(this.bsModalRef.content);
       if (this.bsModalRef.content.ok === true) {
         this.toastr.success('Operación completada con éxito');
       } else if (this.bsModalRef.content.ok === false) {
