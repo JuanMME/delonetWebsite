@@ -1,7 +1,7 @@
 ## <img src="./src/assets/deloSVGblue.svg">
 
 <br/>
-Esta es web del proyecto delonet.<br/>
+Esta es la web del proyecto delonet.<br/>
 <br/>
 Una página dedicada a la gestión de las reservas de una piscina y al mantenimiento de sus monitores y socios, permitiendo una gestión sencilla, rápida y muy eficaz.
 <br/><br/>
@@ -45,7 +45,7 @@ Tardará un poco, pero luego ya tendremos nuestra web totalmente funcional. Sola
 - Modificar cualquier dato de su perfil
 
 ## Contribuidores
-Este proyecto ha sido realizado por Juan Manuel Martín Escobar y <a href="https://github.com/AntonioDuprez">Antonio Duprez Hernández</a>. <br>
+Este proyecto ha sido realizado por <a href="https://github.com/JuanMME">Juan Manuel Martín Escobar</a> y <a href="https://github.com/AntonioDuprez">Antonio Duprez Hernández</a>. <br>
 Proyecto de fin de curso de 2º de DAW.
 
 <img src="./src/assets/bruni.jpeg" width="250px"> <img src="./src/assets/gordito.jpeg" width="250px">
