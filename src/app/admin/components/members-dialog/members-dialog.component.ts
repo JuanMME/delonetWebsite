@@ -12,12 +12,13 @@ import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
   styleUrls: ['./members-dialog.component.scss']
 })
 export class MembersDialogComponent implements OnInit {
-  private memberForm: FormGroup;
-  private submitted: Boolean;
+  memberForm: FormGroup;
+  submitted: Boolean;
   member: Member;
   data: any;
   title: string;
   profilePhoto: String;
+  invalidEmail: boolean;
   @ViewChild('cropper', undefined)
   cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
@@ -77,6 +78,24 @@ export class MembersDialogComponent implements OnInit {
           }
         }
       });
+  }
+
+  checkEmail(event) {
+    const value = event.target.value;
+    this._membersService.checkEmail(value).subscribe(data => {
+      console.log(data);
+      if (data) {
+        if (this.member) {
+          if (data.email !== this.member.email) {
+            this.memberForm.setErrors({incorrect: data.invalid});
+            this.invalidEmail = data.invalid;
+          }
+        } else {
+          this.memberForm.setErrors({incorrect: data.invalid});
+          this.invalidEmail = data.invalid;
+        }
+      }
+    });
   }
 
   createForm() {
