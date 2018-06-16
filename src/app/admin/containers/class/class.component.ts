@@ -21,6 +21,7 @@ export class ClassComponent implements OnInit {
   classes: Class[];
   bsModalRef: BsModalRef;
   openFilterMenu: boolean;
+  classe: Class;
 
   constructor(
     private classService: ClassService,
@@ -28,7 +29,24 @@ export class ClassComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private filter: FilterPipe
-  ) { }
+  ) {
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this.classService.deleteClass(this.classe.id_clase).subscribe(data => {
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('La clase ha sido eliminada correctamente');
+              this.getClasses();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
+          }
+        });
+      } else if (this.bsModalRef.content.cargarDatos) {
+        this.getClasses();
+      }
+    });
+  }
 
   ngOnInit() {
     this.getClasses();
@@ -50,9 +68,6 @@ export class ClassComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState,  class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
-    this.modalService.onHide.subscribe(data => {
-      this.getClasses();
-    });
   }
 
   editClass(classe: Class) {
@@ -62,9 +77,6 @@ export class ClassComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ClassDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
-    this.modalService.onHide.subscribe(data => {
-      this.getClasses();
-    });
   }
 
   deleteClass(classe: Class) {
@@ -74,20 +86,7 @@ export class ClassComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-    this.modalService.onHide.subscribe(useless => {
-      if (this.bsModalRef.content.borrar) {
-        this.classService.deleteClass(classe.id_clase).subscribe(data => {
-          if (data) {
-            if (data.affectedRows > 0) {
-              this.toastr.success('La clase ha sido eliminada correctamente');
-              this.getClasses();
-            } else {
-              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
-            }
-          }
-        });
-      }
-    });
+    this.classe = classe;
   }
 
   viewDetails(classe: Class) {

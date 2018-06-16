@@ -70,6 +70,7 @@ export class ClassDialogComponent implements OnInit {
     this.classForm.controls.hora.patchValue(time.getHours() + ':' + time.getMinutes());
     this.classService.createClases(this.classForm.value).subscribe(data => {
       if (data) {
+        this.bsModalRef.content.cargarDatos = true;
         this.toastr.success(
           'La clase ha sido añadida correctamente'
         );
@@ -89,6 +90,7 @@ export class ClassDialogComponent implements OnInit {
       .modifyClass(this.classe.id_clase, this.classForm.value)
       .subscribe(data => {
         if (data) {
+          this.bsModalRef.content.cargarDatos = true;
           this.toastr.success(
             'La clase ha sido modificada con éxito'
           );

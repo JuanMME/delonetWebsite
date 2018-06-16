@@ -24,6 +24,7 @@ export class ClassDetailsComponent implements OnInit {
     'totalMessage': 'registros totales'
   };
   bsModalRef: BsModalRef;
+  member: Member;
 
   constructor(
     private ar: ActivatedRoute,
@@ -32,7 +33,27 @@ export class ClassDetailsComponent implements OnInit {
     private location: Location,
     private modalService: BsModalService,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this.membersService.modifyMember(this.member.id_socio, this.member).subscribe(data => {
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('El socio ya no está en esta clase');
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
+          }
+          this.getClasse();
+        });
+      } else if (this.bsModalRef.content.ok === true) {
+        this.toastr.success('Operación completada con éxito');
+        this.getClasse();
+      } else if (this.bsModalRef.content.ok === false) {
+        this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+      }
+    });
+  }
 
   ngOnInit() {
     this.id_clase = this.ar.snapshot.params.id;
@@ -58,14 +79,6 @@ export class ClassDetailsComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ClassAddMemberComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
-    this.modalService.onHide.subscribe(data => {
-      if (this.bsModalRef.content.ok === true) {
-        this.toastr.success('Operación completada con éxito');
-      } else if (this.bsModalRef.content.ok === false) {
-        this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
-      }
-      this.getClasse();
-    });
   }
 
   deleteMember(member: Member) {
@@ -76,20 +89,7 @@ export class ClassDetailsComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-    this.modalService.onHide.subscribe(useless => {
-      if (this.bsModalRef.content.borrar) {
-        this.membersService.modifyMember(member.id_socio, member).subscribe(data => {
-          if (data) {
-            if (data.affectedRows > 0) {
-              this.toastr.success('El socio ya no está en esta clase');
-            } else {
-              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
-            }
-          }
-          this.getClasse();
-        });
-      }
-    });
+    this.member = member;
   }
 
 }
