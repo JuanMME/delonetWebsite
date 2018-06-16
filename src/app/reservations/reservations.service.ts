@@ -21,16 +21,6 @@ export class ReservationsService {
       .catch(this.handleError);
   }
 
-  getClasses(): Observable<any> {
-    return this._http.get('http://localhost:3001/api/clases')
-      .catch(this.handleError);
-  }
-
-  getClass(id_clase): Observable<any> {
-    return this._http.get(`http://localhost:3001/api/clases/${id_clase}`)
-      .catch(this.handleError);
-  }
-
   private handleError(error: Response) {
     const msg = 'Error status code' + error.status + 'status' + error.statusText + ' at ' + error.url;
     return Observable.throw(msg);

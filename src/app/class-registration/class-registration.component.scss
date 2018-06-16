@@ -1,0 +1,61 @@
+.classes {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    .class-square {
+        border: 3px solid transparent;
+        border-radius: 3px;
+        padding: 0px;
+        margin: 0 2px;
+
+        img {
+            filter: brightness(70%);
+            border-radius: 3px;
+        }
+
+        .class-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            color: white;
+        }
+
+        &.selected {
+            border: 3px solid #00aced;
+            background-color: #00aced;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.23);
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .classes {
+        .class-title {
+            display: none;
+        }
+    }
+}
+
+.container {
+    margin-top: 50px;
+
+    h2 {
+        text-align: center;
+    }
+}
+
+.card {
+    width: 100%;
+  
+    .card-text {
+        font-size: .9rem;
+    }
+
+    a.card-link {
+        font-size: .8rem;
+        cursor: pointer;
+        color: #1d8fc7;
+    }
+}

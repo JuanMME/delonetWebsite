@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Haga click en una imagen para filtrar</h2>
+    </div>
+  </div>
+  <div class="row classes">
+    <div class="col text-center class-square" (click)="filterClass(1)" [ngClass]="{'selected' : classFilterSelected === 1}">
+      <img class="img-fluid" src="assets/images/kids.jpg">
+      <h4 class="class-title">Infantil</h4>
+    </div>
+    <div class="col text-center class-square" (click)="filterClass(2)" [ngClass]="{'selected' : classFilterSelected === 2}">
+      <img class="img-fluid" src="assets/images/newbie.jpg">
+      <h4 class="class-title">Principiantes</h4>
+    </div>
+    <div class="col text-center class-square" (click)="filterClass(3)" [ngClass]="{'selected' : classFilterSelected === 3}">
+      <img class="img-fluid" src="assets/images/advanced.jpg">
+      <h4 class="class-title">Avanzados</h4>
+    </div>
+    <div class="col text-center class-square" (click)="filterClass(4)" [ngClass]="{'selected' : classFilterSelected === 4}">
+      <img class="img-fluid" src="assets/images/back-pain.jpg">
+      <h4 class="class-title">Espalda</h4>
+    </div>
+    <div class="col text-center class-square" (click)="filterClass(5)" [ngClass]="{'selected' : classFilterSelected === 5}">
+      <img class="img-fluid" src="assets/images/aquagym.jpg">
+      <h4 class="class-title">Aquagym</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let class of classes | classFilter : classFilterSelected">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ class.nombre }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ class.hora }}</h6>
+          <p class="card-text mb-0">{{ class.dias }}</p>
+          <p class="card-text mb-0">Nivel: {{ class.nivel }}</p>
+          <p class="card-text">Plazas disponibles: {{ +class.num_plazas - +class.plazas_ocupadas}}/{{ class.num_plazas }}</p>
+          <a class="card-link" (click)="newMember(class.id_clase, login, register)">REGISTRO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #login>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Se requiere Login</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Solo socios registrados pueden registrarse en una clase.</p>
+  </div>
+</ng-template>
+
+<ng-template #register>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ clickedClass?.nombre }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Confirme que desea registrarse en {{ clickedClass?.nombre }} a las {{ clickedClass?.hora }}.</p>
+    <p>Recuerde que solo es posible estar matriculado en una clase al mismo tiempo, si está inscrito en otra en
+    este momento se le reasignará a esta clase.</p>
+    <button class="btn btn-danger btn-sm" (click)="modalRef.hide()">Cancelar</button>
+    <button class="btn btn-primary btn-sm" (click)="registerNewMember(clickedClass?.id_clase)">Sí, deseo inscribirme</button>
+  </div>
+</ng-template>

@@ -29,6 +29,7 @@ import { ClassAddMemberComponent } from './admin/components/class-add-member/cla
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ClassComponent } from './admin/containers/class/class.component';
+import { ClassRegistrationComponent } from './class-registration/class-registration.component';
 
 import { MembersService } from './admin/members.service';
 import { MonitorService } from './admin/monitor.service';
@@ -40,6 +41,8 @@ import { ProfileService } from './profile/profile.service';
 import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
 
 import { CloseMenuDirective } from './nav/close-menu.directive';
+import { ClassFilterPipe } from './shared/pipes/class-filter.pipe';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +63,9 @@ import { CloseMenuDirective } from './nav/close-menu.directive';
     ClassAddMemberComponent,
     LoginComponent,
     ProfileComponent,
-    CloseMenuDirective
+    ClassRegistrationComponent,
+    CloseMenuDirective,
+    ClassFilterPipe
   ],
   imports: [
     BrowserModule,

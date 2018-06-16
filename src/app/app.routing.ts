@@ -7,14 +7,17 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { MonitorsComponent } from './admin/containers/monitors/monitors.component';
 import { ClassComponent } from './admin/containers/class/class.component';
 import { ClassDetailsComponent } from './admin/components/class-details/class-details.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ClassRegistrationComponent } from './class-registration/class-registration.component';
+
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AdminAuthGuardService } from './shared/services/admin-auth-guard.service';
-import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
+            { path: 'clases', component: ClassRegistrationComponent },
             { path: 'reservas', component: ReservationsComponent, canActivate: [AuthGuardService]},
             { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
             { path: 'admin/socios', component: MembersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },

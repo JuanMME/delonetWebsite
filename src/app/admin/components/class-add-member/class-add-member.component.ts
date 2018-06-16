@@ -35,6 +35,7 @@ export class ClassAddMemberComponent implements OnInit {
         Object.assign(member, {checked: false});
       });
     });
+    this.membersToAdd = this.members;
     this.getClass();
   }
 
