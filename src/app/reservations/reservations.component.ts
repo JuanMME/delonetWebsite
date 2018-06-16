@@ -1,20 +1,10 @@
-import { Component, TemplateRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { addHours, addDays, subDays, isSameHour } from 'date-fns';
-import { Subject } from 'rxjs/Subject';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarDateFormatter,
-  DAYS_OF_WEEK
-} from 'angular-calendar';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ReservationsService } from './reservations.service';
-import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -24,9 +14,9 @@ defineLocale('es', esLocale);
 
 @Component({
   selector: 'app-mycalendar',
-  templateUrl: 'reservations.template.html',
+  templateUrl: 'reservations.component.html',
   styleUrls: [
-    'reservations.styles.scss'
+    'reservations.component.scss'
   ]
 })
 

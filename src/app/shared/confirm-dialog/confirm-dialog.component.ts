@@ -7,7 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap';
   styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent implements OnInit {
-  
+
   title: String;
   content: String;
   borrar: Boolean;
