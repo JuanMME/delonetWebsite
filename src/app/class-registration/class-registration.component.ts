@@ -17,6 +17,7 @@ export class ClassRegistrationComponent implements OnInit {
   isLogged: boolean;
   loginModalRef: BsModalRef;
   classFilterSelected: number;
+  clickedClass: Class;
 
   constructor(
     private _classService: ClassService,
@@ -38,15 +39,22 @@ export class ClassRegistrationComponent implements OnInit {
     }
   }
 
-  newMember(classId: number, template: TemplateRef<any>) {
+  newMember(classId: number, loginTemplate: TemplateRef<any>, registrationTemplate: TemplateRef<any>) {
     if (this.isLogged) {
-
+      this.openRegistrationModal(registrationTemplate, classId);
     } else {
-      this.openLoginModal(template);
+      this.openLoginModal(loginTemplate);
     }
   }
 
   openLoginModal(template: TemplateRef<any>) {
+    this.loginModalRef = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  openRegistrationModal(template: TemplateRef<any>, classId: number) {
+    this._classService.getClasse(classId).subscribe(classItem => {
+      this.clickedClass = classItem;
+    });
     this.loginModalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
