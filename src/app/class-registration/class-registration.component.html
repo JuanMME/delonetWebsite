@@ -35,7 +35,7 @@
           <p class="card-text mb-0">{{ class.dias }}</p>
           <p class="card-text mb-0">Nivel: {{ class.nivel }}</p>
           <p class="card-text">Plazas disponibles: {{ +class.num_plazas - +class.plazas_ocupadas}}/{{ class.num_plazas }}</p>
-          <a class="card-link" (click)="newMember(class.id, login, register)">REGISTRO</a>
+          <a class="card-link" (click)="newMember(class.id_clase, login, register)">REGISTRO</a>
         </div>
       </div>
     </div>
@@ -45,23 +45,27 @@
 <ng-template #login>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Se requiere Login</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="loginModalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Debe estar logeado para registrarse en una clase.
+    <p>Solo socios registrados pueden registrarse en una clase.</p>
   </div>
 </ng-template>
 
 <ng-template #register>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ clickedClass.nombre }}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="registerModalRef.hide()">
+    <h4 class="modal-title pull-left">{{ clickedClass?.nombre }}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Confirme que desea registrarse en {{ clickedClass.nombre }} a las {{ clickedClass.hora }}
+    <p>Confirme que desea registrarse en {{ clickedClass?.nombre }} a las {{ clickedClass?.hora }}.</p>
+    <p>Recuerde que solo es posible estar matriculado en una clase al mismo tiempo, si está inscrito en otra en
+    este momento se le reasignará a esta clase.</p>
+    <button class="btn btn-danger btn-sm" (click)="modalRef.hide()">Cancelar</button>
+    <button class="btn btn-primary btn-sm" (click)="registerNewMember(clickedClass?.id_clase)">Sí, deseo inscribirme</button>
   </div>
 </ng-template>

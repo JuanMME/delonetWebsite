@@ -14,8 +14,8 @@ import { Class } from '../admin/models/class';
 export class ClassRegistrationComponent implements OnInit {
 
   classes: Class[];
-  isLogged: boolean;
-  loginModalRef: BsModalRef;
+  memberId: string;
+  modalRef: BsModalRef;
   classFilterSelected: number;
   clickedClass: Class;
 
@@ -27,35 +27,38 @@ export class ClassRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('member_id')) {
+      this.memberId = localStorage.getItem('member_id');
+    }
     this._classService.getClasses().subscribe(classes => {
       this.classes = classes;
-      console.log(classes);
     });
   }
 
-  checkIsLogged() {
-    if (localStorage.getItem('email')) {
-      this.isLogged = true;
-    }
-  }
-
   newMember(classId: number, loginTemplate: TemplateRef<any>, registrationTemplate: TemplateRef<any>) {
-    if (this.isLogged) {
+    if (this.memberId) {
       this.openRegistrationModal(registrationTemplate, classId);
     } else {
       this.openLoginModal(loginTemplate);
     }
   }
 
+  registerNewMember(classId: number) {
+    this._classService.registerMember(classId, this.memberId).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   openLoginModal(template: TemplateRef<any>) {
-    this.loginModalRef = this.modalService.show(template, { class: 'modal-md' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
   openRegistrationModal(template: TemplateRef<any>, classId: number) {
-    this._classService.getClasse(classId).subscribe(classItem => {
+    this._classService.getClass(classId).subscribe(classItem => {
       this.clickedClass = classItem;
+      console.log(classItem);
     });
-    this.loginModalRef = this.modalService.show(template, { class: 'modal-md' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 
   filterClass(option: number) {

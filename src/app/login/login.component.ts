@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   openLoginModal(template: TemplateRef<any>) {
+    this.loginForm.reset();
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }
 

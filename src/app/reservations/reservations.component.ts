@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import { isSameDay } from 'ngx-bootstrap/chronos/utils/date-getters';
+import { ClassService } from '../admin/class.service';
 defineLocale('es', esLocale);
 
 @Component({
@@ -40,6 +41,7 @@ export class ReservationsComponent implements OnInit {
     private modalService: BsModalService,
     private fb: FormBuilder,
     private _reservationsService: ReservationsService,
+    private _classService: ClassService,
     private localeService: BsLocaleService,
     private datePipe: DatePipe,
     private toastr: ToastrService
@@ -87,16 +89,17 @@ export class ReservationsComponent implements OnInit {
   }
 
   setTime(event: any) {
-    this._reservationsService.getClass(event).subscribe(clase => {
+    this._classService.getClass(event).subscribe(clase => {
+      console.log(clase);
       const classTime = new Date();
-      const hour = clase.hora.substring(0, 2);
+      const hour = parseInt(clase.hora.substring(0, 2), 10);
       classTime.setHours(hour, 0, 0, 0);
       this.reservationForm.controls.time.setValue(classTime);
     });
   }
 
   getClasses() {
-    this._reservationsService.getClasses().subscribe(classes => {
+    this._classService.getClasses().subscribe(classes => {
       this.classes = classes;
       console.log(classes);
     });
