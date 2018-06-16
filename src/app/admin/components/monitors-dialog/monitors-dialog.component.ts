@@ -49,6 +49,7 @@ export class MonitorsDialogComponent implements OnInit {
     this.monitorService.createMonitor(this.monitorForm.value).subscribe(data => {
       if (data) {
         if (data.affectedRows > 0) {
+          this.bsModalRef.content.cargarDatos = true;
           this.toastr.success(
             'El monitor ha sido añadido correctamente'
           );
@@ -67,6 +68,7 @@ export class MonitorsDialogComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           if (data.affectedRows > 0) {
+            this.bsModalRef.content.cargarDatos = true;
             this.toastr.success(
               'El monitor ha sido modificado correctamente'
             );

@@ -50,6 +50,7 @@ export class MembersDialogComponent implements OnInit {
     this._membersService.createMember(this.memberForm.value).subscribe(data => {
       if (data) {
         if (data.affectedRows > 0) {
+          this.bsModalRef.content.cargarDatos = true;
           this.toastr.success(
             'El socio ha sido añadido correctamente'
           );
@@ -68,6 +69,7 @@ export class MembersDialogComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           if (data.affectedRows > 0) {
+            this.bsModalRef.content.cargarDatos = true;
             this.toastr.success(
               'El socio ha sido modificado correctamente'
             );

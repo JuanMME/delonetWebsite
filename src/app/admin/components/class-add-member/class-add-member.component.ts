@@ -24,9 +24,7 @@ export class ClassAddMemberComponent implements OnInit {
     private classService: ClassService,
     private membersService: MembersService,
     private toastr: ToastrService
-  ) {
-    this.membersToAdd = 0;
-  }
+  ) { }
 
   ngOnInit() {
     this.classService.getNotMembersInClass(this.id_clase).subscribe(data => {

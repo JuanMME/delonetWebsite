@@ -21,13 +21,31 @@ export class MembersComponent implements OnInit {
   membersFiltered: Member[];
   bsModalRef: BsModalRef;
   openFilterMenu: boolean;
+  member: Member;
 
   constructor(
     private _membersService: MembersService,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private filter: FilterPipe
-  ) { }
+  ) {
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this._membersService.deleteMember(this.member.id_socio).subscribe(data => {
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('El socio ha sido eliminado correctamente');
+              this.getMembers();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
+          }
+        });
+      } else if (this.bsModalRef.content.cargarDatos) {
+        this.getMembers();
+      }
+    });
+  }
 
   ngOnInit() {
     this.getMembers();
@@ -50,9 +68,6 @@ export class MembersComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-    this.modalService.onHide.subscribe(data => {
-      this.getMembers();
-    });
   }
 
   editMember(member: Member) {
@@ -63,9 +78,6 @@ export class MembersComponent implements OnInit {
     this.bsModalRef = this.modalService.show(MembersDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
     this.bsModalRef.content.member = member;
-    this.modalService.onHide.subscribe(data => {
-      this.getMembers();
-    });
   }
 
   deleteMember(member: Member) {
@@ -75,20 +87,7 @@ export class MembersComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-    this.modalService.onHide.subscribe(useless => {
-      if (this.bsModalRef.content.borrar) {
-        this._membersService.deleteMember(member.id_socio).subscribe(data => {
-          if (data) {
-            if (data.affectedRows > 0) {
-              this.toastr.success('El socio ha sido eliminado correctamente');
-              this.getMembers();
-            } else {
-              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
-            }
-          }
-        });
-      }
-    });
+    this.member = member;
   }
 
   openFilter() {

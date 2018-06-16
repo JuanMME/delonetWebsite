@@ -34,7 +34,7 @@
           <h6 class="card-subtitle mb-2 text-muted">{{ class.hora }}</h6>
           <p class="card-text mb-0">{{ class.dias }}</p>
           <p class="card-text mb-0">Nivel: {{ class.nivel }}</p>
-          <p class="card-text">Plazas disponibles: {{ +class.num_plazas - +class.plazas_ocupadas}}/{{ class.num_plazas }}</p>
+          <p class="card-text">Plazas disponibles: {{ class.num_plazas - class.plazas_ocupadas}}/{{ class.num_plazas }}</p>
           <a class="card-link" (click)="newMember(class.id_clase, login, register)">REGISTRO</a>
         </div>
       </div>
@@ -62,7 +62,8 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Confirme que desea registrarse en {{ clickedClass?.nombre }} a las {{ clickedClass?.hora }}.</p>
+    <p>Confirme que desea registrarse en <strong>{{ clickedClass?.nombre }}</strong> que se imparte 
+      <strong>{{ clickedClass?.dias }}</strong> a las <strong>{{ clickedClass?.hora }}</strong>.</p>
     <p>Recuerde que solo es posible estar matriculado en una clase al mismo tiempo, si está inscrito en otra en
     este momento se le reasignará a esta clase.</p>
     <button class="btn btn-danger btn-sm" (click)="modalRef.hide()">Cancelar</button>

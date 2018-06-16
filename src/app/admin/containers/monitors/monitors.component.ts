@@ -19,14 +19,31 @@ export class MonitorsComponent implements OnInit {
   monitors: Monitor[];
   bsModalRef: BsModalRef;
   openFilterMenu: boolean;
-
+  monitor: Monitor;
 
   constructor(
     private monitorsService: MonitorService,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private filter: FilterPipe
-  ) { }
+  ) {
+    this.modalService.onHide.subscribe(useless => {
+      if (this.bsModalRef.content.borrar) {
+        this.monitorsService.deleteMonitor(this.monitor.id_monitor).subscribe(data => {
+          if (data) {
+            if (data.affectedRows > 0) {
+              this.toastr.success('El monitor ha sido eliminado correctamente');
+              this.getMonitors();
+            } else {
+              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
+            }
+          }
+        });
+      } else if (this.bsModalRef.content.cargarDatos) {
+        this.getMonitors();
+      }
+    });
+  }
 
   ngOnInit() {
     this.getMonitors();
@@ -48,9 +65,6 @@ export class MonitorsComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
-    this.modalService.onHide.subscribe(data => {
-      this.getMonitors();
-    });
   }
 
   editMonitor(monitor: Monitor) {
@@ -60,9 +74,6 @@ export class MonitorsComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(MonitorsDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Close';
-    this.modalService.onHide.subscribe(data => {
-      this.getMonitors();
-    });
   }
 
   deleteMonitor(monitor: Monitor) {
@@ -72,20 +83,7 @@ export class MonitorsComponent implements OnInit {
     };
     this.bsModalRef = this.modalService.show(ConfirmDialogComponent, {initialState, class: 'modal-lg'});
     this.bsModalRef.content.closeBtnName = 'Cerrar';
-    this.modalService.onHide.subscribe(useless => {
-      if (this.bsModalRef.content.borrar) {
-        this.monitorsService.deleteMonitor(monitor.id_monitor).subscribe(data => {
-          if (data) {
-            if (data.affectedRows > 0) {
-              this.toastr.success('El monitor ha sido eliminado correctamente');
-              this.getMonitors();
-            } else {
-              this.toastr.error('Algo ha salido mal. Inténtelo más tarde');
-            }
-          }
-        });
-      }
-    });
+    this.monitor = monitor;
   }
 
   openFilter() {

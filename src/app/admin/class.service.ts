@@ -23,7 +23,6 @@ export class ClassService {
 
   /**
    * Devuelve los socios de una clase concreta
-<<<<<<< HEAD
    * @param id_clase
    * @returns {Class} clase
    */
@@ -38,23 +37,6 @@ export class ClassService {
    * @returns {Class} clase
    */
   getClass(id_clase): Observable<Class> {
-    return this._http.get<Class>(this.serverUrl + '/' + id_clase)
-=======
-   * @param id_clase
-   * @returns {Class} clase
-   */
-  getClassMembers(id_clase): Observable<Class> {
-    return this._http.get<Class>(this.serverUrl + '-socios/' + id_clase)
->>>>>>> updated a bunch of stuff
-      .catch(this.handleError);
-  }
-
-  /**
-   * Devuelve una clase concreta
-   * @param id_clase
-   * @returns {Class} clase
-   */
-  getClass(id_clase): Observable<any> {
     return this._http.get<Class>(this.serverUrl + '/' + id_clase)
       .catch(this.handleError);
   }
@@ -97,17 +79,6 @@ export class ClassService {
    */
   getNotMembersInClass(id_clase): Observable<any> {
     return this._http.get(this.serverUrl + '/' + id_clase + '/add-member')
-      .catch(this.handleError);
-  }
-
-  /**
-   * Devuelve aquellos miembros que no están asociados a una clase
-   * @param classId
-   * @param memberId
-   * @returns {Members[]} members
-   */
-  registerMember(classId, memberId): Observable<any> {
-    return this._http.post(this.serverUrl + '/' + classId + '/add-member', memberId)
       .catch(this.handleError);
   }
 
