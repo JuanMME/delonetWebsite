@@ -83,7 +83,6 @@ export class MembersDialogComponent implements OnInit {
   checkEmail(event) {
     const value = event.target.value;
     this._membersService.checkEmail(value).subscribe(data => {
-      console.log(data);
       if (data) {
         if (this.member) {
           if (data.email !== this.member.email) {

@@ -18,6 +18,7 @@ export class MonitorsDialogComponent implements OnInit {
   data: any;
   title: string;
   profilePhoto: string;
+  invalidEmail: boolean;
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
   cropperSettings: CropperSettings;
 
@@ -76,6 +77,25 @@ export class MonitorsDialogComponent implements OnInit {
           }
         }
       });
+  }
+
+  checkEmail(event) {
+    const value = event.target.value;
+    this.monitorService.checkEmail(value).subscribe(data => {
+      if (data) {
+        if (this.monitor) {
+          if (data.email !== this.monitor.email) {
+            this.monitorForm.setErrors({incorrect: data.invalid});
+            this.invalidEmail = data.invalid;
+          } else {
+            this.invalidEmail = false;
+          }
+        } else {
+          this.monitorForm.setErrors({incorrect: data.invalid});
+          this.invalidEmail = data.invalid;
+        }
+      }
+    });
   }
 
   createForm() {

@@ -56,9 +56,10 @@ export class MembersService {
   /**
    * Comprueba que el email no está siendo usado por ningún otro usuario
    * @param email
+   * @returns {boolean} invalid
    */
-  checkEmail(email: string) {
-    return this._http.get(this.serverUrl_v2 + '/check-email', {
+  checkEmail(email: string): Observable<any> {
+    return this._http.get<any>(this.serverUrl_v2 + '/check-email', {
       params: {
         email: email
       }
