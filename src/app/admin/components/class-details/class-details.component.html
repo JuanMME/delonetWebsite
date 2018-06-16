@@ -15,7 +15,8 @@
           </button>
         </div>
         <div class="card-body">
-          <ngx-datatable #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
+          <md-progress-bar mode="indeterminate" *ngIf="!classe"></md-progress-bar>
+          <ngx-datatable *ngIf="classe" #mydatatable class="material" [headerHeight]="50" [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50"
             [rows]="classe" [scrollbarV]="true" [scrollbarH]="true" [messages]="my_messages">
             <ngx-datatable-column name="Nombre del socio" prop="nombre"></ngx-datatable-column>
             <ngx-datatable-column name="Email" prop="email"></ngx-datatable-column>

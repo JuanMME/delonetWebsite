@@ -21,12 +21,22 @@ export class ClassService {
   }
 
   /**
+   * Devuelve los socios de una clase concreta
+   * @param id_clase
+   * @returns {Class} clase
+   */
+  getClassMembers(id_clase): Observable<Class[]> {
+    return this._http.get<Class[]>(this.serverUrl + '-socios/' + id_clase)
+      .catch(this.handleError);
+  }
+
+  /**
    * Devuelve una clase concreta
    * @param id_clase
    * @returns {Class} clase
    */
-  getClasse(id_clase): Observable<Class> {
-    return this._http.get<Class>(this.serverUrl + '-socios/' + id_clase)
+  getClass(id_clase): Observable<Class> {
+    return this._http.get<Class>(this.serverUrl + '/' + id_clase)
       .catch(this.handleError);
   }
 
