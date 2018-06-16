@@ -7,4 +7,5 @@ export interface Class {
     nivel: String;
     nombre: String;
     num_plazas: Number;
+    plazas_ocupadas: Number;
 }

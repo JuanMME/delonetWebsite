@@ -23,6 +23,16 @@ export class MembersService {
   }
 
   /**
+   * Devuelve un miembro a partir de un id
+   * @param id
+   * @returns {Member[]} members
+   */
+  getMember(id: number): Observable<Member> {
+    return this._http.get<Member>(`${this.serverUrl}/${id}`)
+      .catch(this.handleError);
+  }
+
+  /**
    * Crea un nuevo miembro
    * @param member
    * @returns {any} affectedRows
