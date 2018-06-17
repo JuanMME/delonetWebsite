@@ -79,6 +79,7 @@ export class ClassDialogComponent implements OnInit {
           'Algo ha salido mal. Inténtelo más tarde'
         );
       }
+      this.bsModalRef.hide();
     });
   }
 
@@ -99,6 +100,7 @@ export class ClassDialogComponent implements OnInit {
             'Algo ha salido mal. Inténtelo más tarde'
           );
         }
+        this.bsModalRef.hide();
       });
   }
 
