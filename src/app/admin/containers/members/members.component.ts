@@ -30,6 +30,7 @@ export class MembersComponent implements OnInit {
     private filter: FilterPipe
   ) {
     this.modalService.onHide.subscribe(useless => {
+      console.log(this.bsModalRef);
       if (this.bsModalRef.content.borrar) {
         this._membersService.deleteMember(this.member.id_socio).subscribe(data => {
           if (data) {

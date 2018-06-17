@@ -59,6 +59,7 @@ export class MembersDialogComponent implements OnInit {
             'Algo ha salido mal. Inténtelo más tarde'
           );
         }
+        this.bsModalRef.hide();
       }
     });
   }
@@ -79,6 +80,7 @@ export class MembersDialogComponent implements OnInit {
             );
           }
         }
+        this.bsModalRef.hide();
       });
   }
 
@@ -88,11 +90,11 @@ export class MembersDialogComponent implements OnInit {
       if (data) {
         if (this.member) {
           if (data.email !== this.member.email) {
-            this.memberForm.setErrors({incorrect: data.invalid});
             this.invalidEmail = data.invalid;
+          } else {
+            this.invalidEmail = false;
           }
         } else {
-          this.memberForm.setErrors({incorrect: data.invalid});
           this.invalidEmail = data.invalid;
         }
       }

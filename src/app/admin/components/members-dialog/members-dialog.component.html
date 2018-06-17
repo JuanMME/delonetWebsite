@@ -1,4 +1,4 @@
-<form [formGroup]="memberForm" (ngSubmit)="member ? modifyMember() : createMember(); bsModalRef.hide(memberForm.value)" novalidate>
+<form [formGroup]="memberForm" (ngSubmit)="member ? modifyMember() : createMember()" novalidate>
   <div class="modal-header">
     <h5 class="modal-title">{{title}}</h5>
     <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()" tooltip="Cerrar">
@@ -58,7 +58,7 @@
         check
       </i>
     </button>
-    <button *ngIf="member" [disabled]="submitted || !memberForm.valid || memberForm.pristine || invalidEmail" type="submit" class="btn-actions">
+    <button *ngIf="member" [disabled]="submitted || !memberForm.valid || memberForm.pristine || invalidEmail === true" type="submit" class="btn-actions">
       <i class="material-icons" tooltip="Guardar">
         check
       </i>
