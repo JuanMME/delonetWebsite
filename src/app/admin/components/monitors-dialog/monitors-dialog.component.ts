@@ -12,7 +12,7 @@ import { MonitorService } from '../../monitor.service';
   styleUrls: ['./monitors-dialog.component.scss']
 })
 export class MonitorsDialogComponent implements OnInit {
-  private monitorForm: FormGroup;
+  monitorForm: FormGroup;
   submitted: boolean;
   monitor: Monitor;
   data: any;
@@ -59,6 +59,7 @@ export class MonitorsDialogComponent implements OnInit {
           );
         }
       }
+      this.bsModalRef.hide();
     });
   }
 
@@ -78,6 +79,7 @@ export class MonitorsDialogComponent implements OnInit {
             );
           }
         }
+        this.bsModalRef.hide();
       });
   }
 
@@ -87,13 +89,11 @@ export class MonitorsDialogComponent implements OnInit {
       if (data) {
         if (this.monitor) {
           if (data.email !== this.monitor.email) {
-            this.monitorForm.setErrors({incorrect: data.invalid});
             this.invalidEmail = data.invalid;
           } else {
             this.invalidEmail = false;
           }
         } else {
-          this.monitorForm.setErrors({incorrect: data.invalid});
           this.invalidEmail = data.invalid;
         }
       }
@@ -107,7 +107,16 @@ export class MonitorsDialogComponent implements OnInit {
         apellidos: [this.monitor.apellidos, [<any>Validators.required]],
         direccion: [this.monitor.direccion, [<any>Validators.required]],
         telefono: [this.monitor.telefono, [<any>Validators.required]],
-        email: [this.monitor.email, [<any>Validators.required]],
+        email: [this.monitor.email, [
+            Validators.required,
+            Validators.pattern(
+              RegExp(
+                // tslint:disable-next-line:max-line-length
+                /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+              )
+            )
+          ]
+        ],
         profile_image: [this.monitor.profile_image]
       });
       if (this.monitor.profile_image && this.monitor.profile_image.length) {

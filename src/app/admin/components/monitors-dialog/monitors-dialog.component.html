@@ -1,4 +1,4 @@
-<form [formGroup]="monitorForm" (ngSubmit)="monitor ? modifyMonitor() : createMonitor(); bsModalRef.hide(monitorForm.value)"
+<form [formGroup]="monitorForm" (ngSubmit)="monitor ? modifyMonitor() : createMonitor()"
   novalidate>
   <div class="modal-header">
     <h5 class="modal-title">{{ title }}</h5>
@@ -47,7 +47,7 @@
           <div class="col-12 col-lg-6 form-group">
             <label>Email</label>
             <input type="text" class="form-control" formControlName="email" (keyup)="checkEmail($event)"/>
-            <div class="text-danger" *ngIf="invalidEmail">Este email ya está siendo utilizado</div>
+            <div class="text-danger" *ngIf="invalidEmail === true">Este email ya está siendo utilizado</div>
           </div>
         </div>
       </div>
