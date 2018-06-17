@@ -23,7 +23,6 @@ defineLocale('es', esLocale);
 
 export class ReservationsComponent implements OnInit {
   reservationForm: FormGroup;
-  viewDate: Date = new Date();
   submitted = false;
   classes;
 
@@ -36,6 +35,7 @@ export class ReservationsComponent implements OnInit {
   isAdmin = false;
   newReservation = false;
   alreadyBooked = false;
+  calendarDate: Date;
 
   constructor(
     private modalService: BsModalService,
@@ -84,13 +84,11 @@ export class ReservationsComponent implements OnInit {
         });
       });
       this.laneEvents = laneEvents;
-      console.log(laneEvents);
     });
   }
 
   setTime(event: any) {
     this._classService.getClass(event).subscribe(clase => {
-      console.log(clase);
       const classTime = new Date();
       const hour = parseInt(clase.hora.substring(0, 2), 10);
       classTime.setHours(hour, 0, 0, 0);
@@ -101,7 +99,6 @@ export class ReservationsComponent implements OnInit {
   getClasses() {
     this._classService.getClasses().subscribe(classes => {
       this.classes = classes;
-      console.log(classes);
     });
   }
 
@@ -131,7 +128,6 @@ export class ReservationsComponent implements OnInit {
       this.reservationForm.controls.id_socio.setValue(localStorage.getItem('member_id'));
       this.reservationForm.controls.id_clase.setValue(null);
     }
-    console.log(this.reservationForm.value);
     if (this.reservationForm.valid && !this.isAlreadyBooked()) {
       this.submitted = true;
       this._reservationsService.createReservation(this.reservationForm.value).subscribe( response => {
@@ -148,14 +144,18 @@ export class ReservationsComponent implements OnInit {
   isAlreadyBooked() {
     const calle = parseInt(this.reservationForm.controls.id_calle.value, 10) - 1;
     this.alreadyBooked = false;
+    const reservationDate = new Date(this.reservationForm.controls.date.value);
+    const reservationTime = new Date(this.reservationForm.controls.time.value);
+    reservationDate.setHours(reservationTime.getHours(), reservationTime.getMinutes(),
+        reservationTime.getSeconds(), reservationTime.getMilliseconds());
+
     this.laneEvents[calle].events.forEach(event => {
-      if (isSameDay(new Date(event.fecha), new Date(this.reservationForm.controls.date.value)) &&
-          isSameHour(new Date(event.fecha), new Date(this.reservationForm.controls.time.value))) {
+      if (isSameHour(new Date(event.fecha), reservationDate)) {
         this.alreadyBooked = true;
       }
     });
     if (this.alreadyBooked) {
-      this.toastr.error('Ya hay una reserva realizada ese día para la calle y hora seleccionadas.', 'Error');
+      this.toastr.error('Error. Ya hay una reserva realizada ese día para la calle y hora seleccionadas.');
     }
     return this.alreadyBooked;
   }
@@ -169,15 +169,19 @@ export class ReservationsComponent implements OnInit {
   }
 
   viewPreviousDay() {
-    this.viewDate = subDays(this.viewDate, 1);
+    this.reservationForm.controls.date.setValue(subDays(this.reservationForm.controls.date.value, 1));
   }
 
   viewToday() {
-    this.viewDate = new Date();
+    this.reservationForm.controls.date.setValue(new Date());
   }
 
   viewNextDay() {
-    this.viewDate = addDays(this.viewDate, 1);
+    this.reservationForm.controls.date.setValue(addDays(this.reservationForm.controls.date.value, 1));
+  }
+
+  updateFormDate() {
+    this.reservationForm.controls.date.setValue(this.calendarDate);
   }
 
 }

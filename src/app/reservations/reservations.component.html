@@ -79,13 +79,14 @@
           </div>
         </div>
         <div class="col-8 offset-2 text-center pt-1">
-          <span (click)="dp.toggle()">{{ viewDate | date:'longDate':'':'es'}}</span>
+          <span (click)="dp.toggle()">{{ reservationForm.controls.date.value | date:'longDate':'':'es'}}</span>
           <input
             class="calendar-dp"
             #dp="bsDatepicker"
             bsDatepicker 
-            [(ngModel)]="viewDate"
+            [(ngModel)]="calendarDate"
             readonly
+            (onHidden)="updateFormDate()"
             [bsConfig]="{ containerClass: 'theme-dark-blue' }">
         </div>
         <div class="col-2">
@@ -95,7 +96,7 @@
           <div class="calendar-hours-column">
             <br>
             <mwl-calendar-day-view
-              [viewDate]="viewDate"
+              [viewDate]="reservationForm.controls.date.value"
               [locale]="locale"
               [dayStartHour]="16"
               [dayEndHour]="21"
@@ -105,7 +106,7 @@
           <div class="calendar-column" *ngFor="let lane of laneEvents, let i = index">
             Calle {{ lane.lane }}
             <mwl-calendar-day-view
-              [viewDate]="viewDate"
+              [viewDate]="reservationForm.controls.date.value"
               [events]="lane.events"
               [locale]="locale"
               [dayStartHour]="16"
