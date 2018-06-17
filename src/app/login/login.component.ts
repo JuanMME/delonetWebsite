@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('user_email', loginResponse.email);
     localStorage.setItem('profile_image', loginResponse.profile_image);
     this.userName = loginResponse.nombre;
-    this.toastr.success(`Bienvenido ${this.userName}`);
+    this.toastr.success(`Bienvenido/a ${this.userName}`);
   }
 
   logout() {
