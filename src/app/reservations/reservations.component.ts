@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
-import { isSameDay } from 'ngx-bootstrap/chronos/utils/date-getters';
 import { ClassService } from '../admin/class.service';
 defineLocale('es', esLocale);
 
@@ -181,7 +180,9 @@ export class ReservationsComponent implements OnInit {
   }
 
   updateFormDate() {
-    this.reservationForm.controls.date.setValue(this.calendarDate);
+    if (this.calendarDate) {
+      this.reservationForm.controls.date.setValue(this.calendarDate);
+    }
   }
 
 }
