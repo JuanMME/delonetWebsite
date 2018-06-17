@@ -119,7 +119,7 @@ export class ClassDialogComponent implements OnInit {
         monitores: [this.classe.monitores, [<any>Validators.required]],
         nivel: [this.classe.nivel, [<any>Validators.required]],
         num_plazas: [this.classe.num_plazas, [<any>Validators.required]],
-        edad_maxima: [this.classe.edad_maxima, [<any>Validators.required]]
+        edad_maxima: [this.classe.edad_maxima]
       });
     } else {
       this.classForm = this.fb.group({
@@ -129,7 +129,7 @@ export class ClassDialogComponent implements OnInit {
         monitores: [, [<any>Validators.required]],
         nivel: [, [<any>Validators.required]],
         num_plazas: [, [<any>Validators.required]],
-        edad_maxima: [, [<any>Validators.required]]
+        edad_maxima: []
       });
     }
   }
