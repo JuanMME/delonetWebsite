@@ -26,21 +26,18 @@ export class ClassFilterPipe implements PipeTransform {
       });
     } else if (option === 3) {
       return items.filter( it => {
-        console.log(it.nombre);
         if (it.nombre === 'Natación Avanzada') {
           return true;
         }
       });
     } else if (option === 4) {
       return items.filter( it => {
-        console.log(it.nombre);
         if (it.nombre === 'Espalda') {
           return true;
         }
       });
     } else if (option === 5) {
       return items.filter( it => {
-        console.log(it.nombre);
         if (it.nombre === 'Aquagym') {
           return true;
         }
