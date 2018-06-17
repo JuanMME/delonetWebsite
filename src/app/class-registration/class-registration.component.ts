@@ -84,7 +84,6 @@ export class ClassRegistrationComponent implements OnInit {
   openRegistrationModal(template: TemplateRef<any>, classId: number) {
     this._classService.getClass(classId).subscribe(classItem => {
       this.clickedClass = classItem;
-      console.log(classItem);
     });
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
   }

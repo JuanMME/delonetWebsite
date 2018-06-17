@@ -117,7 +117,7 @@ export class MonitorsDialogComponent implements OnInit {
             )
           ]
         ],
-        profile_image: [this.monitor.profile_image]
+        profile_image: ['data:image/JPEG;base64,' + this.monitor.profile_image]
       });
       if (this.monitor.profile_image && this.monitor.profile_image.length) {
         this.data.image = 'data:image/JPEG;base64,' + this.monitor.profile_image;

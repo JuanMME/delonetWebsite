@@ -108,11 +108,11 @@ export class MembersDialogComponent implements OnInit {
         apellidos: [this.member.apellidos, [<any>Validators.required]],
         direccion: [this.member.direccion, [<any>Validators.required]],
         fecha_alta: [this.member.fecha_alta, [<any>Validators.required]],
-        fecha_baja: [this.member.fecha_baja, [<any>Validators.required]], // cambiar
+        fecha_baja: [this.member.fecha_baja, [<any>Validators.required]],
         telefono: [this.member.telefono, [<any>Validators.required]],
         email: [this.member.email, [<any>Validators.required]],
         id_clase: [this.member.id_clase],
-        profile_image: [this.member.profile_image]
+        profile_image: ['data:image/JPEG;base64,' + this.member.profile_image]
       });
       if (this.member.profile_image && this.member.profile_image.length) {
         this.data.image = 'data:image/JPEG;base64,' + this.member.profile_image;

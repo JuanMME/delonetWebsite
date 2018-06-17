@@ -60,7 +60,10 @@ export class ProfileComponent implements OnInit {
       direccion: [this.profile.direccion, [<any>Validators.required]],
       telefono: [this.profile.telefono, [<any>Validators.required]],
       email: [this.profile.email, [<any>Validators.required]],
-      profile_image: [this.profile.profile_image],
+      fecha_alta: [this.profile.fecha_alta ? this.profile.fecha_alta : ''],
+      fecha_baja: [this.profile.fecha_baja ? this.profile.fecha_baja : ''],
+      id_clase: [this.profile.id_clase ? this.profile.id_clase : null],
+      profile_image: ['data:image/JPEG;base64,' + this.profile.profile_image],
       password: [],
       _password: []
     });
@@ -77,7 +80,6 @@ export class ProfileComponent implements OnInit {
       this.profileService.updateProfile(this.form.value, this.profile.id, this.profile.type).subscribe(data => {
         if (pass && _pass) {
           this.profileService.updatePassword(this.form.value, this.profile.id, this.profile.type).subscribe(passwordData => {
-            console.log(passwordData);
             if (passwordData) {
               if (passwordData.affectedRows > 0) {
                 this.toastr.success('Operación realizada con éxito');
@@ -108,7 +110,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.checkEmail(value).subscribe(data => {
       if (data) {
         if (data.email !== this.profile.email) {
-          this.form.setErrors({incorrect: data.invalid});
           this.invalidEmail = data.invalid;
         }
       }

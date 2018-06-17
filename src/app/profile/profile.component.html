@@ -23,11 +23,11 @@
         <div class="row">
           <div class="col-12 col-lg-6 form-group">
             <label>Nombre</label>
-            <input type="text" class="form-control" formControlName="nombre" readonly />
+            <input type="text" class="form-control" formControlName="nombre"/>
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Apellidos</label>
-            <input type="text" class="form-control" formControlName="apellidos" readonly />
+            <input type="text" class="form-control" formControlName="apellidos"/>
           </div>
           <div class="col-12 col-lg-6 form-group">
             <label>Dirección</label>
@@ -39,7 +39,7 @@
           </div>
           <div class="col-12 form-group">
             <label>Email</label>
-            <input type="text" class="form-control" formControlName="email" (keyup)="checkEmail($event)"/>
+            <input type="text" class="form-control" formControlName="email" (keyup)="checkEmail($event)" readonly/>
             <div class="text-danger" *ngIf="invalidEmail">Este email ya está siendo utilizado</div>
           </div>
           <div class="col-12 col-lg-12 form-group">
@@ -55,7 +55,7 @@
               </div>
           </div>
           <div class="col-12 col-lg-12 form-group">
-            <button [disabled]="submitted || !form.valid || form.pristine || invalidEmail" type="submit" class="btn btn-primary float-right">
+            <button [disabled]="submitted || !form.valid || form.pristine || invalidEmail === true" type="submit" class="btn btn-primary float-right">
               Guardar
             </button>
           </div>
